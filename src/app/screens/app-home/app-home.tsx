@@ -22,7 +22,7 @@ const Home = () => {
 	return (
 		<div className={classes.root}>
 			<Typography className={classes.homeTitle}>
-				Crypto asset tracking made easy.
+				Crypto asset tracking made easy PR Test Test Workflow.
 			</Typography>
 		</div>
 	);
