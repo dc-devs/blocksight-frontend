@@ -80,7 +80,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						</Typography>
 					</Link>
 
-					<Link
+					{/* <Link
 						to="/token"
 						color="primary"
 						underline="none"
@@ -91,7 +91,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Tokens
 						</Typography>
-					</Link>
+					</Link> */}
 					{/* <Link
 						to="/"
 						color="primary"
