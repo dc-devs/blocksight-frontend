@@ -3,9 +3,10 @@ interface ConfigData {
 }
 
 interface Environment {
+	test: ConfigData;
 	development: ConfigData;
 	production: ConfigData;
-	[key: string]: ConfigData;
+	[key: string]: ConfigData | Headers;
 }
 
 const environment: Environment = {

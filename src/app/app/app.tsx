@@ -1,75 +1,43 @@
-import { useEffect } from 'react';
 import AppHome from '../screens/app-home';
-import { Redirect } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
 import Token from '../screens/token-info';
 import Dashboard from '../screens/dashboard';
+import SignIn from '../screens/sign-in';
+import SignUp from '../screens/sign-up';
 import LayoutApp from '../layouts/layout-app';
 import LayoutAppHome from '../layouts/layout-app-home';
-import { Route, Switch } from 'react-router-dom';
-import {
-	fetchMetaMaskWallet,
-	selectMetaMaskWallet,
-} from '../../redux/slices/metamask-slice';
-import {
-	selectIsMetaMaskConnected,
-	fetchIsMetaMaskConnected,
-} from '../../redux/slices/metamask-connected-slice';
-import {
-	selectIsMetaMaskInstalled,
-	fetchIsMetaMaskInstalled,
-} from '../../redux/slices/metamask-installed-slice';
+import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
-	const dispatch = useDispatch();
-	const metaMaskWallet = useSelector(selectMetaMaskWallet);
-	const isMetaMaskInstalled = useSelector(selectIsMetaMaskInstalled);
-	const isMetaMaskConnected = useSelector(selectIsMetaMaskConnected);
-
-	console.log('App - metaMaskWallet', metaMaskWallet);
-	console.log('App - isMetaMaskInstalled', isMetaMaskInstalled);
-	console.log('App - isMetaMaskConnected', isMetaMaskConnected);
-
-	useEffect(() => {
-		if (!isMetaMaskInstalled) {
-			dispatch(fetchIsMetaMaskInstalled());
-		}
-
-		if (isMetaMaskInstalled && !isMetaMaskConnected) {
-			dispatch(fetchIsMetaMaskConnected());
-		}
-
-		if (isMetaMaskConnected) {
-			dispatch(fetchMetaMaskWallet());
-		}
-	}, [isMetaMaskInstalled, isMetaMaskConnected, dispatch]);
-
-	const redirectComponent = isMetaMaskConnected ? (
-		<Redirect to="/dashboard" />
-	) : (
-		<Redirect to="/" />
-	);
-
 	return (
 		<>
-			{redirectComponent}
-			<Switch>
-				<Route path="/dashboard">
-					<LayoutApp>
-						<Dashboard />
-					</LayoutApp>
-				</Route>
-				<Route path="/token/:symbol">
-					<LayoutApp>
-						<Token />
-					</LayoutApp>
-				</Route>
-				<Route path="/">
-					<LayoutAppHome>
-						<AppHome />
-					</LayoutAppHome>
-				</Route>
-			</Switch>
+			<Routes>
+				<Route path="/sign-up" element={<SignUp />} />
+				<Route path="/sign-in" element={<SignIn />} />
+				<Route
+					path="/dashboard"
+					element={
+						<LayoutApp>
+							<Dashboard />
+						</LayoutApp>
+					}
+				/>
+				<Route
+					path="/token/:symbol"
+					element={
+						<LayoutApp>
+							<Token />
+						</LayoutApp>
+					}
+				/>
+				<Route
+					path="/"
+					element={
+						<LayoutAppHome>
+							<AppHome />
+						</LayoutAppHome>
+					}
+				/>
+			</Routes>
 		</>
 	);
 };
