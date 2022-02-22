@@ -1,8 +1,8 @@
 import './setup-tests';
 import React, { FC, ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import theme from './theme';

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import Transaction from './transaction';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from 'tss-react/mui';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	fetchTransactions,
@@ -13,7 +13,7 @@ import {
 import TokenBalance from '../../../../../interfaces/token-balance-interface';
 import { selectMetaMaskWallet } from '../../../../../redux/slices/metamask-slice';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	transactionsContainer: {
 		marginTop: '20px',
 		borderRadius: '10px',
@@ -29,7 +29,7 @@ interface Props {
 }
 
 const Transactions = ({ tokenBalance }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const dispatch = useDispatch();
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
 	const transactions = useSelector(selectTransactions);

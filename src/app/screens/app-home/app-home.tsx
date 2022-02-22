@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<div className={classes.root}>

@@ -1,12 +1,12 @@
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Paper from '@mui/material/Paper';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
 import { themeColors } from '../../../../../../theme/colors';
 import { Triangle } from 'react-feather';
 
 const { green, red, coinbaseBorderColor } = themeColors;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	valuationContainer: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -99,7 +99,7 @@ const DollarSummary = ({
 	deltaValue,
 	deltaValuePositive = true,
 }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	const deltaValueComponent = deltaValue ? (
 		<div

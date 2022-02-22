@@ -1,11 +1,11 @@
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from 'tss-react/mui';
 import { textColors } from '../../../../../theme/colors';
 import TokenBalance from '../../../../../interfaces/token-balance-interface';
 
 const { coinbaseTableHeaderText } = textColors;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	tokenHeaderContainer: {
 		display: 'flex',
 		alignContent: 'center',
@@ -37,7 +37,7 @@ interface Props {
 const TokenHeader = ({ tokenBalance }: Props) => {
 	const { logoUrl, name, symbol } = tokenBalance;
 	const tokenSymbol = symbol.toUpperCase();
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<div className={classes.tokenHeaderContainer}>

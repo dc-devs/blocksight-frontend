@@ -1,10 +1,10 @@
-import Link from '@material-ui/core/Link';
-import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import Divider from '@mui/material/Divider';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
 import { Link as ReactLink } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	linkNavigateContainer: {
 		marginTop: theme.spacing(6),
 	},
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const HaveAnAccount = ({ isSignUpForm }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const link = isSignUpForm ? '/sign-in' : '/sign-up';
 	const text = isSignUpForm
 		? 'Already have an account?'

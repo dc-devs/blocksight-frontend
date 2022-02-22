@@ -2,11 +2,11 @@ import axios from 'axios';
 import Logo from '../../icons/logo';
 import { useForm } from 'react-hook-form';
 import SignInForm from '../sign-in/components/sign-in-form';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 import environment from '../../../constants/environment';
 import headers from '../../../constants/headers';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const {
 		register,
 		handleSubmit,

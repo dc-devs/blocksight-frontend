@@ -1,7 +1,7 @@
 import LegendItemData from '../interfaces/legend-data-item';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	legendContainer: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -41,7 +41,7 @@ interface Props {
 }
 
 const LegendColumn = ({ legendItemsDatas }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	const legendItems = legendItemsDatas.map(
 		(legendItemData: LegendItemData, index: number) => {

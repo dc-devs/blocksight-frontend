@@ -1,9 +1,9 @@
 import numeral from 'numeral';
 import { useEffect } from 'react';
 import BigNumber from 'bignumber.js';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import DollarSummary from './dollar-summary';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	fetchTotalDeposits,
@@ -12,7 +12,7 @@ import {
 	selectTotalDepositsError,
 } from '../../../../../redux/slices/total-deposits-slice';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	assetDollarSummaryContainer: {},
 }));
 
@@ -26,7 +26,7 @@ interface Props {
 }
 
 const AssetDollarSummary = ({ totalValue }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const dispatch = useDispatch();
 	const totalDeposits = useSelector(selectTotalDeposits);
 	const totalDepositsStatus = useSelector(selectTotalDepositsStatus);
@@ -61,7 +61,7 @@ const AssetDollarSummary = ({ totalValue }: Props) => {
 			<Grid
 				container
 				direction="row"
-				justify="flex-start"
+				justifyContent="flex-start"
 				alignItems="flex-start"
 				spacing={3}
 			>

@@ -1,10 +1,10 @@
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from 'tss-react/mui';
 import TokenBalances from './components/token-balances';
 import AssetPieChart from './components/asset-pie-chart';
 import TokenBalance from '../../../../../interfaces/token-balance-interface';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	assetSummaryContainer: {
 		marginTop: '50px',
 	},
@@ -20,14 +20,14 @@ interface Props {
 }
 
 const AssetDolllarSummary = ({ totalValue, tokenBalances }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<div className={classes.assetSummaryContainer}>
 			<Grid
 				container
 				direction="row"
-				justify="flex-start"
+				justifyContent="flex-start"
 				alignItems="flex-start"
 				spacing={3}
 			>

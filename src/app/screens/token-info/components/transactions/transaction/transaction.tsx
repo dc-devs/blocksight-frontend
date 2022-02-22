@@ -1,14 +1,14 @@
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import { ArrowRight, Repeat } from 'react-feather';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
 import shortenWalletAddress from '../../../../../../utils/shorten-wallet-address';
 import TransactionInterface from '../../../../../../interfaces/transaction-interface';
 import { themeColors } from '../../../../../../theme/colors';
 
 const { coinbaseBorderColor } = themeColors;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	transactionContainer: {
 		display: 'flex',
 		alignItems: 'center',
@@ -66,7 +66,7 @@ interface Props {
 }
 
 const Transaction = ({ transaction }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const { type, fromWallet, fromAddress, exchange, inputToken, outputToken } =
 		transaction;
 	const shortFromAddress = shortenWalletAddress(fromAddress);

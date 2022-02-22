@@ -1,9 +1,9 @@
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Link from '@mui/material/Link';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
 import { Link as ReactLink } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	signInOptionsContainer: {
 		display: 'flex',
 		alignItems: 'center',
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignInOptions = () => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<div className={classes.signInOptionsContainer}>

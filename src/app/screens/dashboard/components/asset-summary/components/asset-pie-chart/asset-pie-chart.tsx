@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import numeral from 'numeral';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import pieChartColors from './pie-chart-colors';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
 import generateSeriesData from './generate-series-data';
 import { Pie, Cell, Label, Sector, Legend, PieChart } from 'recharts';
 import TokenBalance from '../../../../../../../interfaces/token-balance-interface';
 import LegendComponent from './legend';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	allocationPieChartContainer: {
 		paddingTop: theme.spacing(2),
 		paddingLeft: theme.spacing(2),
@@ -44,7 +44,7 @@ interface Props {
 }
 
 const AssetPieChart = ({ totalValue, tokenBalances }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const seriesData = generateSeriesData({ tokenBalances });
 	const [index, setIndex] = useState(-1);
 

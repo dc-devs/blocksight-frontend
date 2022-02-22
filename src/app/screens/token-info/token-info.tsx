@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectMetaMaskWallet } from '../../../redux/slices/metamask-slice';
 import Header from './components/header';
@@ -17,7 +17,7 @@ interface Params {
 	[key: string]: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	screenContainer: {
 		height: '100vh',
 		padding: theme.spacing(3),
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TokenInfo = () => {
 	const params = useParams();
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const dispatch = useDispatch();
 	const { symbol } = params as Params;
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);

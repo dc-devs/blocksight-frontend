@@ -1,5 +1,5 @@
-import Dialog from '@material-ui/core/Dialog';
-import { makeStyles } from '@material-ui/core/styles';
+import Dialog from '@mui/material/Dialog';
+import { makeStyles } from 'tss-react/mui';
 
 interface Props {
 	isOpen: boolean;
@@ -7,7 +7,7 @@ interface Props {
 	className?: string;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	dialogRoot: {},
 	paper: {
 		borderRadius: '10px',
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ModalBase = ({ isOpen, children, className }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<Dialog

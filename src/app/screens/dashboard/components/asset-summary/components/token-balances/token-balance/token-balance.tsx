@@ -1,12 +1,12 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 import TokenBalanceInterface from '../../../../../../../../interfaces/token-balance-interface';
 // import { Link as ReactLink } from 'react-router-dom';
-// import Link from '@material-ui/core/Link';
+// import Link from '@mui/material/Link';
 import textColors from '../../../../../../../../theme/colors/text-colors';
 
 const { coinbaseTableHeaderText } = textColors;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	tokenBalanceRow: {
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -63,7 +63,7 @@ interface Props {
 }
 
 const TokenBalance = ({ token }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const { name, price, symbol, balance, logoUrl, totalValue } = token;
 	// TODO: Add back linking in future iteration
 	// const lowerCaseSymbol = symbol.toLowerCase();

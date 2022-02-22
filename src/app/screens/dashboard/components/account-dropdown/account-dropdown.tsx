@@ -1,21 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import { selectMetaMaskWallet } from '../../../../../redux/slices/metamask-slice';
 import { shortenWalletAddress } from '../../../../../utils';
-import Button from '@material-ui/core/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
 import { Copy, LogOut, Settings } from 'react-feather';
 // import { MouseEvent } from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	root: {
 		display: 'flex',
 	},
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AccountDropdown = () => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
 	const shortendWalletAddress = shortenWalletAddress(selectedAddress);
 	const [open, setOpen] = useState(false);

@@ -1,14 +1,14 @@
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Container from '@material-ui/core/Container';
+import { makeStyles } from 'tss-react/mui';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
 import Logo from '../logo';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import { Link as ReactLink } from 'react-router-dom';
-import Link from '@material-ui/core/Link';
+import Link from '@mui/material/Link';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	root: {
 		flexGrow: 1,
 	},
@@ -33,7 +33,7 @@ interface Props {
 }
 
 const LayoutAppHome = ({ children }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<div data-testid="layoutAppHome" className={classes.root}>

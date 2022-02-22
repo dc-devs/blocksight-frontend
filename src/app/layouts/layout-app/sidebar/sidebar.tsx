@@ -1,11 +1,11 @@
-import Paper from '@material-ui/core/Paper';
+import Paper from '@mui/material/Paper';
 import AccountDropdown from '../../../screens/dashboard/components/account-dropdown';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from 'tss-react/mui';
 import { BarChart } from 'react-feather';
 // import { BarChart, Octagon, Repeat, Search } from 'react-feather';
 import { Link as ReactLink } from 'react-router-dom';
-import Link from '@material-ui/core/Link';
+import Link from '@mui/material/Link';
 
 const drawerWidth = 240;
 
@@ -15,7 +15,7 @@ const drawerWidth = 240;
 // Queue up the collapsable side bar
 // Update weird layout that is currently set..
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	sidebar: {
 		width: drawerWidth,
 		height: '100vh',
@@ -56,7 +56,7 @@ interface Props {
 }
 
 const PermanentDrawer = ({ logoText }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	return (
 		<Paper elevation={2} square={true} className={classes.sidebar}>
 			<div className={classes.sidebarContent}>

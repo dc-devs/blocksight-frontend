@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 import AssetSummary from './components/asset-summary';
 import { useSelector, useDispatch } from 'react-redux';
 import filterTokenBalances from '../../../utils/filter-token-balances';
@@ -12,7 +12,7 @@ import {
 	// selectTokenBalancesError,
 } from '../../../redux/slices/token-balances-slice';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
 		height: '100vh',
 		padding: theme.spacing(3),
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DashBoard = () => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const dispatch = useDispatch();
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
 

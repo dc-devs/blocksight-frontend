@@ -1,7 +1,7 @@
 import SideBar from './sidebar';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	layoutContainer: {
 		display: 'flex',
 		width: '100vw',
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const LayoutApp = ({ children }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<div data-testid="layoutApp" className={classes.layoutContainer}>

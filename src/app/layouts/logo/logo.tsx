@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from 'tss-react/mui';
+import Typography from '@mui/material/Typography';
 import { Link as ReactLink } from 'react-router-dom';
-import Link from '@material-ui/core/Link';
+import Link from '@mui/material/Link';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	logoContainer: {
 		display: 'flex',
 		flexGrow: 1,
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Logo = () => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 
 	return (
 		<div className={classes.logoContainer}>

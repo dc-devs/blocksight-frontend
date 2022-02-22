@@ -2,23 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/app';
 import reportWebVitals from './report-web-vitals';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { Provider } from 'react-redux';
+import { CacheProvider } from '@emotion/react';
 import store from './redux/store';
 import theme from './theme';
 import { BrowserRouter as Router } from 'react-router-dom';
+import createCache from '@emotion/cache';
+import { ThemeProvider } from '@mui/material/styles';
+
+export const muiCache = createCache({
+	key: 'mui',
+	prepend: true,
+});
 
 ReactDOM.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Router>
-					<App />
-				</Router>
-			</ThemeProvider>
-		</Provider>
+		<CacheProvider value={muiCache}>
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<CssBaseline />
+					<Router>
+						<App />
+					</Router>
+				</ThemeProvider>
+			</Provider>
+		</CacheProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

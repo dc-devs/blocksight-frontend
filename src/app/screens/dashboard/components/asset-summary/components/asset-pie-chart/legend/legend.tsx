@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 import LegendColumn from './legend-column';
 import splitArrayInTwo from '../../../../../../../../utils/split-array-in-two';
 import getLegendItemsData from './get-legend-items-data';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
 	legendContainer: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Legend = (legendPayload: any) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const legendItemsData = getLegendItemsData(legendPayload);
 
 	const legendItemsDataHalves = splitArrayInTwo(legendItemsData);

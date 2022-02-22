@@ -1,12 +1,12 @@
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { makeStyles } from 'tss-react/mui';
 import SignInOptions from '../sign-in-form/sign-in-options';
 import HaveAnAccount from '../sign-in-form/have-an-account';
 import emailRegex from '../../../../../constants/email-regex';
 import PasswordConfirmation from '../sign-in-form/password-confirmation';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	form: {
 		marginTop: '10px',
 		display: 'flex',
@@ -56,7 +56,7 @@ const SignInForm = ({
 	isSignUpForm = false,
 	submitButtonText,
 }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	console.log(errors);
 	return (
 		<>

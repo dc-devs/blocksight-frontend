@@ -1,12 +1,12 @@
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from 'tss-react/mui';
 import { themeColors } from '../../../../../theme/colors';
 import TokenBalance from '../../../../../interfaces/token-balance-interface';
 
 const { coinbaseBorderColor } = themeColors;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
 	tokenInfosContainer: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -39,7 +39,7 @@ interface Props {
 }
 
 const Tokenomics = ({ tokenBalance }: Props) => {
-	const classes = useStyles();
+	const { classes } = useStyles();
 	const { balance, price, totalValue } = tokenBalance;
 
 	return (
