@@ -73,7 +73,7 @@ const SignInForm = ({
 					label="email"
 					name="email"
 					error={!!errors.email}
-					inputRef={register('email', {
+					{...register('email', {
 						required: true,
 						pattern: emailRegex,
 					})}
@@ -96,10 +96,10 @@ const SignInForm = ({
 					label="password"
 					name="password"
 					error={!!errors.password}
-					// inputRef={register('password', {
-					// 	required: true,
-					// 	minLength: 8,
-					// })}
+					{...register('password', {
+						required: true,
+						minLength: 8,
+					})}
 				/>
 				{errors.password && errors.password.type === 'required' && (
 					<div className={classes.errorContainer}>

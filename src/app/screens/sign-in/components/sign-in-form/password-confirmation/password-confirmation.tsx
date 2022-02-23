@@ -23,11 +23,11 @@ const SignInOptions = ({
 				label="password confirmation"
 				name="passwordConfirmation"
 				error={!!errors.passwordConfirmation}
-				// inputRef={register('password-confirmation', {
-				// 	required: true,
-				// 	minLength: 8,
-				// 	validate: (value: string) => value === watch('password'),
-				// })}
+				{...register('passwordConfirmation', {
+					required: true,
+					minLength: 8,
+					validate: (value: string) => value === watch('password'),
+				})}
 			/>
 			{errors.passwordConfirmation &&
 				errors.passwordConfirmation.type === 'required' && (
