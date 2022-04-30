@@ -11,6 +11,7 @@
 		"deploy": "yarn test --watchAll=false && yarn build && cd infrastructure && yarn deploy && cd .."
 	},
 	"dependencies": {
+		"@apollo/client": "^3.6.1",
 		"@emotion/react": "^11.8.1",
 		"@emotion/styled": "^11.8.1",
 		"@metamask/detect-provider": "^1.2.0",
@@ -30,6 +31,7 @@
 		"axios": "^0.26.0",
 		"bignumber.js": "^9.0.2",
 		"ethers": "^5.5.4",
+		"graphql": "^16.4.0",
 		"highcharts": "^9.3.3",
 		"highcharts-react-official": "^3.1.0",
 		"numeral": "^2.0.6",

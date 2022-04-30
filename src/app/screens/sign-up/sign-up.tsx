@@ -50,7 +50,7 @@ const SignUp = () => {
 		console.log('Submitted!!');
 		axios.post(
 			`${serverBaseUrl}/users`,
-			{ data },
+			{ ...data },
 			{
 				headers,
 			}
