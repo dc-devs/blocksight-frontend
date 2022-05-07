@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
+import { useAppDispatch } from '../../../hooks';
 import AssetSummary from './components/asset-summary';
-import { useSelector, useDispatch } from 'react-redux';
-import filterTokenBalances from '../../../utils/filter-token-balances';
 import AssetDollarSummary from './components/asset-dollar-summary';
+import filterTokenBalances from '../../../utils/filter-token-balances';
 import { selectMetaMaskWallet } from '../../../redux/slices/metamask-slice';
 import {
 	fetchTokenBalances,
@@ -36,7 +37,7 @@ const useStyles = makeStyles()((theme) => ({
 
 const DashBoard = () => {
 	const { classes } = useStyles();
-	const dispatch = useDispatch();
+	const appDispatch = useAppDispatch();
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
 
 	const tokenBalances = useSelector(selectTokenBalances);
@@ -46,9 +47,9 @@ const DashBoard = () => {
 	// GET Token Balances
 	useEffect(() => {
 		if (selectedAddress && tokenBalancesStatus === 'idle') {
-			dispatch(fetchTokenBalances({ address: selectedAddress }));
+			appDispatch(fetchTokenBalances({ address: selectedAddress }));
 		}
-	}, [tokenBalancesStatus, selectedAddress, dispatch]);
+	}, [tokenBalancesStatus, selectedAddress, appDispatch]);
 
 	const { totalValue, balances } = tokenBalances;
 

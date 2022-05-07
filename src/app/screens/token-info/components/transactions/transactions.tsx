@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import Transaction from './transaction';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-import { useSelector, useDispatch } from 'react-redux';
+import Typography from '@mui/material/Typography';
+import { useAppDispatch } from '../../../../../hooks';
+
 import {
 	fetchTransactions,
 	selectTransactions,
@@ -30,7 +32,7 @@ interface Props {
 
 const Transactions = ({ tokenBalance }: Props) => {
 	const { classes } = useStyles();
-	const dispatch = useDispatch();
+	const appDispatch = useAppDispatch();
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
 	const transactions = useSelector(selectTransactions);
 	const transactionsStatus = useSelector(selectTransactionsStatus);
@@ -39,11 +41,14 @@ const Transactions = ({ tokenBalance }: Props) => {
 
 	useEffect(() => {
 		if (selectedAddress && transactionsStatus === 'idle') {
-			dispatch(
-				fetchTransactions({ address: selectedAddress, filter: symbol })
+			appDispatch(
+				fetchTransactions({
+					address: selectedAddress,
+					filter: symbol,
+				})
 			);
 		}
-	}, [transactionsStatus, selectedAddress, dispatch, symbol]);
+	}, [transactionsStatus, selectedAddress, appDispatch, symbol]);
 
 	const transactionComponents =
 		transactions?.supportedTransactions?.map((transaction, index) => {

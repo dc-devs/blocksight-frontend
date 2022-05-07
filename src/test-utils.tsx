@@ -8,7 +8,11 @@ import store from './redux/store';
 import theme from './theme';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const AllTheProviders: FC = ({ children }) => {
+interface Props {
+	children?: React.ReactNode;
+}
+
+const AllTheProviders: FC = ({ children }: Props) => {
 	return (
 		<React.StrictMode>
 			<Provider store={store}>

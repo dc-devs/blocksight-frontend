@@ -2,9 +2,10 @@ import numeral from 'numeral';
 import { useEffect } from 'react';
 import BigNumber from 'bignumber.js';
 import Grid from '@mui/material/Grid';
-import DollarSummary from './dollar-summary';
+import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-import { useSelector, useDispatch } from 'react-redux';
+import DollarSummary from './dollar-summary';
+import { useAppDispatch } from '../../../../../hooks';
 import {
 	fetchTotalDeposits,
 	selectTotalDeposits,
@@ -27,7 +28,7 @@ interface Props {
 
 const AssetDollarSummary = ({ totalValue }: Props) => {
 	const { classes } = useStyles();
-	const dispatch = useDispatch();
+	const appDispatch = useAppDispatch();
 	const totalDeposits = useSelector(selectTotalDeposits);
 	const totalDepositsStatus = useSelector(selectTotalDepositsStatus);
 	const totalDepositsError = useSelector(selectTotalDepositsError);
@@ -35,9 +36,9 @@ const AssetDollarSummary = ({ totalValue }: Props) => {
 	// GET Token Balances
 	useEffect(() => {
 		if (totalDepositsStatus === 'idle') {
-			dispatch(fetchTotalDeposits());
+			appDispatch(fetchTotalDeposits());
 		}
-	}, [totalDepositsStatus, dispatch]);
+	}, [totalDepositsStatus, appDispatch]);
 
 	const totalDepositsString = totalDeposits.string;
 	const totalDepositsFormatted = totalDeposits.formatted;

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import DollarSummary from '../dollar-summary';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../../../../hooks';
 import {
 	fetchTotalWithdrawls,
 	selectTotalWithdrawls,
@@ -9,7 +10,7 @@ import {
 } from '../../../../../../redux/slices/total-withdrawls-slice';
 
 const DollarSummaryDeposits = () => {
-	const dispatch = useDispatch();
+	const appDispatch = useAppDispatch();
 	const totalWithdrawls = useSelector(selectTotalWithdrawls);
 	const totalWithdrawlsStatus = useSelector(selectTotalWithdrawlsStatus);
 	// const totalWithdrawlsError = useSelector(selectTotalWithdrawlsError);
@@ -17,9 +18,9 @@ const DollarSummaryDeposits = () => {
 	// GET Token Balances
 	useEffect(() => {
 		if (totalWithdrawlsStatus === 'idle') {
-			dispatch(fetchTotalWithdrawls());
+			appDispatch(fetchTotalWithdrawls());
 		}
-	}, [totalWithdrawlsStatus, dispatch]);
+	}, [totalWithdrawlsStatus, appDispatch]);
 
 	const { formatted } = totalWithdrawls;
 

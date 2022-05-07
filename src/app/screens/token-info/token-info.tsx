@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { makeStyles } from 'tss-react/mui';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectMetaMaskWallet } from '../../../redux/slices/metamask-slice';
 import Header from './components/header';
+import { useSelector } from 'react-redux';
+import { makeStyles } from 'tss-react/mui';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks';
 import Tokenomics from './components/tokenomics';
 import Transactions from './components/transactions';
+import { selectMetaMaskWallet } from '../../../redux/slices/metamask-slice';
 import {
 	fetchTokenBalances,
 	selectTokenBalances,
@@ -27,7 +28,7 @@ const useStyles = makeStyles()((theme) => ({
 const TokenInfo = () => {
 	const params = useParams();
 	const { classes } = useStyles();
-	const dispatch = useDispatch();
+	const appDispatch = useAppDispatch();
 	const { symbol } = params as Params;
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
 	const tokenBalances = useSelector(selectTokenBalances);
@@ -40,11 +41,11 @@ const TokenInfo = () => {
 	// GET Token Balances
 	useEffect(() => {
 		if (selectedAddress && tokenBalancesStatus === 'idle') {
-			dispatch(
+			appDispatch(
 				fetchTokenBalances({ address: selectedAddress, filter: symbol })
 			);
 		}
-	}, [tokenBalancesStatus, selectedAddress, dispatch, symbol]);
+	}, [tokenBalancesStatus, selectedAddress, appDispatch, symbol]);
 
 	if (tokenBalances.balances) {
 		const tokenBalance = tokenBalances.balances[0];
