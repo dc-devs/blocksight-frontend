@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import metaMaskReducer from './slices/metamask-slice';
-import transactionsReducer from './slices/transactions-slice';
-import totalDepositsReducer from './slices/total-deposits-slice';
-import tokenBalancesReducer from './slices/token-balances-slice';
-import totalWithdrawlsReducer from './slices/total-withdrawls-slice';
-import metaMaskConnectedReducer from './slices/metamask-connected-slice';
-import metaMaskInstalledReducer from './slices/metamask-installed-slice';
+import metaMaskReducer from './slices/metamaskSlice';
+import transactionsReducer from './slices/transactionsSlice';
+import totalDepositsReducer from './slices/totalDepositsSlice';
+import tokenBalancesReducer from './slices/tokenBalancesSlice';
+import totalWithdrawlsReducer from './slices/totalWithdrawlsSlice';
+import metaMaskConnectedReducer from './slices/metamaskConnectedSlice';
+import metaMaskInstalledReducer from './slices/metamaskInstalledSlice';
 
 const store = configureStore({
 	reducer: {

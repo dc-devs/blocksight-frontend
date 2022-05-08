@@ -1,12 +1,12 @@
 import React from 'react';
 import theme from './theme';
-import App from './app/app';
+import App from './app/App';
 import ReactDOM from 'react-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import reportWebVitals from './report-web-vitals';
+import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from 'react-router-dom';

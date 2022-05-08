@@ -1,5 +1,5 @@
-import splitArrayInTwo from './split-array-in-two';
-import filterTokenBalances from './filter-token-balances';
-import shortenWalletAddress from './shorten-wallet-address/shorten-wallet-address';
+import splitArrayInTwo from './splitArrayInTwo';
+import filterTokenBalances from './filterTokenBalances';
+import shortenWalletAddress from './shortenWalletAddress/shortenWalletAddress';
 
 export { splitArrayInTwo, filterTokenBalances, shortenWalletAddress };

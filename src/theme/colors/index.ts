@@ -1,5 +1,5 @@
-import textColors from './text-colors';
-import themeColors from './theme-colors';
-import defaultColors from './default-colors';
+import textColors from './textColors';
+import themeColors from './themeColors';
+import defaultColors from './defaultColors';
 
 export { textColors, themeColors, defaultColors };

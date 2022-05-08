@@ -1,5 +1,5 @@
-import getMetaMaskWallet from './get-metamask-wallet';
-import getIsMetaMaskConnected from './get-is-metamask-connected';
-import getIsMetaMaskInstalled from './get-is-metamask-installed';
+import getMetaMaskWallet from './getMetamaskWallet';
+import getIsMetaMaskConnected from './getIsMetamaskConnected';
+import getIsMetaMaskInstalled from './getIsMetamaskInstalled';
 
 export { getMetaMaskWallet, getIsMetaMaskConnected, getIsMetaMaskInstalled };
