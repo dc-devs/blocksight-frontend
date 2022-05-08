@@ -2,7 +2,7 @@ import AppHome from '../screens/AppHome';
 import Token from '../screens/TokenInfo';
 import Dashboard from '../screens/Dashboard';
 import SignIn from '../screens/SignIn';
-import SignUp from '../screens/signUp';
+import SignUp from '../screens/SignUp';
 import Users from '../screens/Users';
 import LayoutApp from '../layouts/LayoutApp';
 import LayoutAppHome from '../layouts/LayoutAppHome';
