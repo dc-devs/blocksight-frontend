@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
-import Typography from '@mui/material/Typography';
 import { gql, useQuery } from '@apollo/client';
+import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles()((theme) => ({
 	root: {},
@@ -39,8 +39,8 @@ const Users = () => {
 
 	const { loading, error, data } = useQuery(GET_USERS, {
 		variables: {
-			skip: 20,
-			take: 10
+			skip: 50,
+			take: 10,
 		},
 	});
 

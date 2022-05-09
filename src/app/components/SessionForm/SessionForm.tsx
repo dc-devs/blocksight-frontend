@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from 'tss-react/mui';
-import SignInOptions from './SignInOptions';
+import SignInOptions from './SessionOptions';
 import HaveAnAccount from './HaveAnAccount';
-import emailRegex from '../../../../../constants/emailRegex';
-import PasswordConfirmation from './PasswordConfirmation';
+import emailRegex from '../../../constants/emailRegex';
+// import PasswordConfirmation from './PasswordConfirmation';
 
 const useStyles = makeStyles()((theme) => ({
 	form: {
@@ -47,7 +47,7 @@ interface Props {
 	submitButtonText: string;
 }
 
-const SignInForm = ({
+const SessionForm = ({
 	watch,
 	errors,
 	register,
@@ -57,7 +57,6 @@ const SignInForm = ({
 	submitButtonText,
 }: Props) => {
 	const { classes } = useStyles();
-	console.log(errors);
 	return (
 		<>
 			<form
@@ -78,16 +77,25 @@ const SignInForm = ({
 						pattern: emailRegex,
 					})}
 				/>
+
 				{errors.email && errors.email.type === 'required' && (
 					<div className={classes.errorContainer}>
 						Email is required
 					</div>
 				)}
+
 				{errors.email && errors.email.type === 'pattern' && (
 					<div className={classes.errorContainer}>
 						Must be an email
 					</div>
 				)}
+
+				{errors.email && errors.email.type === 'BAD_USER_INPUT' && (
+					<div className={classes.errorContainer}>
+						{`${errors.email.message}`}
+					</div>
+				)}
+
 				<TextField
 					fullWidth
 					autoComplete="off"
@@ -111,14 +119,14 @@ const SignInForm = ({
 						Must be minmum 8 characters
 					</div>
 				)}
-				{isSignUpForm && (
+				{/* {isSignUpForm && (
 					<PasswordConfirmation
 						watch={watch}
 						errors={errors}
 						register={register}
 						errorContainerClass={classes.errorContainer}
 					/>
-				)}
+				)} */}
 				{!isSignUpForm && <SignInOptions />}
 				<Button
 					type="submit"
@@ -134,4 +142,4 @@ const SignInForm = ({
 	);
 };
 
-export default SignInForm;
+export default SessionForm;

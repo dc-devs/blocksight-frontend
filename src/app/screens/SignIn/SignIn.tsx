@@ -1,10 +1,10 @@
 import axios from 'axios';
 import Logo from '../../icons/Logo';
 import { useForm } from 'react-hook-form';
-import SignInForm from './components/SignInForm';
 import { makeStyles } from 'tss-react/mui';
-import environment from '../../../constants/environment';
 import headers from '../../../constants/headers';
+import environment from '../../../constants/environment';
+import SignInForm from '../../components/SessionForm';
 
 const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
@@ -49,7 +49,6 @@ const SignIn = () => {
 	const { serverBaseUrl } = development;
 
 	const onSubmit = async (data: any) => {
-		console.log('Submitted!!');
 		axios.post(
 			`${serverBaseUrl}/sign-in`,
 			{ data },

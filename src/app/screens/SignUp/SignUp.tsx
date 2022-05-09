@@ -1,10 +1,10 @@
-import axios from 'axios';
+import { useState } from 'react';
 import Logo from '../../icons/Logo';
 import { useForm } from 'react-hook-form';
-import SignInForm from '../SignIn/components/SignInForm';
 import { makeStyles } from 'tss-react/mui';
-import environment from '../../../constants/environment';
-import headers from '../../../constants/headers';
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../../../queries/users';
+import SessionForm from '../../components/SessionForm';
 
 const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
@@ -35,26 +35,67 @@ const useStyles = makeStyles()((theme) => ({
 	},
 }));
 
+interface ErrorAttributes {
+	type: string;
+	message: string;
+}
+
+interface ErrorProps {
+	email: ErrorAttributes;
+}
+
 const SignUp = () => {
 	const { classes } = useStyles();
+	const [backendErrors, setErrors] = useState({
+		email: {
+			type: '',
+			message: '',
+		},
+	});
+
+	const [createUser, { error, data }] = useMutation(CREATE_USER, {
+		onError: (error) => {
+			const errors = error.graphQLErrors[0].extensions
+				.errors as ErrorProps;
+
+			if (errors.email) {
+				setErrors(errors as ErrorProps);
+			}
+		},
+		onCompleted: (data) => {
+			console.log('Created New User!!', data);
+
+			setErrors({
+				email: {
+					type: '',
+					message: '',
+				},
+			});
+		},
+	});
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		watch,
 	} = useForm();
-	const { development } = environment;
-	const { serverBaseUrl } = development;
 
-	const onSubmit = async (data: any) => {
-		console.log('Submitted!!');
-		axios.post(
-			`${serverBaseUrl}/users`,
-			{ ...data },
-			{
-				headers,
-			}
-		);
+	const formErrors = backendErrors.email.type ? backendErrors : errors;
+
+	const onSubmit = async (userData: any) => {
+		const { email, password } = userData;
+
+		try {
+			createUser({
+				variables: {
+					createUserInput: {
+						email,
+						password,
+					},
+				},
+			});
+		} catch (e) {}
 	};
 
 	return (
@@ -64,9 +105,9 @@ const SignUp = () => {
 					<Logo className={classes.logo} />
 				</div>
 				<div className={classes.signUpContainer}>
-					<SignInForm
+					<SessionForm
 						watch={watch}
-						errors={errors}
+						errors={formErrors}
 						register={register}
 						onSubmit={onSubmit}
 						handleSubmit={handleSubmit}

@@ -5,16 +5,13 @@ import ReactDOM from 'react-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import createCache from '@emotion/cache';
+import { createRoot } from 'react-dom/client';
 import { CacheProvider } from '@emotion/react';
 import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
-import {
-	ApolloClient,
-	InMemoryCache,
-	ApolloProvider,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
 	uri: 'http://localhost:3001/graphql',
@@ -26,7 +23,10 @@ export const muiCache = createCache({
 	prepend: true,
 });
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!);
+
+root.render(
 	<React.StrictMode>
 		<ApolloProvider client={client}>
 			<CacheProvider value={muiCache}>
@@ -40,8 +40,7 @@ ReactDOM.render(
 				</Provider>
 			</CacheProvider>
 		</ApolloProvider>
-	</React.StrictMode>,
-	document.getElementById('root')
+	</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
