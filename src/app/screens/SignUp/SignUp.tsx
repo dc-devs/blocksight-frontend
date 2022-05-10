@@ -3,6 +3,7 @@ import Logo from '../../icons/Logo';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import { CREATE_USER } from '../../../queries/users';
 import SessionForm from '../../components/SessionForm';
 
@@ -46,14 +47,16 @@ interface ErrorProps {
 
 const SignUp = () => {
 	const { classes } = useStyles();
-	const [backendErrors, setErrors] = useState({
+	const navigate = useNavigate();
+	const defaultErrorState = {
 		email: {
 			type: '',
 			message: '',
 		},
-	});
+	};
+	const [backendErrors, setErrors] = useState(defaultErrorState);
 
-	const [createUser, { error, data }] = useMutation(CREATE_USER, {
+	const [createUser] = useMutation(CREATE_USER, {
 		onError: (error) => {
 			const errors = error.graphQLErrors[0].extensions
 				.errors as ErrorProps;
@@ -63,14 +66,9 @@ const SignUp = () => {
 			}
 		},
 		onCompleted: (data) => {
-			console.log('Created New User!!', data);
-
-			setErrors({
-				email: {
-					type: '',
-					message: '',
-				},
-			});
+			const { createUser } = data;
+			setErrors(defaultErrorState);
+			navigate(`/users/${createUser.id}`, { replace: true });
 		},
 	});
 
