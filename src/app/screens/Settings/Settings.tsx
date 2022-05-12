@@ -22,7 +22,7 @@ const useStyles = makeStyles()((theme) => ({
 		padding: theme.spacing(3),
 	},
 	updateContainer: {
-		width: '30%'
+		width: '30%',
 	},
 	form: {
 		marginTop: '10px',
@@ -65,7 +65,7 @@ const Settings = () => {
 			}
 		},
 		onCompleted: (data) => {
-			console.log('User updated!!', data);
+			console.log('User Updated!!', data);
 			setErrors(defaultErrorState);
 		},
 	});
@@ -108,17 +108,19 @@ const Settings = () => {
 						})}
 					/>
 
-					{formErrors.email && formErrors.email.type === 'required' && (
-						<div className={classes.errorContainer}>
-							Email is required
-						</div>
-					)}
+					{formErrors.email &&
+						formErrors.email.type === 'required' && (
+							<div className={classes.errorContainer}>
+								Email is required
+							</div>
+						)}
 
-					{formErrors.email && formErrors.email.type === 'pattern' && (
-						<div className={classes.errorContainer}>
-							Must be an email
-						</div>
-					)}
+					{formErrors.email &&
+						formErrors.email.type === 'pattern' && (
+							<div className={classes.errorContainer}>
+								Must be an email
+							</div>
+						)}
 
 					{formErrors.email &&
 						formErrors.email.type === 'BAD_USER_INPUT' && (
