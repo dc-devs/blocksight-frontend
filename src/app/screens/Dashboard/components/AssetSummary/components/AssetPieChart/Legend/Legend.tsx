@@ -1,7 +1,7 @@
-import { makeStyles } from 'tss-react/mui';
 import LegendColumn from './LegendColumn';
-import splitArrayInTwo from '../../../../../../../../utils/splitArrayInTwo';
+import { makeStyles } from 'tss-react/mui';
 import getLegendItemsData from './getLegendItemsData';
+import splitArrayInTwo from '../../../../../../../../utils/splitArrayInTwo';
 
 const useStyles = makeStyles()(() => ({
 	legendContainer: {

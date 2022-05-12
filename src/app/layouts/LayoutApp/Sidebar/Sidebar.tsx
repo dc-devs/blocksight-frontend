@@ -2,8 +2,7 @@ import Paper from '@mui/material/Paper';
 import AccountDropdown from '../../../screens/Dashboard/components/AccountDropdown';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from 'tss-react/mui';
-import { BarChart } from 'react-feather';
-// import { BarChart, Octagon, Repeat, Search } from 'react-feather';
+import { BarChart, Octagon, Repeat, Search } from 'react-feather';
 import { Link as ReactLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
 
@@ -30,7 +29,7 @@ const useStyles = makeStyles()((theme) => ({
 	logoText: {
 		textAlign: 'center',
 		fontSize: '2rem',
-		'font-weight': '300',
+		fontWeight: '300',
 	},
 	sidebarLinksContainer: {
 		marginTop: '50px',
@@ -80,7 +79,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						</Typography>
 					</Link>
 
-					{/* <Link
+					<Link
 						to="/token"
 						color="primary"
 						underline="none"
@@ -91,8 +90,8 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Tokens
 						</Typography>
-					</Link> */}
-					{/* <Link
+					</Link>
+					<Link
 						to="/"
 						color="primary"
 						underline="none"
@@ -115,7 +114,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Wallet Mapper
 						</Typography>
-					</Link> */}
+					</Link>
 				</div>
 			</div>
 		</Paper>

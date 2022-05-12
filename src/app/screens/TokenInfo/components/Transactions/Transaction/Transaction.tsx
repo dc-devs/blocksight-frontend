@@ -19,7 +19,7 @@ const useStyles = makeStyles()((theme) => ({
 		padding: theme.spacing(2),
 		paddingLeft: theme.spacing(4),
 		borderBottom: `1px solid ${coinbaseBorderColor}`,
-		'&:first-child': {
+		'&:first-of-type': {
 			borderTop: `1px solid ${coinbaseBorderColor}`,
 		},
 	},

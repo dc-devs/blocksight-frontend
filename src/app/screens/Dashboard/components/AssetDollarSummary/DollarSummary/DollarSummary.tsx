@@ -28,7 +28,7 @@ const useStyles = makeStyles()((theme) => ({
 		alignContent: 'center',
 		justifyContent: 'center',
 		alignItems: 'center',
-		'flex-grow': '1',
+		flexGrow: '1',
 		position: 'relative',
 	},
 	valuationValueContainerDown: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles()((theme) => ({
 		alignContent: 'center',
 		justifyContent: 'center',
 		alignItems: 'center',
-		'flex-grow': '1',
+		flexGrow: '1',
 		position: 'relative',
 		'& $valuationValue': {
 			color: red,
@@ -47,7 +47,7 @@ const useStyles = makeStyles()((theme) => ({
 	},
 	valuationValue: {
 		fontSize: '1.5rem',
-		'font-weight': '500',
+		fontWeight: '500',
 		color: green,
 	},
 	deltaContainer: {

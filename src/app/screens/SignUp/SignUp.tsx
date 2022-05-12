@@ -73,10 +73,10 @@ const SignUp = () => {
 	});
 
 	const {
+		watch,
 		register,
 		handleSubmit,
 		formState: { errors },
-		watch,
 	} = useForm();
 
 	const formErrors = backendErrors.email.type ? backendErrors : errors;

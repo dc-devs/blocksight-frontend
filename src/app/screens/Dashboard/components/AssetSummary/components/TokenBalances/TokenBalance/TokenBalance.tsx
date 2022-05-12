@@ -20,7 +20,7 @@ const useStyles = makeStyles()((theme) => ({
 	},
 	tokenBalanceColumn: {
 		textAlign: 'right',
-		'&:first-child': {
+		'&:first-of-type': {
 			textAlign: 'left',
 		},
 	},

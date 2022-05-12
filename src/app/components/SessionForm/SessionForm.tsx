@@ -1,8 +1,8 @@
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { makeStyles } from 'tss-react/mui';
-import SignInOptions from './SessionOptions';
 import HaveAnAccount from './HaveAnAccount';
+import SignInOptions from './SessionOptions';
+import TextField from '@mui/material/TextField';
 import emailRegex from '../../../constants/emailRegex';
 // import PasswordConfirmation from './PasswordConfirmation';
 

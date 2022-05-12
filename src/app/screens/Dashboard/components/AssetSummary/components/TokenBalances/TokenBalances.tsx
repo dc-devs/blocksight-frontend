@@ -30,7 +30,7 @@ const useStyles = makeStyles()((theme) => ({
 	tokenBalancesColumn: {
 		color: 'rgba(17, 51, 83, 0.6)',
 		textAlign: 'right',
-		'&:first-child': {
+		'&:first-of-type': {
 			textAlign: 'left',
 		},
 	},

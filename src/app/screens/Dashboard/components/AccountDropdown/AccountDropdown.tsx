@@ -1,18 +1,20 @@
-import { useState, useRef, useEffect } from 'react';
+import Grow from '@mui/material/Grow';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Popper from '@mui/material/Popper';
 import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-import Typography from '@mui/material/Typography';
-import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
-import { selectMetaMaskWallet } from '../../../../../redux/slices/metamaskSlice';
-import { shortenWalletAddress } from '../../../../../utils';
-import Button from '@mui/material/Button';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+import { useState, useRef, useEffect } from 'react';
+import Typography from '@mui/material/Typography';
+import { Link as ReactLink } from 'react-router-dom';
 import { Copy, LogOut, Settings } from 'react-feather';
+import { shortenWalletAddress } from '../../../../../utils';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import { selectMetaMaskWallet } from '../../../../../redux/slices/metamaskSlice';
 // import { MouseEvent } from 'react';
 
 const useStyles = makeStyles()((theme) => ({
@@ -42,6 +44,9 @@ const useStyles = makeStyles()((theme) => ({
 		borderRadius: '10px',
 		minHeight: '36px',
 		width: '100%',
+	},
+	accountDropdownLink: {
+		color: theme.palette.text.primary
 	},
 	signedInDot: {
 		height: '10px',
@@ -152,12 +157,24 @@ const AccountDropdown = () => {
 										id="menu-list-grow"
 										onKeyDown={handleListKeyDown}
 									>
-										<MenuItem onClick={handleClose}>
-											<Settings
-												className={classes.menuIcon}
-											/>
-											<Typography>Settings</Typography>
-										</MenuItem>
+										<Link
+											to="/dashboard/settings"
+											color="primary"
+											underline="none"
+											component={ReactLink}
+											className={
+												classes.accountDropdownLink
+											}
+										>
+											<MenuItem onClick={handleClose}>
+												<Settings
+													className={classes.menuIcon}
+												/>
+												<Typography>
+													Settings
+												</Typography>
+											</MenuItem>
+										</Link>
 										<MenuItem onClick={handleClose}>
 											<Copy
 												className={classes.menuIcon}

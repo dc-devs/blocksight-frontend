@@ -7,10 +7,10 @@ const useStyles = makeStyles()((theme) => ({
 		width: '100vw',
 	},
 	sidebarContainer: {
-		'flex-grow': '0',
+		flexGrow: '0',
 	},
 	pageContainer: {
-		'flex-grow': '1',
+		flexGrow: '1',
 		// backgroundColor: 'rgba(228, 230, 246, .1)',
 	},
 }));

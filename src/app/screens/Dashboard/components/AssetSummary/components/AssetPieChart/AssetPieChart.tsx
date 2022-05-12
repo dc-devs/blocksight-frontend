@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import numeral from 'numeral';
 import Paper from '@mui/material/Paper';
+import LegendComponent from './Legend';
 import pieChartColors from './pieChartColors';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import generateSeriesData from './GenerateSeriesData';
 import { Pie, Cell, Label, Sector, Legend, PieChart } from 'recharts';
 import TokenBalance from '../../../../../../../interfaces/tokenBalanceInterface';
-import LegendComponent from './Legend';
 
 const useStyles = makeStyles()((theme) => ({
 	allocationPieChartContainer: {

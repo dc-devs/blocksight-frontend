@@ -3,6 +3,7 @@ import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
 import AppHome from '../screens/AppHome';
 import Token from '../screens/TokenInfo';
+import Settings from '../screens/Settings';
 import Dashboard from '../screens/Dashboard';
 import LayoutApp from '../layouts/LayoutApp';
 import { Routes, Route } from 'react-router-dom';
@@ -22,6 +23,14 @@ const App = () => {
 				/>
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/sign-in" element={<SignIn />} />
+				<Route
+					path="/dashboard/settings"
+					element={
+						<LayoutApp>
+							<Settings />
+						</LayoutApp>
+					}
+				/>
 				<Route
 					path="/dashboard"
 					element={
