@@ -1,7 +1,6 @@
 import React from 'react';
 import theme from './theme';
 import App from './app/App';
-import ReactDOM from 'react-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import createCache from '@emotion/cache';
@@ -11,9 +10,20 @@ import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+	ApolloClient,
+	InMemoryCache,
+	ApolloProvider,
+	createHttpLink,
+} from '@apollo/client';
+
+const link = createHttpLink({
+	credentials: 'include',
+	uri: 'http://localhost:3001/graphql',
+});
 
 const client = new ApolloClient({
+	link,
 	uri: 'http://localhost:3001/graphql',
 	cache: new InMemoryCache(),
 });

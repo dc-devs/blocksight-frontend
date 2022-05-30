@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { CREATE_USER } from '../../../queries/users';
+import { SIGN_UP } from '../../../queries/sessions';
 import SessionForm from '../../components/SessionForm';
 
 const useStyles = makeStyles()((theme) => ({
@@ -56,7 +56,7 @@ const SignUp = () => {
 	};
 	const [backendErrors, setErrors] = useState(defaultErrorState);
 
-	const [createUser] = useMutation(CREATE_USER, {
+	const [createUser] = useMutation(SIGN_UP, {
 		onError: (error) => {
 			const errors = error.graphQLErrors[0].extensions
 				.errors as ErrorProps;
@@ -66,9 +66,9 @@ const SignUp = () => {
 			}
 		},
 		onCompleted: (data) => {
-			const { createUser } = data;
 			setErrors(defaultErrorState);
-			navigate(`/users/${createUser.id}`, { replace: true });
+
+			// navigate(`/dashboard`, { replace: true });
 		},
 	});
 
@@ -90,6 +90,11 @@ const SignUp = () => {
 					createUserInput: {
 						email,
 						password,
+					},
+				},
+				context: {
+					headers: {
+						'X-Forwarded-Proto': 'https',
 					},
 				},
 			});
