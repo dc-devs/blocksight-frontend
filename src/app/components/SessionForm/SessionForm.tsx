@@ -96,6 +96,13 @@ const SessionForm = ({
 					</div>
 				)}
 
+				{errors.email &&
+					errors.email.type === 'Unauthorized' && (
+						<div className={classes.errorContainer}>
+							{`${errors.email.message}`}
+						</div>
+					)}
+
 				<TextField
 					fullWidth
 					autoComplete="off"

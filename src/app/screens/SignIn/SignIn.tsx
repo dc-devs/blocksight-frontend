@@ -1,9 +1,11 @@
-import axios from 'axios';
+import { useState } from 'react';
 import Logo from '../../icons/Logo';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import headers from '../../../constants/headers';
-import environment from '../../../constants/environment';
+import { SIGN_IN } from '../../../queries/sessions';
 import SignInForm from '../../components/SessionForm';
 
 const useStyles = makeStyles()((theme) => ({
@@ -36,8 +38,47 @@ const useStyles = makeStyles()((theme) => ({
 	},
 }));
 
+interface ErrorAttributes {
+	type: string;
+	message: string;
+}
+
+interface ErrorProps {
+	email: ErrorAttributes;
+}
+
 const SignIn = () => {
 	const { classes } = useStyles();
+	const navigate = useNavigate();
+	const defaultErrorState = {
+		email: {
+			type: '',
+			message: '',
+		},
+	};
+
+	const [backendErrors, setErrors] = useState(defaultErrorState);
+
+	const [createUser] = useMutation(SIGN_IN, {
+		onError: (apolloError) => {
+			const errror = apolloError.graphQLErrors[0];
+			const errorMessage = errror?.message;
+
+			if (errorMessage === 'Unauthorized') {
+				setErrors({
+					email: {
+						type: 'Unauthorized',
+						message: 'Incorrect email / password combination',
+					},
+				});
+			}
+		},
+		onCompleted: () => {
+			setErrors(defaultErrorState);
+			navigate(`/dashboard`, { replace: true });
+		},
+	});
+
 	const {
 		register,
 		handleSubmit,
@@ -45,17 +86,25 @@ const SignIn = () => {
 		watch,
 		reset,
 	} = useForm();
-	const { development } = environment;
-	const { serverBaseUrl } = development;
 
-	const onSubmit = async (data: any) => {
-		axios.post(
-			`${serverBaseUrl}/sign-in`,
-			{ data },
-			{
-				headers,
-			}
-		);
+	const formErrors = backendErrors.email.type ? backendErrors : errors;
+
+	const onSubmit = async (userData: any) => {
+		const { email, password } = userData;
+
+		try {
+			createUser({
+				variables: {
+					sessionInput: {
+						email,
+						password,
+					},
+				},
+				context: {
+					headers,
+				},
+			});
+		} catch (e) {}
 	};
 
 	return (
@@ -67,7 +116,7 @@ const SignIn = () => {
 				<div className={classes.signUpContainer}>
 					<SignInForm
 						watch={watch}
-						errors={errors}
+						errors={formErrors}
 						register={register}
 						onSubmit={onSubmit}
 						handleSubmit={handleSubmit}

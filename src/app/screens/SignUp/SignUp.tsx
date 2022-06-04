@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import headers from '../../../constants/headers';
 import { SIGN_UP } from '../../../queries/sessions';
 import SessionForm from '../../components/SessionForm';
 
@@ -65,10 +66,9 @@ const SignUp = () => {
 				setErrors(errors as ErrorProps);
 			}
 		},
-		onCompleted: (data) => {
+		onCompleted: () => {
 			setErrors(defaultErrorState);
-
-			// navigate(`/dashboard`, { replace: true });
+			navigate(`/dashboard`, { replace: true });
 		},
 	});
 
@@ -93,9 +93,7 @@ const SignUp = () => {
 					},
 				},
 				context: {
-					headers: {
-						'X-Forwarded-Proto': 'https',
-					},
+					headers,
 				},
 			});
 		} catch (e) {}
