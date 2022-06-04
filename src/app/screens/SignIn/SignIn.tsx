@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import headers from '../../../constants/headers';
 import { SIGN_IN } from '../../../queries/sessions';
 import SignInForm from '../../components/SessionForm';
+import { defaultErrorState } from '../../components/SessionForm/constants';
+import {
+	FormErrorType,
+	FormErrorMessage,
+} from '../../components/SessionForm/enums';
 
 const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
@@ -38,24 +43,9 @@ const useStyles = makeStyles()((theme) => ({
 	},
 }));
 
-interface ErrorAttributes {
-	type: string;
-	message: string;
-}
-
-interface ErrorProps {
-	email: ErrorAttributes;
-}
-
 const SignIn = () => {
 	const { classes } = useStyles();
 	const navigate = useNavigate();
-	const defaultErrorState = {
-		email: {
-			type: '',
-			message: '',
-		},
-	};
 
 	const [backendErrors, setErrors] = useState(defaultErrorState);
 
@@ -64,11 +54,11 @@ const SignIn = () => {
 			const errror = apolloError.graphQLErrors[0];
 			const errorMessage = errror?.message;
 
-			if (errorMessage === 'Unauthorized') {
+			if (errorMessage === FormErrorType.UNAUTHORIZED) {
 				setErrors({
 					email: {
-						type: 'Unauthorized',
-						message: 'Incorrect email / password combination',
+						type: FormErrorType.UNAUTHORIZED,
+						message: FormErrorMessage.INCORRECT_EMAIL_PASSWORD,
 					},
 				});
 			}

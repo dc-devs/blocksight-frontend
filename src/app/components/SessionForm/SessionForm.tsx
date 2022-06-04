@@ -3,8 +3,9 @@ import { makeStyles } from 'tss-react/mui';
 import HaveAnAccount from './HaveAnAccount';
 import SignInOptions from './SessionOptions';
 import TextField from '@mui/material/TextField';
+import FormErrorType from './enums/FormErrorType';
 import emailRegex from '../../../constants/emailRegex';
-// import PasswordConfirmation from './PasswordConfirmation';
+import FormErrorMessage from './enums/FormErrorMessage';
 
 const useStyles = makeStyles()((theme) => ({
 	form: {
@@ -78,28 +79,31 @@ const SessionForm = ({
 					})}
 				/>
 
-				{errors.email && errors.email.type === 'required' && (
-					<div className={classes.errorContainer}>
-						Email is required
-					</div>
-				)}
-
-				{errors.email && errors.email.type === 'pattern' && (
-					<div className={classes.errorContainer}>
-						Must be an email
-					</div>
-				)}
-
-				{errors.email && errors.email.type === 'BAD_USER_INPUT' && (
-					<div className={classes.errorContainer}>
-						{`${errors.email.message}`}
-					</div>
-				)}
+				{errors.email &&
+					errors.email.type === FormErrorType.REQUIRED && (
+						<div className={classes.errorContainer}>
+							{FormErrorMessage.EMAIL_REQUIRED}
+						</div>
+					)}
 
 				{errors.email &&
-					errors.email.type === 'Unauthorized' && (
+					errors.email.type === FormErrorType.REQUIRED && (
+						<div className={classes.errorContainer}>
+							{FormErrorMessage.MUST_BE_EMAIL}
+						</div>
+					)}
+
+				{errors.email &&
+					errors.email.type === FormErrorType.BAD_USER_INPUT && (
 						<div className={classes.errorContainer}>
 							{`${errors.email.message}`}
+						</div>
+					)}
+
+				{errors.email &&
+					errors.email.type === FormErrorType.UNAUTHORIZED && (
+						<div className={classes.errorContainer}>
+							{FormErrorMessage.INCORRECT_EMAIL_PASSWORD}
 						</div>
 					)}
 
@@ -116,25 +120,21 @@ const SessionForm = ({
 						minLength: 8,
 					})}
 				/>
-				{errors.password && errors.password.type === 'required' && (
-					<div className={classes.errorContainer}>
-						Password is required
-					</div>
-				)}
-				{errors.password && errors.password.type === 'minLength' && (
-					<div className={classes.errorContainer}>
-						Must be minmum 8 characters
-					</div>
-				)}
-				{/* {isSignUpForm && (
-					<PasswordConfirmation
-						watch={watch}
-						errors={errors}
-						register={register}
-						errorContainerClass={classes.errorContainer}
-					/>
-				)} */}
+				{errors.password &&
+					errors.password.type === FormErrorType.REQUIRED && (
+						<div className={classes.errorContainer}>
+							Password is required
+						</div>
+					)}
+				{errors.password &&
+					errors.password.type === FormErrorType.MIN_LENGTH && (
+						<div className={classes.errorContainer}>
+							Must be minmum 8 characters
+						</div>
+					)}
+
 				{!isSignUpForm && <SignInOptions />}
+
 				<Button
 					type="submit"
 					color="primary"

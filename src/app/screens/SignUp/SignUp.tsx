@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import headers from '../../../constants/headers';
 import { SIGN_UP } from '../../../queries/sessions';
 import SessionForm from '../../components/SessionForm';
+import { IErrorProps } from '../../components/SessionForm/interfaces';
+import { defaultErrorState } from '../../components/SessionForm/constants';
 
 const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
@@ -37,33 +39,19 @@ const useStyles = makeStyles()((theme) => ({
 	},
 }));
 
-interface ErrorAttributes {
-	type: string;
-	message: string;
-}
-
-interface ErrorProps {
-	email: ErrorAttributes;
-}
-
 const SignUp = () => {
 	const { classes } = useStyles();
 	const navigate = useNavigate();
-	const defaultErrorState = {
-		email: {
-			type: '',
-			message: '',
-		},
-	};
+
 	const [backendErrors, setErrors] = useState(defaultErrorState);
 
 	const [createUser] = useMutation(SIGN_UP, {
 		onError: (error) => {
 			const errors = error.graphQLErrors[0].extensions
-				.errors as ErrorProps;
+				.errors as IErrorProps;
 
 			if (errors.email) {
-				setErrors(errors as ErrorProps);
+				setErrors(errors);
 			}
 		},
 		onCompleted: () => {
