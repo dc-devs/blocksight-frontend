@@ -4,10 +4,12 @@ import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks';
 import headers from '../../../constants/headers';
 import { SIGN_IN } from '../../../queries/sessions';
 import SignInForm from '../../components/SessionForm';
 import { defaultErrorState } from '../../components/SessionForm/constants';
+import { setAuthentication } from '../../../redux/slices/authenticationSlice';
 import {
 	FormErrorType,
 	FormErrorMessage,
@@ -44,13 +46,15 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const SignIn = () => {
-	const { classes } = useStyles();
 	const navigate = useNavigate();
+	const { classes } = useStyles();
+	const appDispatch = useAppDispatch();
 
 	const [backendErrors, setErrors] = useState(defaultErrorState);
 
 	const [createUser] = useMutation(SIGN_IN, {
-		onError: (apolloError) => {
+		onError: async (apolloError) => {
+			// signOut();
 			const errror = apolloError.graphQLErrors[0];
 			const errorMessage = errror?.message;
 
@@ -63,18 +67,20 @@ const SignIn = () => {
 				});
 			}
 		},
-		onCompleted: () => {
+		onCompleted: (data) => {
+			const { user } = data.login;
+
 			setErrors(defaultErrorState);
+			appDispatch(setAuthentication(user));
 			navigate(`/dashboard`, { replace: true });
 		},
 	});
 
 	const {
+		watch,
 		register,
 		handleSubmit,
 		formState: { errors },
-		watch,
-		reset,
 	} = useForm();
 
 	const formErrors = backendErrors.email.type ? backendErrors : errors;

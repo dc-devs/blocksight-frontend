@@ -3,6 +3,7 @@ import metaMaskReducer from './slices/metamaskSlice';
 import transactionsReducer from './slices/transactionsSlice';
 import totalDepositsReducer from './slices/totalDepositsSlice';
 import tokenBalancesReducer from './slices/tokenBalancesSlice';
+import authenticationReducer from './slices/authenticationSlice';
 import totalWithdrawlsReducer from './slices/totalWithdrawlsSlice';
 import metaMaskConnectedReducer from './slices/metamaskConnectedSlice';
 import metaMaskInstalledReducer from './slices/metamaskInstalledSlice';
@@ -11,6 +12,7 @@ const store = configureStore({
 	reducer: {
 		metaMask: metaMaskReducer,
 		transactions: transactionsReducer,
+		authentication: authenticationReducer,
 		tokenBalances: tokenBalancesReducer,
 		totalDeposits: totalDepositsReducer,
 		totalWithdrawls: totalWithdrawlsReducer,
@@ -25,9 +27,9 @@ const store = configureStore({
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

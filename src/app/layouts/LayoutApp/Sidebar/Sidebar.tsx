@@ -1,10 +1,13 @@
-import Paper from '@mui/material/Paper';
-import AccountDropdown from '../../../screens/Dashboard/components/AccountDropdown';
-import Typography from '@mui/material/Typography';
-import { makeStyles } from 'tss-react/mui';
-import { BarChart, Octagon, Repeat, Search } from 'react-feather';
-import { Link as ReactLink } from 'react-router-dom';
+// import { useContext } from 'react';
 import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import { makeStyles } from 'tss-react/mui';
+// import { IAuth } from '../../../../interfaces';
+import Typography from '@mui/material/Typography';
+// import { AuthContext } from '../../../../contexts';
+import { Link as ReactLink } from 'react-router-dom';
+import { BarChart, Octagon, Repeat, Search } from 'react-feather';
+import AccountDropdown from '../../../screens/Dashboard/components/AccountDropdown';
 
 const drawerWidth = 240;
 
@@ -56,6 +59,10 @@ interface Props {
 
 const PermanentDrawer = ({ logoText }: Props) => {
 	const { classes } = useStyles();
+	// const { currentUser } = useContext(AuthContext) as IAuth;
+
+	// console.log('SideBar', currentUser);
+
 	return (
 		<Paper elevation={2} square={true} className={classes.sidebar}>
 			<div className={classes.sidebarContent}>
@@ -79,7 +86,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						</Typography>
 					</Link>
 
-					<Link
+					{/* <Link
 						to="/token"
 						color="primary"
 						underline="none"
@@ -114,7 +121,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Wallet Mapper
 						</Typography>
-					</Link>
+					</Link> */}
 				</div>
 			</div>
 		</Paper>

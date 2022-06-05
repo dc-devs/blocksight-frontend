@@ -29,7 +29,7 @@ const useStyles = makeStyles()((theme) => ({
 		fontSize: '2rem',
 	},
 	dashboardDataContainer: {
-		'flexGrow': '1',
+		flexGrow: '1',
 		padding: `${theme.spacing(2)}px ${theme.spacing(5)}px`,
 		height: '100vh',
 	},

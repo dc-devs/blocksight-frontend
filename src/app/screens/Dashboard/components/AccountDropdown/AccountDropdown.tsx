@@ -7,14 +7,18 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import { useState, useRef, useEffect } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
+import { useAppDispatch } from '../../../../../hooks';
 import { Copy, LogOut, Settings } from 'react-feather';
 import { shortenWalletAddress } from '../../../../../utils';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import { selectMetaMaskWallet } from '../../../../../redux/slices/metamaskSlice';
+import { revokeAuthentication } from '../../../../../redux/slices/authenticationSlice';
+
 // import { MouseEvent } from 'react';
 
 const useStyles = makeStyles()((theme) => ({
@@ -46,7 +50,7 @@ const useStyles = makeStyles()((theme) => ({
 		width: '100%',
 	},
 	accountDropdownLink: {
-		color: theme.palette.text.primary
+		color: theme.palette.text.primary,
 	},
 	signedInDot: {
 		height: '10px',
@@ -69,7 +73,9 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const AccountDropdown = () => {
+	const navigate = useNavigate();
 	const { classes } = useStyles();
+	const appDispatch = useAppDispatch();
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
 	const shortendWalletAddress = shortenWalletAddress(selectedAddress);
 	const [open, setOpen] = useState(false);
@@ -79,7 +85,6 @@ const AccountDropdown = () => {
 		setOpen((prevOpen) => !prevOpen);
 	};
 
-	// TODO: FIX ANY
 	const handleClose = (event: any) => {
 		// console.log(event);
 		if (
@@ -93,6 +98,13 @@ const AccountDropdown = () => {
 		setOpen(false);
 
 		return true;
+	};
+
+	// TODO: FIX ANY
+	const handleSignOut = (event: any) => {
+		appDispatch(revokeAuthentication());
+		handleClose(event);
+		navigate('/', { replace: true });
 	};
 
 	// TODO: FIX ANY
@@ -183,7 +195,7 @@ const AccountDropdown = () => {
 												Copy Address
 											</Typography>
 										</MenuItem>
-										<MenuItem onClick={handleClose}>
+										<MenuItem onClick={handleSignOut}>
 											<LogOut
 												className={classes.menuIcon}
 											/>

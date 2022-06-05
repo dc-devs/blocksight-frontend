@@ -4,29 +4,15 @@ import App from './app/App';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import createCache from '@emotion/cache';
+import { AuthProvider } from './providers';
 import { createRoot } from 'react-dom/client';
 import { CacheProvider } from '@emotion/react';
 import reportWebVitals from './reportWebVitals';
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient } from './services/apollo';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
-import {
-	ApolloClient,
-	InMemoryCache,
-	ApolloProvider,
-	createHttpLink,
-} from '@apollo/client';
-
-const link = createHttpLink({
-	credentials: 'include',
-	uri: 'http://localhost:3001/graphql',
-});
-
-const client = new ApolloClient({
-	link,
-	uri: 'http://localhost:3001/graphql',
-	cache: new InMemoryCache(),
-});
 
 export const muiCache = createCache({
 	key: 'mui',
@@ -38,17 +24,19 @@ const root = createRoot(container!);
 
 root.render(
 	<React.StrictMode>
-		<ApolloProvider client={client}>
-			<CacheProvider value={muiCache}>
-				<Provider store={store}>
-					<ThemeProvider theme={theme}>
-						<CssBaseline />
-						<Router>
-							<App />
-						</Router>
-					</ThemeProvider>
-				</Provider>
-			</CacheProvider>
+		<ApolloProvider client={apolloClient}>
+			{/* <AuthProvider> */}
+				<CacheProvider value={muiCache}>
+					<Provider store={store}>
+						<ThemeProvider theme={theme}>
+							<CssBaseline />
+							<Router>
+								<App />
+							</Router>
+						</ThemeProvider>
+					</Provider>
+				</CacheProvider>
+			{/* </AuthProvider> */}
 		</ApolloProvider>
 	</React.StrictMode>
 );
