@@ -13,7 +13,9 @@ import { useState, useRef, useEffect } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../../../hooks';
 import { Copy, LogOut, Settings } from 'react-feather';
+import { SIGN_OUT } from '../../../../../queries/sessions';
 import { shortenWalletAddress } from '../../../../../utils';
+import { apolloClient } from '../../../../../services/apollo';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import { selectMetaMaskWallet } from '../../../../../redux/slices/metamaskSlice';
@@ -101,7 +103,14 @@ const AccountDropdown = () => {
 	};
 
 	// TODO: FIX ANY
-	const handleSignOut = (event: any) => {
+	const handleSignOut = async (event: any) => {
+		await apolloClient.mutate({
+			mutation: SIGN_OUT,
+			variables: {
+				userId: 1,
+			},
+		});
+
 		appDispatch(revokeAuthentication());
 		handleClose(event);
 		navigate('/', { replace: true });

@@ -10,6 +10,7 @@ const SIGN_UP = gql`
 				createdAt
 				updatedAt
 			}
+			isAuthenticated
 		}
 	}
 `;

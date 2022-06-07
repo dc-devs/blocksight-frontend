@@ -3,11 +3,14 @@ import { gql } from '@apollo/client';
 const CURRENT_USER = gql`
 	query Query {
 		currentUser {
-			id
-			email
-			role
-			createdAt
-			updatedAt
+			user {
+				id
+				email
+				role
+				createdAt
+				updatedAt
+			}
+			isAuthenticated
 		}
 	}
 `;

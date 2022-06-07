@@ -29,7 +29,10 @@ const App = () => {
 	);
 
 	useEffect(() => {
-		if (selectedAuthentication && selectedAuthenticationStatus === 'idle') {
+		if (
+			selectedAuthentication &&
+			selectedAuthenticationStatus === Status.IDLE
+		) {
 			appDispatch(fetchAuthentication());
 		}
 
@@ -56,8 +59,8 @@ const App = () => {
 		selectedAuthenticationStatus
 	);
 
-	if (selectedAuthenticationStatus === 'loading') {
-		return (<></>);
+	if (selectedAuthenticationStatus === Status.LOADING) {
+		return <></>;
 	}
 
 	return (

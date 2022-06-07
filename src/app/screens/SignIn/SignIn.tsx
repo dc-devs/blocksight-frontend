@@ -52,7 +52,7 @@ const SignIn = () => {
 
 	const [backendErrors, setErrors] = useState(defaultErrorState);
 
-	const [createUser] = useMutation(SIGN_IN, {
+	const [signInUser] = useMutation(SIGN_IN, {
 		onError: async (apolloError) => {
 			// signOut();
 			const errror = apolloError.graphQLErrors[0];
@@ -68,10 +68,10 @@ const SignIn = () => {
 			}
 		},
 		onCompleted: (data) => {
-			const { user } = data.login;
+			const authentication = data.login;
 
 			setErrors(defaultErrorState);
-			appDispatch(setAuthentication(user));
+			appDispatch(setAuthentication(authentication));
 			navigate(`/dashboard`, { replace: true });
 		},
 	});
@@ -89,7 +89,7 @@ const SignIn = () => {
 		const { email, password } = userData;
 
 		try {
-			createUser({
+			signInUser({
 				variables: {
 					sessionInput: {
 						email,

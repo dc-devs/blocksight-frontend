@@ -6,16 +6,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const enum Model {
 	AUTHENTICATION = 'authentication',
-	AUTHENTICATED_USER = 'authenticatedUser',
 }
 
-interface IAuthenticatedUser {
+interface IAuthentication {
 	user?: IUser;
+	userId?: number;
 	isAuthenticated: boolean;
 }
 
 interface Transaction {
-	authentication: IAuthenticatedUser;
+	authentication: IAuthentication;
 	status: string;
 	error: null | string;
 }
@@ -28,20 +28,21 @@ interface State {
 // ---------------
 export const fetchAuthentication = createAsyncThunk(
 	'authentication/fetchAuthentication',
-	async (): Promise<IAuthenticatedUser> => {
-		const localAuthenticatedUser = localStorage.getItem(
-			Model.AUTHENTICATED_USER
+	async (): Promise<IAuthentication> => {
+		const localAuthentication = localStorage.getItem(
+			Model.AUTHENTICATION
 		);
-		let authenticatedUser: IAuthenticatedUser = {
+
+		let authentication: IAuthentication = {
 			isAuthenticated: false,
 		};
 
 		try {
 			if (
-				localAuthenticatedUser &&
-				typeof localAuthenticatedUser === 'string'
+				localAuthentication &&
+				typeof localAuthentication === 'string'
 			) {
-				authenticatedUser = JSON.parse(localAuthenticatedUser);
+				authentication = JSON.parse(localAuthentication);
 			} else {
 				const result = await apolloClient.query({
 					query: CURRENT_USER,
@@ -50,21 +51,18 @@ export const fetchAuthentication = createAsyncThunk(
 				const { data } = result;
 				const { currentUser } = data;
 
-				authenticatedUser = {
-					...currentUser,
-					isAuthenticated: true,
-				};
+				authentication = currentUser;
 
 				localStorage.setItem(
-					Model.AUTHENTICATED_USER,
-					JSON.stringify(authenticatedUser)
+					Model.AUTHENTICATION,
+					JSON.stringify(authentication)
 				);
 			}
 		} catch (error) {
-			localStorage.removeItem(Model.AUTHENTICATED_USER);
+			localStorage.removeItem(Model.AUTHENTICATION);
 		}
 
-		return authenticatedUser;
+		return authentication;
 	}
 );
 
@@ -77,27 +75,25 @@ export const authenticationSlice = createSlice({
 	},
 	reducers: {
 		setAuthentication: (state: any, { payload }: any) => {
-			const authenticatedUser = {
-				...payload,
-				isAuthenticated: true,
-			};
+			const authentication = { ...payload } as IAuthentication;
 
-			state.authentication = authenticatedUser;
+			state.authentication = authentication;
 			state.status = Status.SUCCEEDED;
 
 			localStorage.setItem(
-				Model.AUTHENTICATED_USER,
-				JSON.stringify(authenticatedUser)
+				Model.AUTHENTICATION,
+				JSON.stringify(authentication)
 			);
 		},
 		revokeAuthentication: (state: any) => {
-			const authenticatedUser = {
+			const authentication = {
 				isAuthenticated: false,
 			};
 
-			state.authentication = authenticatedUser;
+			state.authentication = authentication;
 			state.status = Status.SUCCEEDED;
-			localStorage.removeItem(Model.AUTHENTICATED_USER);
+
+			localStorage.removeItem(Model.AUTHENTICATION);
 		},
 	},
 	extraReducers: (builder) => {
