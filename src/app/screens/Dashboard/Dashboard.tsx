@@ -10,7 +10,6 @@ import {
 	fetchTokenBalances,
 	selectTokenBalances,
 	selectTokenBalancesStatus,
-	// selectTokenBalancesError,
 } from '../../../redux/slices/tokenBalancesSlice';
 
 const useStyles = makeStyles()((theme) => ({

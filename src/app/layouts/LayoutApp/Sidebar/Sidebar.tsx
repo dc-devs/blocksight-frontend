@@ -59,9 +59,6 @@ interface Props {
 
 const PermanentDrawer = ({ logoText }: Props) => {
 	const { classes } = useStyles();
-	// const { currentUser } = useContext(AuthContext) as IAuth;
-
-	// console.log('SideBar', currentUser);
 
 	return (
 		<Paper elevation={2} square={true} className={classes.sidebar}>

@@ -71,6 +71,17 @@ const useStyles = makeStyles()((theme) => ({
 		color: theme.palette.text.primary,
 		margin: '0 5px',
 	},
+	userEmail: {
+		display: 'block',
+		width: '140px',
+		textTransform: 'lowercase',
+		textOverflow: 'ellipsis',
+		overflow: 'hidden',
+		whiteSpace: 'nowrap',
+		color: theme.palette.text.primary,
+		margin: '0 5px',
+		fontSize: '1rem',
+	},
 	dropdownArrow: {
 		fontSize: '1rem',
 		transform: 'rotate(-90deg)',
@@ -86,6 +97,7 @@ const AccountDropdown = () => {
 	const shortendWalletAddress = shortenWalletAddress(selectedAddress);
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef(null) as any;
+	const { user } = selectedAuthentication;
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen);
@@ -108,7 +120,6 @@ const AccountDropdown = () => {
 
 	// TODO: FIX ANY
 	const handleSignOut = async (event: any) => {
-		const { user } = selectedAuthentication;
 		await apolloClient.mutate({
 			mutation: SIGN_OUT,
 			variables: {
@@ -151,9 +162,16 @@ const AccountDropdown = () => {
 					className={classes.accountDropdownContainer}
 				>
 					<div className={classes.signedInDot} />
-					<Typography className={classes.walletAddress}>
-						{shortendWalletAddress}
-					</Typography>
+					{user?.email ? (
+						<Typography className={classes.userEmail}>
+							{user?.email} {`sjdfhklsjhfljkashdfkjshdfkls`}
+						</Typography>
+					) : (
+						<Typography className={classes.walletAddress}>
+							{shortendWalletAddress}
+						</Typography>
+					)}
+
 					<ArrowBackIosRoundedIcon
 						className={classes.dropdownArrow}
 					/>
