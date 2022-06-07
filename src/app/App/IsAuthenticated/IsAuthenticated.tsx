@@ -44,16 +44,6 @@ const IsAuthenticated = ({ children }: IProps) => {
 		navigate,
 	]);
 
-	console.log(
-		'[IsAuthenticated] isAuthenticated',
-		!!selectedAuthentication.isAuthenticated
-	);
-
-	console.log(
-		'[IsAuthenticated] selectedAuthenticationStatus',
-		selectedAuthenticationStatus
-	);
-
 	if (selectedAuthenticationStatus === Status.LOADING) {
 		return <></>;
 	}

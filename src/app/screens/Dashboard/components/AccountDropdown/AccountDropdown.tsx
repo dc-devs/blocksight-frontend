@@ -87,8 +87,6 @@ const AccountDropdown = () => {
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef(null) as any;
 
-	console.log('[AccountDropdown]', selectedAuthentication);
-
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen);
 	};

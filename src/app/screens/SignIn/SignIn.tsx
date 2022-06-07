@@ -54,7 +54,6 @@ const SignIn = () => {
 
 	const [signInUser] = useMutation(SIGN_IN, {
 		onError: async (apolloError) => {
-			// signOut();
 			const errror = apolloError.graphQLErrors[0];
 			const errorMessage = errror?.message;
 

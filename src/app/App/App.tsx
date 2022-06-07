@@ -18,7 +18,6 @@ import {
 	fetchAuthentication,
 	selectAuthentication,
 	selectAuthenticationStatus,
-	// selectTokenBalancesError,
 } from '../../redux/slices/authenticationSlice';
 
 const App = () => {
@@ -42,16 +41,6 @@ const App = () => {
 		appDispatch,
 		navigate,
 	]);
-
-	console.log(
-		'[App] isAuthenticated',
-		!!selectedAuthentication.isAuthenticated
-	);
-
-	console.log(
-		'[App] selectedAuthenticationStatus',
-		selectedAuthenticationStatus
-	);
 
 	return (
 		<>
