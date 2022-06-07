@@ -19,7 +19,10 @@ import { apolloClient } from '../../../../../services/apollo';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import { selectMetaMaskWallet } from '../../../../../redux/slices/metamaskSlice';
-import { revokeAuthentication } from '../../../../../redux/slices/authenticationSlice';
+import {
+	revokeAuthentication,
+	selectAuthentication,
+} from '../../../../../redux/slices/authenticationSlice';
 
 // import { MouseEvent } from 'react';
 
@@ -79,9 +82,12 @@ const AccountDropdown = () => {
 	const { classes } = useStyles();
 	const appDispatch = useAppDispatch();
 	const { selectedAddress } = useSelector(selectMetaMaskWallet);
+	const selectedAuthentication = useSelector(selectAuthentication);
 	const shortendWalletAddress = shortenWalletAddress(selectedAddress);
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef(null) as any;
+
+	console.log('[AccountDropdown]', selectedAuthentication);
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen);
@@ -104,10 +110,11 @@ const AccountDropdown = () => {
 
 	// TODO: FIX ANY
 	const handleSignOut = async (event: any) => {
+		const { user } = selectedAuthentication;
 		await apolloClient.mutate({
 			mutation: SIGN_OUT,
 			variables: {
-				userId: 1,
+				userId: user?.id,
 			},
 		});
 

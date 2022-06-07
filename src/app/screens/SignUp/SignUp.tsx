@@ -4,11 +4,13 @@ import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks';
 import headers from '../../../constants/headers';
 import { SIGN_UP } from '../../../queries/sessions';
 import SessionForm from '../../components/SessionForm';
 import { IErrorProps } from '../../components/SessionForm/interfaces';
 import { defaultErrorState } from '../../components/SessionForm/constants';
+import { setAuthentication } from '../../../redux/slices/authenticationSlice';
 
 const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
@@ -40,8 +42,10 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 const SignUp = () => {
-	const { classes } = useStyles();
 	const navigate = useNavigate();
+	const { classes } = useStyles();
+	const appDispatch = useAppDispatch();
+
 
 	const [backendErrors, setErrors] = useState(defaultErrorState);
 
@@ -54,8 +58,11 @@ const SignUp = () => {
 				setErrors(errors);
 			}
 		},
-		onCompleted: () => {
+		onCompleted: (data) => {
+			const authentication = data.signUp;
+
 			setErrors(defaultErrorState);
+			appDispatch(setAuthentication(authentication));
 			navigate(`/dashboard`, { replace: true });
 		},
 	});

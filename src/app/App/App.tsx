@@ -10,6 +10,8 @@ import Settings from '../screens/Settings';
 import { useAppDispatch } from '../../hooks';
 import Dashboard from '../screens/Dashboard';
 import LayoutApp from '../layouts/LayoutApp';
+import IsAuthenticated from './IsAuthenticated';
+import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import LayoutAppHome from '../layouts/LayoutAppHome';
 import {
@@ -18,7 +20,6 @@ import {
 	selectAuthenticationStatus,
 	// selectTokenBalancesError,
 } from '../../redux/slices/authenticationSlice';
-import { useNavigate } from 'react-router-dom';
 
 const App = () => {
 	const navigate = useNavigate();
@@ -34,13 +35,6 @@ const App = () => {
 			selectedAuthenticationStatus === Status.IDLE
 		) {
 			appDispatch(fetchAuthentication());
-		}
-
-		if (
-			selectedAuthenticationStatus === Status.SUCCEEDED &&
-			!selectedAuthentication.isAuthenticated
-		) {
-			navigate('/sign-in', { replace: true });
 		}
 	}, [
 		selectedAuthenticationStatus,
@@ -58,10 +52,6 @@ const App = () => {
 		'[App] selectedAuthenticationStatus',
 		selectedAuthenticationStatus
 	);
-
-	if (selectedAuthenticationStatus === Status.LOADING) {
-		return <></>;
-	}
 
 	return (
 		<>
@@ -87,11 +77,11 @@ const App = () => {
 				<Route
 					path="/dashboard"
 					element={
-						// <IsAuthenticated>
-						<LayoutApp>
-							<Dashboard />
-						</LayoutApp>
-						// </IsAuthenticated>
+						<IsAuthenticated>
+							<LayoutApp>
+								<Dashboard />
+							</LayoutApp>
+						</IsAuthenticated>
 					}
 				/>
 				<Route

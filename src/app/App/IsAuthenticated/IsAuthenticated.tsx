@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
 import { ReactElement } from 'react';
+import { Status } from '../../../redux';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks';
 import {
+	fetchAuthentication,
 	selectAuthentication,
 	selectAuthenticationStatus,
 } from '../../../redux/slices/authenticationSlice';
@@ -12,26 +16,49 @@ interface IProps {
 }
 
 const IsAuthenticated = ({ children }: IProps) => {
+	const navigate = useNavigate();
+	const appDispatch = useAppDispatch();
 	const selectedAuthentication = useSelector(selectAuthentication);
 	const selectedAuthenticationStatus = useSelector(
 		selectAuthenticationStatus
 	);
 
 	useEffect(() => {
-		console.log(
-			'[IsAuthenticated] IsAuthenticated',
-			selectedAuthentication
-		);
-		console.log('[IsAuthenticated] - Status', selectedAuthenticationStatus);
-	}, [selectedAuthentication, selectedAuthenticationStatus]);
+		if (
+			selectedAuthentication &&
+			selectedAuthenticationStatus === Status.IDLE
+		) {
+			appDispatch(fetchAuthentication());
+		}
 
-	if (selectedAuthenticationStatus === 'loading') {
+		if (
+			selectedAuthenticationStatus === Status.SUCCEEDED &&
+			!selectedAuthentication.isAuthenticated
+		) {
+			navigate('/sign-in', { replace: true });
+		}
+	}, [
+		selectedAuthenticationStatus,
+		selectedAuthentication,
+		appDispatch,
+		navigate,
+	]);
+
+	console.log(
+		'[IsAuthenticated] isAuthenticated',
+		!!selectedAuthentication.isAuthenticated
+	);
+
+	console.log(
+		'[IsAuthenticated] selectedAuthenticationStatus',
+		selectedAuthenticationStatus
+	);
+
+	if (selectedAuthenticationStatus === Status.LOADING) {
 		return <></>;
-	} else if (selectedAuthentication.isAuthenticated) {
-		return children;
-	} else {
-		return <Navigate to="/sign-in" replace />;
 	}
+
+	return children;
 };
 
 export default IsAuthenticated;
