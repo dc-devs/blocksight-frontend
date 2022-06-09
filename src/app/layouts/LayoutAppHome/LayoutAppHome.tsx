@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Logo from '../Logo';
+import WalletConnect from './WalletConnect/ConnectToAWalletButton'
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link as ReactLink } from 'react-router-dom';
@@ -46,6 +47,7 @@ const LayoutAppHome = ({ children }: Props) => {
 				<Container>
 					<Toolbar>
 						<Logo />
+						<WalletConnect />
 						<Link
 							to="/sign-in"
 							color="primary"
