@@ -1,19 +1,21 @@
 import { useEffect } from 'react';
 import { Status } from '../../redux';
-import Users from '../screens/Users';
-import SignIn from '../screens/SignIn';
-import SignUp from '../screens/SignUp';
-import AppHome from '../screens/AppHome';
-import Token from '../screens/TokenInfo';
 import { useSelector } from 'react-redux';
-import Settings from '../screens/Settings';
 import { useAppDispatch } from '../../hooks';
-import Dashboard from '../screens/Dashboard';
 import LayoutApp from '../layouts/LayoutApp';
 import LayoutHome from '../layouts/LayoutHome';
 import { useNavigate } from 'react-router-dom';
 import IsAuthenticated from './IsAuthenticated';
 import { Routes, Route } from 'react-router-dom';
+import {
+	Home,
+	Users,
+	SignIn,
+	SignUp,
+	Settings,
+	TokenInfo,
+	Dashboard,
+} from '../screens/';
 import {
 	fetchAuthentication,
 	selectAuthentication,
@@ -35,10 +37,8 @@ import {
 const App = () => {
 	const navigate = useNavigate();
 	const appDispatch = useAppDispatch();
-	const selectedAuthentication = useSelector(selectAuthentication);
-	const selectedAuthenticationStatus = useSelector(
-		selectAuthenticationStatus
-	);
+	const authentication = useSelector(selectAuthentication);
+	const authenticationStatus = useSelector(selectAuthenticationStatus);
 	const metaMaskWallet = useSelector(selectMetaMaskWallet);
 	const isMetaMaskInstalled = useSelector(selectIsMetaMaskInstalled);
 	const isMetaMaskConnected = useSelector(selectIsMetaMaskConnected);
@@ -62,18 +62,10 @@ const App = () => {
 	console.log('App - isMetaMaskConnected', isMetaMaskConnected);
 
 	useEffect(() => {
-		if (
-			selectedAuthentication &&
-			selectedAuthenticationStatus === Status.IDLE
-		) {
+		if (authentication && authenticationStatus === Status.IDLE) {
 			appDispatch(fetchAuthentication());
 		}
-	}, [
-		selectedAuthenticationStatus,
-		selectedAuthentication,
-		appDispatch,
-		navigate,
-	]);
+	}, [authenticationStatus, authentication, appDispatch, navigate]);
 
 	return (
 		<>
@@ -110,7 +102,7 @@ const App = () => {
 					path="/token/:symbol"
 					element={
 						<LayoutApp>
-							<Token />
+							<TokenInfo />
 						</LayoutApp>
 					}
 				/>
@@ -118,7 +110,7 @@ const App = () => {
 					path="/"
 					element={
 						<LayoutHome>
-							<AppHome />
+							<Home />
 						</LayoutHome>
 					}
 				/>

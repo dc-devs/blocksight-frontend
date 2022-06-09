@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { ReactElement } from 'react';
 import { Status } from '../../../redux';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import {
@@ -18,33 +17,23 @@ interface IProps {
 const IsAuthenticated = ({ children }: IProps) => {
 	const navigate = useNavigate();
 	const appDispatch = useAppDispatch();
-	const selectedAuthentication = useSelector(selectAuthentication);
-	const selectedAuthenticationStatus = useSelector(
-		selectAuthenticationStatus
-	);
+	const authentication = useSelector(selectAuthentication);
+	const authenticationStatus = useSelector(selectAuthenticationStatus);
 
 	useEffect(() => {
-		if (
-			selectedAuthentication &&
-			selectedAuthenticationStatus === Status.IDLE
-		) {
+		if (authentication && authenticationStatus === Status.IDLE) {
 			appDispatch(fetchAuthentication());
 		}
 
 		if (
-			selectedAuthenticationStatus === Status.SUCCEEDED &&
-			!selectedAuthentication.isAuthenticated
+			authenticationStatus === Status.SUCCEEDED &&
+			!authentication.isAuthenticated
 		) {
 			navigate('/sign-in', { replace: true });
 		}
-	}, [
-		selectedAuthenticationStatus,
-		selectedAuthentication,
-		appDispatch,
-		navigate,
-	]);
+	}, [authenticationStatus, authentication, appDispatch, navigate]);
 
-	if (selectedAuthenticationStatus === Status.LOADING) {
+	if (authenticationStatus === Status.LOADING) {
 		return <></>;
 	}
 
