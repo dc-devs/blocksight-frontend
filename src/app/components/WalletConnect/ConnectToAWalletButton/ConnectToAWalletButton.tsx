@@ -4,7 +4,7 @@ import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ModalWalletConnect from '../ConnectToAWalletModal';
-import { selectIsMetaMaskConnected } from '../../../../../redux/slices/metamaskConnectedSlice';
+import { selectIsMetaMaskConnected } from '../../../../redux/slices/metamaskConnectedSlice';
 
 const useStyles = makeStyles()((theme) => ({
 	buttonRoot: {

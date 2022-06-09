@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Logo from '../Logo';
-import WalletConnect from './WalletConnect/ConnectToAWalletButton'
+import WalletConnect from '../../components/WalletConnect/ConnectToAWalletButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link as ReactLink } from 'react-router-dom';
@@ -33,7 +33,7 @@ interface Props {
 	children: JSX.Element;
 }
 
-const LayoutAppHome = ({ children }: Props) => {
+const LayoutHome = ({ children }: Props) => {
 	const { classes } = useStyles();
 
 	return (
@@ -74,4 +74,4 @@ const LayoutAppHome = ({ children }: Props) => {
 	);
 };
 
-export default LayoutAppHome;
+export default LayoutHome;

@@ -2,7 +2,7 @@ import { makeStyles } from 'tss-react/mui';
 import DialogContent from '@mui/material/DialogContent';
 import ConnectWalletGeneric from '../ConnectWalletGeneric';
 import ConnectWalletMetaMask from '../ConnectWalletMetamask';
-import ModalBase from '../../../../components/core/modals/ModalBase';
+import ModalBase from '../../core/modals/ModalBase';
 
 interface Props {
 	isOpen: boolean;
