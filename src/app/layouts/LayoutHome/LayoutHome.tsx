@@ -4,10 +4,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Logo from '../Logo';
 import WalletConnect from '../../components/WalletConnect/ConnectToAWalletButton';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Link as ReactLink } from 'react-router-dom';
-import Link from '@mui/material/Link';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
+// import { Link as ReactLink } from 'react-router-dom';
+// import Link from '@mui/material/Link';
 
 const useStyles = makeStyles()((theme) => ({
 	root: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles()((theme) => ({
 	},
 	appBar: {
 		backgroundColor: 'white',
-		boxShadow: 'none',
+		boxShadow: theme.shadows[1],
 		color: '#bbb',
 	},
 	loginLink: {
@@ -48,7 +48,7 @@ const LayoutHome = ({ children }: Props) => {
 					<Toolbar>
 						<Logo />
 						<WalletConnect />
-						<Link
+						{/* <Link
 							to="/sign-in"
 							color="primary"
 							underline="none"
@@ -65,7 +65,7 @@ const LayoutHome = ({ children }: Props) => {
 							>
 								Sign Up
 							</Button>
-						</Link>
+						</Link> */}
 					</Toolbar>
 				</Container>
 			</AppBar>

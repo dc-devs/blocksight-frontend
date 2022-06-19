@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useAppDispatch } from '../../../../hooks';
 import ModalWalletConnect from '../ConnectToAWalletModal';
-import { selectIsMetaMaskConnected } from '../../../../redux/slices/metamaskConnectedSlice';
+// import { selectIsMetaMaskConnected } from '../../../../redux/slices/metamaskConnectedSlice';
+import { selectIsMetaMaskInstalled } from '../../../../redux/slices/metamaskInstalledSlice';
+import connectWalletMetaMask from '../../../components/WalletConnect/untils/connectMetaMaskWallet';
 
 const useStyles = makeStyles()((theme) => ({
 	buttonRoot: {
@@ -24,24 +27,34 @@ const useStyles = makeStyles()((theme) => ({
 const ConnectToAWallet = () => {
 	const { classes } = useStyles();
 	const [open, setOpen] = useState(false);
-	const isWalletConnected = useSelector(selectIsMetaMaskConnected);
+	const dispatch = useAppDispatch();
+	const isMetaMaskInstalled = useSelector(selectIsMetaMaskInstalled);
 
-	const toggleModal = () => {
-		if (open) {
-			setOpen(false);
+	const handleClick = () => {
+		if (isMetaMaskInstalled) {
+			const connectWallet = connectWalletMetaMask({
+				dispatch,
+				isWalletInstalled: isMetaMaskInstalled,
+			});
+
+			connectWallet();
 		} else {
-			setOpen(true);
+			if (open) {
+				setOpen(false);
+			} else {
+				setOpen(true);
+			}
 		}
 	};
 
-	const isOpen = isWalletConnected ? false : open;
+	const isOpen = open; // update with shouldWalletModalBeClosed ? false : open;
 
 	return (
 		<>
 			<Button
 				className={classes.buttonRoot}
 				disableRipple={true}
-				onClick={toggleModal}
+				onClick={handleClick}
 			>
 				<Typography className={classes.buttonText}>
 					Connect to a wallet

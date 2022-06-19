@@ -3,12 +3,7 @@ import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles()((theme) => ({
 	root: {
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
-		width: '100vw',
-		height: '100vh',
+		marginTop: '200px',
 	},
 	homeTitle: {
 		fontSize: '2.5rem',
@@ -24,7 +19,6 @@ const useStyles = makeStyles()((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 		alignContent: 'center',
-		height: '500px',
 		width: '100%',
 		overflow: 'hidden',
 		// background: 'linear-gradient(to top, #443ec2 0%, #5951ff 100%)',
@@ -45,7 +39,7 @@ const Home = () => {
 					</Typography>
 				</div>
 			</div>
-			<div className={classes.testFooter} />
+			{/* <div className={classes.testFooter} /> */}
 		</>
 	);
 };
