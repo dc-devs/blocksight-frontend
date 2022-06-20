@@ -1,17 +1,11 @@
 import { Status } from '../../redux';
-import { IUser } from '../../interfaces';
+import { IAuthentication } from '../../interfaces';
 import { apolloClient } from '../../services/apollo';
 import { CURRENT_USER } from '../../queries/sessions';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const enum Model {
 	AUTHENTICATION = 'authentication',
-}
-
-interface IAuthentication {
-	user?: IUser;
-	userId?: number;
-	isAuthenticated: boolean;
 }
 
 interface Transaction {

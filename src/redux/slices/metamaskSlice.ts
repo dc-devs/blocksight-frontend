@@ -1,14 +1,10 @@
+import { IWallet } from '../../interfaces';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getMetaMaskWallet from '../../sdks/metamask/getMetamaskWallet';
-
-interface Wallet {
-	selectedAddress: string;
-}
-
 interface MetaMask {
 	status: string;
 	error: null | string;
-	wallet: Wallet;
+	wallet: IWallet;
 }
 
 interface State {
@@ -29,10 +25,10 @@ export const metaMaskSlice = createSlice({
 	initialState: {
 		error: null,
 		status: 'idle',
-		wallet: { selectedAddress: null },
+		wallet: {},
 	},
 	reducers: {
-		updateMetaMaskWallet: (state, { payload }) => {
+		updateMetaMaskWallet: (state: any, { payload }: any) => {
 			state.wallet = payload;
 		},
 	},

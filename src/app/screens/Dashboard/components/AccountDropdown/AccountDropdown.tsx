@@ -18,7 +18,6 @@ import { shortenWalletAddress } from '../../../../../utils';
 import { apolloClient } from '../../../../../services/apollo';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
-import { selectMetaMaskWallet } from '../../../../../redux/slices/metamaskSlice';
 import {
 	revokeAuthentication,
 	selectAuthentication,
@@ -92,12 +91,18 @@ const AccountDropdown = () => {
 	const navigate = useNavigate();
 	const { classes } = useStyles();
 	const appDispatch = useAppDispatch();
-	const { selectedAddress } = useSelector(selectMetaMaskWallet);
-	const selectedAuthentication = useSelector(selectAuthentication);
-	const shortendWalletAddress = shortenWalletAddress(selectedAddress);
+	const authentication = useSelector(selectAuthentication);
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef(null) as any;
-	const { user } = selectedAuthentication;
+	const { user, wallet } = authentication;
+
+	const chainId = wallet?.chainId;
+	const selectedAddress = wallet?.selectedAddress;
+	let shortendWalletAddress;
+
+	if (selectedAddress) {
+		shortendWalletAddress = shortenWalletAddress(selectedAddress);
+	}
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen);
@@ -164,7 +169,7 @@ const AccountDropdown = () => {
 					<div className={classes.signedInDot} />
 					{user?.email ? (
 						<Typography className={classes.userEmail}>
-							{user?.email} {`sjdfhklsjhfljkashdfkjshdfkls`}
+							{user?.email}
 						</Typography>
 					) : (
 						<Typography className={classes.walletAddress}>
@@ -176,6 +181,9 @@ const AccountDropdown = () => {
 						className={classes.dropdownArrow}
 					/>
 				</Button>
+				<Typography className={classes.walletAddress}>
+					Chain Id: {chainId}
+				</Typography>
 				<Popper
 					open={open}
 					anchorEl={anchorRef.current}

@@ -1,14 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-interface IProps {
-	chainId: string;
-}
-
-const generateMessage = ({ chainId }: IProps) => {
-	console.log(chainId);
-	return {
+const generateMessage = () => {
+	const messageParams = {
 		domain: {
-			chainId,
 			name: 'BlockSight',
 			verifyingContract: 'https://blocksight.fi',
 			salt: uuidv4(),
@@ -24,13 +18,15 @@ const generateMessage = ({ chainId }: IProps) => {
 			EIP712Domain: [
 				{ name: 'name', type: 'string' },
 				{ name: 'version', type: 'string' },
-				{ name: 'chainId', type: 'uint256' },
 				{ name: 'verifyingContract', type: 'address' },
 			],
 			// Refer to PrimaryType
 			Message: [{ name: 'Sign', type: 'string' }],
 		},
 	};
+	const message = JSON.stringify(messageParams);
+
+	return { messageParams, message };
 };
 
 export default generateMessage;

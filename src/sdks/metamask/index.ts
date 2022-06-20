@@ -1,4 +1,4 @@
-import generateMessage from "./generateMessage";
+import generateMessage from "./utils/generateMessage";
 import getMetaMaskWallet from './getMetamaskWallet';
 import getIsMetaMaskConnected from './getIsMetamaskConnected';
 import getIsMetaMaskInstalled from './getIsMetamaskInstalled';

@@ -1,22 +1,17 @@
+import { IWallet } from '../../interfaces';
+import { defaultWallet } from './constants';
 import {
 	getProvider,
 	getWalletFromProvider,
 	checkIsMetaMaskConnected,
 } from './utils';
-import MetaMaskMethod from './enums/MetaMaskMethod';
 
-const getMetaMaskWallet = async () => {
-	let wallet;
+const getMetaMaskWallet = async (): Promise<IWallet> => {
 	const provider: any = await getProvider();
 	const isMetaMaskConnected = await checkIsMetaMaskConnected();
+	let wallet: IWallet = defaultWallet;
 
 	if (isMetaMaskConnected) {
-		wallet = getWalletFromProvider(provider);
-	} else {
-		await provider.request({
-			method: MetaMaskMethod.REQUEST_ACCOUNTS,
-		});
-
 		wallet = getWalletFromProvider(provider);
 	}
 
