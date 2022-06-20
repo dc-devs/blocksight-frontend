@@ -67,6 +67,12 @@ const App = () => {
 		}
 	}, [authenticationStatus, authentication, appDispatch, navigate]);
 
+	useEffect(() => {
+		if (authentication && authenticationStatus === Status.IDLE) {
+			appDispatch(fetchAuthentication());
+		}
+	}, [authenticationStatus, authentication, appDispatch, navigate]);
+
 	return (
 		<>
 			<Routes>

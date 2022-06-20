@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getIsMetaMaskInstalled } from '../../services/metamask';
+import { getIsMetaMaskInstalled } from '../../sdks/metamask';
 
 interface MetaMask {
 	status: string;

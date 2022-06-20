@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import getMetaMaskWallet from '../../services/metamask/getMetamaskWallet';
+import getMetaMaskWallet from '../../sdks/metamask/getMetamaskWallet';
 
 interface Wallet {
 	selectedAddress: string;

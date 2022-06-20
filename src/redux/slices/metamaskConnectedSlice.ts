@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getIsMetaMaskConnected } from '../../services/metamask';
+import { getIsMetaMaskConnected } from '../../sdks/metamask';
 
 interface IsConnected {
 	status: string;
@@ -28,7 +28,7 @@ export const metaMaskConnected = createSlice({
 		isConnected: false,
 	},
 	reducers: {
-		updateIsMetaMaskConnected: (state, { payload }) => {
+		updateIsMetaMaskConnected: (state: any, { payload }: any) => {
 			state.isConnected = payload;
 		},
 	},

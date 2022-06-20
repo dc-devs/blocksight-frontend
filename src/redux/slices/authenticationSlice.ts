@@ -29,9 +29,7 @@ interface State {
 export const fetchAuthentication = createAsyncThunk(
 	'authentication/fetchAuthentication',
 	async (): Promise<IAuthentication> => {
-		const localAuthentication = localStorage.getItem(
-			Model.AUTHENTICATION
-		);
+		const localAuthentication = localStorage.getItem(Model.AUTHENTICATION);
 
 		let authentication: IAuthentication = {
 			isAuthenticated: false,

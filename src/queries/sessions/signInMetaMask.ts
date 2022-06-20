@@ -1,14 +1,13 @@
 import { gql } from '@apollo/client';
 
 const SIGN_IN_METAMASK = gql`
-	mutation Mutation($sessionInput: SessionInput!) {
-		login(sessionInput: $sessionInput) {
-			wallet {
+	mutation Mutation($signInMetaMaskInput: SignInMetaMaskInput!) {
+		signInMetaMask(signInMetaMaskInput: $signInMetaMaskInput) {
+			user {
 				id
 				email
 				role
-				createdAt
-				updatedAt
+				primaryWalletAddress
 			}
 			isAuthenticated
 		}

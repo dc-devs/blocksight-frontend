@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
-import { connectMetaMaskWallet } from '../untils';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks';
 import ConnectWalletBase from '../ConnectWalletBase';
+import { generateConnectMetaMaskWallet } from '../../../../sdks/metamask';
 import { selectIsMetaMaskInstalled } from '../../../../redux/slices/metamaskInstalledSlice';
 
 interface Props {
@@ -20,8 +21,10 @@ const ConnectWalletMetaMask = ({
 	const dispatch = useAppDispatch();
 	const isWalletInstalled = useSelector(selectIsMetaMaskInstalled);
 	const displayWalletInstallUrl = !isWalletInstalled;
+	const navigate = useNavigate();
 
-	const connectWallet = connectMetaMaskWallet({
+	const connectWallet = generateConnectMetaMaskWallet({
+		navigate,
 		dispatch,
 		isWalletInstalled,
 	});

@@ -29,7 +29,7 @@ const IsAuthenticated = ({ children }: IProps) => {
 			authenticationStatus === Status.SUCCEEDED &&
 			!authentication.isAuthenticated
 		) {
-			navigate('/sign-in', { replace: true });
+			navigate('/', { replace: true });
 		}
 	}, [authenticationStatus, authentication, appDispatch, navigate]);
 

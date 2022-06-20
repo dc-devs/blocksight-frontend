@@ -1,3 +1,4 @@
+import MetaMaskMethod from './enums/MetaMaskMethod';
 import detectEthereumProvider from '@metamask/detect-provider';
 
 const getMetaMaskWallet = async () => {
@@ -8,7 +9,7 @@ const getMetaMaskWallet = async () => {
 
 	if (provider && provider.selectedAddress) {
 		await provider.request({
-			method: 'eth_requestAccounts',
+			method: MetaMaskMethod.REQUEST_ACCOUNTS,
 		});
 	}
 
