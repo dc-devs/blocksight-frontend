@@ -1,19 +1,26 @@
+import {
+	getProvider,
+	getWalletFromProvider,
+	checkIsMetaMaskConnected,
+} from './utils';
 import MetaMaskMethod from './enums/MetaMaskMethod';
-import detectEthereumProvider from '@metamask/detect-provider';
 
 const getMetaMaskWallet = async () => {
-	const provider: any = await detectEthereumProvider({
-		silent: true,
-		mustBeMetaMask: true,
-	});
+	let wallet;
+	const provider: any = await getProvider();
+	const isMetaMaskConnected = await checkIsMetaMaskConnected();
 
-	if (provider && provider.selectedAddress) {
+	if (isMetaMaskConnected) {
+		wallet = getWalletFromProvider(provider);
+	} else {
 		await provider.request({
 			method: MetaMaskMethod.REQUEST_ACCOUNTS,
 		});
+
+		wallet = getWalletFromProvider(provider);
 	}
 
-	return { selectedAddress: provider.selectedAddress };
+	return wallet;
 };
 
 export default getMetaMaskWallet;

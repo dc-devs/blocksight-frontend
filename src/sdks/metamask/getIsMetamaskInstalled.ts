@@ -1,12 +1,9 @@
-import detectEthereumProvider from '@metamask/detect-provider';
+import { getProvider } from './utils';
 
 const getIsMetaMaskInstalled = async () => {
 	let isInstalled = false;
 
-	const provider: any = await detectEthereumProvider({
-		silent: true,
-		mustBeMetaMask: true,
-	});
+	const provider: any = getProvider();
 
 	if (provider) {
 		isInstalled = true;
