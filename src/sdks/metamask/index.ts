@@ -1,13 +1,19 @@
-import generateMessage from "./utils/generateMessage";
 import getMetaMaskWallet from './getMetamaskWallet';
 import getIsMetaMaskConnected from './getIsMetamaskConnected';
 import getIsMetaMaskInstalled from './getIsMetamaskInstalled';
-import generateConnectMetaMaskWallet from './generateConnectMetaMaskWallet';
+import {
+	getProvider,
+	requestAccounts,
+	requestSignature,
+	getWalletFromProvider,
+} from './utils';
 
 export {
-	generateMessage,
+	getProvider,
+	requestAccounts,
+	requestSignature,
 	getMetaMaskWallet,
+	getWalletFromProvider,
 	getIsMetaMaskConnected,
 	getIsMetaMaskInstalled,
-	generateConnectMetaMaskWallet,
 };

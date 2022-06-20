@@ -5,8 +5,8 @@ import { makeStyles } from 'tss-react/mui';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { useAppDispatch } from '../../../../hooks';
+import { generateConnectMetaMaskWallet } from '../utils';
 import ModalWalletConnect from '../ConnectToAWalletModal';
-import { generateConnectMetaMaskWallet } from '../../../../sdks/metamask';
 import { selectIsMetaMaskInstalled } from '../../../../redux/slices/metamaskInstalledSlice';
 
 const useStyles = makeStyles()((theme) => ({

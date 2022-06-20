@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks';
 import ConnectWalletBase from '../ConnectWalletBase';
-import { generateConnectMetaMaskWallet } from '../../../../sdks/metamask';
+import { generateConnectMetaMaskWallet } from '../utils';
 import { selectIsMetaMaskInstalled } from '../../../../redux/slices/metamaskInstalledSlice';
 
 interface Props {

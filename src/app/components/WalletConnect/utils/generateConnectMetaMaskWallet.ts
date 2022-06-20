@@ -1,15 +1,16 @@
 import { SyntheticEvent } from 'react';
-import signInUserMetaMask from '../../app/components/WalletConnect/utils/signInUserMetaMask';
-import { updateMetaMaskWallet } from '../../redux/slices/metamaskSlice';
-import { setAuthentication } from '../../redux/slices/authenticationSlice';
-import { updateIsMetaMaskConnected } from '../../redux/slices/metamaskConnectedSlice';
+import generateMessage from './generateMessage';
+import signInUserMetaMask from './signInUserMetaMask';
+import { updateMetaMaskWallet } from '../../../../redux/slices/metamaskSlice';
+import { setAuthentication } from '../../../../redux/slices/authenticationSlice';
+import { updateIsMetaMaskConnected } from '../../../../redux/slices/metamaskConnectedSlice';
 
 import {
 	getProvider,
 	requestAccounts,
 	requestSignature,
 	getWalletFromProvider,
-} from './utils';
+} from '../../../../sdks/metamask/utils';
 
 interface IProps {
 	navigate: CallableFunction;
@@ -43,7 +44,10 @@ const connectMetaMaskWallet = ({
 					dispatch(updateIsMetaMaskConnected(true));
 					dispatch(updateMetaMaskWallet(wallet));
 
-					const { signature, message } = await requestSignature({
+					const { message } = generateMessage();
+
+					const { signature } = await requestSignature({
+						message,
 						provider,
 						selectedAddress,
 					});
