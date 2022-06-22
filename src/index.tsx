@@ -4,7 +4,6 @@ import App from './app/App';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import createCache from '@emotion/cache';
-import { AuthProvider } from './providers';
 import { createRoot } from 'react-dom/client';
 import { CacheProvider } from '@emotion/react';
 import reportWebVitals from './reportWebVitals';
@@ -25,18 +24,16 @@ const root = createRoot(container!);
 root.render(
 	<React.StrictMode>
 		<ApolloProvider client={apolloClient}>
-			{/* <AuthProvider> */}
-				<CacheProvider value={muiCache}>
-					<Provider store={store}>
-						<ThemeProvider theme={theme}>
-							<CssBaseline />
-							<Router>
-								<App />
-							</Router>
-						</ThemeProvider>
-					</Provider>
-				</CacheProvider>
-			{/* </AuthProvider> */}
+			<CacheProvider value={muiCache}>
+				<Provider store={store}>
+					<ThemeProvider theme={theme}>
+						<CssBaseline />
+						<Router>
+							<App />
+						</Router>
+					</ThemeProvider>
+				</Provider>
+			</CacheProvider>
 		</ApolloProvider>
 	</React.StrictMode>
 );
