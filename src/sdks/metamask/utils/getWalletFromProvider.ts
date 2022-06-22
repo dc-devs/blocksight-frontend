@@ -3,7 +3,7 @@ import { IWallet } from '../../../interfaces';
 
 const getWalletFromProvider = (provider: IProvider): IWallet => {
 	const { chainId: rawChainId = '', selectedAddress = '' } = provider;
-	const chainId = rawChainId?.substring(2, 3);
+	const chainId = String(Number(rawChainId));
 
 	return { chainId, selectedAddress };
 };

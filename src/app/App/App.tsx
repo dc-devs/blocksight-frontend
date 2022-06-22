@@ -22,8 +22,8 @@ import {
 	selectAuthenticationStatus,
 } from '../../redux/slices/authenticationSlice';
 import {
-	fetchMetaMaskWallet,
-	selectMetaMaskWallet,
+	fetchMetaMaskProvider,
+	selectMetaMaskProvider,
 } from '../../redux/slices/metamaskSlice';
 import {
 	selectIsMetaMaskConnected,
@@ -39,7 +39,7 @@ const App = () => {
 	const appDispatch = useAppDispatch();
 	const authentication = useSelector(selectAuthentication);
 	const authenticationStatus = useSelector(selectAuthenticationStatus);
-	const metaMaskWallet = useSelector(selectMetaMaskWallet);
+	const metaMaskProvider = useSelector(selectMetaMaskProvider);
 	const isMetaMaskInstalled = useSelector(selectIsMetaMaskInstalled);
 	const isMetaMaskConnected = useSelector(selectIsMetaMaskConnected);
 
@@ -53,13 +53,13 @@ const App = () => {
 		}
 
 		if (isMetaMaskConnected) {
-			appDispatch(fetchMetaMaskWallet());
+			appDispatch(fetchMetaMaskProvider());
 		}
 	}, [isMetaMaskInstalled, isMetaMaskConnected, appDispatch]);
 
-	console.log('App - metaMaskWallet', metaMaskWallet);
 	console.log('App - isMetaMaskInstalled', isMetaMaskInstalled);
 	console.log('App - isMetaMaskConnected', isMetaMaskConnected);
+	console.log('App - metaMaskProvider', metaMaskProvider);
 
 	useEffect(() => {
 		if (authentication && authenticationStatus === Status.IDLE) {
@@ -72,6 +72,26 @@ const App = () => {
 			appDispatch(fetchAuthentication());
 		}
 	}, [authenticationStatus, authentication, appDispatch, navigate]);
+
+	// useEffect(() => {
+	// 	if (isMetaMaskConnected && metaMaskProvider.on) {
+	// 		metaMaskProvider.on('accountsChanged', (accounts: string[]) => {
+	// 			console.log('--- accountsChanged ---', accounts);
+	// 			console.log(metaMaskProvider.selectedAddress);
+	// 			console.log(authentication);
+	// 			// Handle the new accounts, or lack thereof.
+	// 			// "accounts" will always be an array, but it can be empty.
+	// 		});
+
+	// 		metaMaskProvider.on('chainChanged', (chainId: string) => {
+	// 			console.log('--- chainChanged ---', chainId);
+	// 			console.log(authentication);
+	// 			// Handle the new chain.
+	// 			// Correctly handling chain changes can be complicated.
+	// 			// We recommend reloading the page unless you have good reason not to.
+	// 		});
+	// 	}
+	// }, [authentication, isMetaMaskConnected, metaMaskProvider]);
 
 	return (
 		<>

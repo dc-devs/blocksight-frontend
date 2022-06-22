@@ -13,7 +13,7 @@ import {
 	// selectTransactionsError,
 } from '../../../../../redux/slices/transactionsSlice';
 import TokenBalance from '../../../../../interfaces/tokenBalanceInterface';
-import { selectMetaMaskWallet } from '../../../../../redux/slices/metamaskSlice';
+import { selectMetaMaskProvider } from '../../../../../redux/slices/metamaskSlice';
 
 const useStyles = makeStyles()((theme) => ({
 	transactionsContainer: {
@@ -33,7 +33,7 @@ interface Props {
 const Transactions = ({ tokenBalance }: Props) => {
 	const { classes } = useStyles();
 	const appDispatch = useAppDispatch();
-	const { selectedAddress } = useSelector(selectMetaMaskWallet);
+	const { selectedAddress } = useSelector(selectMetaMaskProvider);
 	const transactions = useSelector(selectTransactions);
 	const transactionsStatus = useSelector(selectTransactionsStatus);
 	// const transactionsError = useSelector(selectTransactionsError);

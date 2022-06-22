@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../../hooks';
 import AssetSummary from './components/AssetSummary';
 import AssetDollarSummary from './components/AssetDollarSummary';
 import filterTokenBalances from '../../../utils/filterTokenBalances';
-import { selectMetaMaskWallet } from '../../../redux/slices/metamaskSlice';
+import { selectMetaMaskProvider } from '../../../redux/slices/metamaskSlice';
 import {
 	fetchTokenBalances,
 	selectTokenBalances,
@@ -37,7 +37,7 @@ const useStyles = makeStyles()((theme) => ({
 const DashBoard = () => {
 	const { classes } = useStyles();
 	const appDispatch = useAppDispatch();
-	const { selectedAddress } = useSelector(selectMetaMaskWallet);
+	const { selectedAddress } = useSelector(selectMetaMaskProvider);
 
 	const tokenBalances = useSelector(selectTokenBalances);
 	const tokenBalancesStatus = useSelector(selectTokenBalancesStatus);

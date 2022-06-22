@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import Tokenomics from './components/Tokenomics';
 import Transactions from './components/Transactions';
-import { selectMetaMaskWallet } from '../../../redux/slices/metamaskSlice';
+import { selectMetaMaskProvider } from '../../../redux/slices/metamaskSlice';
 import {
 	fetchTokenBalances,
 	selectTokenBalances,
@@ -30,7 +30,7 @@ const TokenInfo = () => {
 	const { classes } = useStyles();
 	const appDispatch = useAppDispatch();
 	const { symbol } = params as Params;
-	const { selectedAddress } = useSelector(selectMetaMaskWallet);
+	const { selectedAddress } = useSelector(selectMetaMaskProvider);
 	const tokenBalances = useSelector(selectTokenBalances);
 	const tokenBalancesStatus = useSelector(selectTokenBalancesStatus);
 	// const tokenBalancesError = useSelector(selectTokenBalancesError);

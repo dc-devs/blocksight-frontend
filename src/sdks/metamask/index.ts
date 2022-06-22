@@ -1,4 +1,4 @@
-import getMetaMaskWallet from './getMetamaskWallet';
+import getMetaMaskWallet from './getMetamaskProvider';
 import getIsMetaMaskConnected from './getIsMetamaskConnected';
 import getIsMetaMaskInstalled from './getIsMetamaskInstalled';
 import {

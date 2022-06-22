@@ -1,10 +1,10 @@
-import { IWallet } from '../../interfaces';
+import { IProvider } from '../../sdks/metamask/interfaces';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import getMetaMaskWallet from '../../sdks/metamask/getMetamaskWallet';
+import getMetaMaskProvider from '../../sdks/metamask/getMetamaskProvider';
 interface MetaMask {
 	status: string;
 	error: null | string;
-	wallet: IWallet;
+	provider: IProvider;
 }
 
 interface State {
@@ -13,10 +13,10 @@ interface State {
 
 // Export Thunks
 // ---------------
-export const fetchMetaMaskWallet = createAsyncThunk(
-	'metaMask/fetchMetaMaskWallet',
+export const fetchMetaMaskProvider = createAsyncThunk(
+	'metaMask/fetchMetaMaskProvider',
 	async () => {
-		return await getMetaMaskWallet();
+		return await getMetaMaskProvider();
 	}
 );
 
@@ -25,24 +25,24 @@ export const metaMaskSlice = createSlice({
 	initialState: {
 		error: null,
 		status: 'idle',
-		wallet: {},
+		provider: {},
 	},
 	reducers: {
-		updateMetaMaskWallet: (state: any, { payload }: any) => {
-			state.wallet = payload;
+		updateMetaMaskProvider: (state: any, { payload }: any) => {
+			state.provider = payload;
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(fetchMetaMaskWallet.pending, (state) => {
+		builder.addCase(fetchMetaMaskProvider.pending, (state) => {
 			state.status = 'loading';
 		});
 
-		builder.addCase(fetchMetaMaskWallet.fulfilled, (state, action) => {
+		builder.addCase(fetchMetaMaskProvider.fulfilled, (state, action) => {
 			state.status = 'succeeded';
-			state.wallet = action.payload;
+			state.provider = action.payload;
 		});
 
-		builder.addCase(fetchMetaMaskWallet.rejected, (state) => {
+		builder.addCase(fetchMetaMaskProvider.rejected, (state) => {
 			state.status = 'failed';
 		});
 	},
@@ -52,15 +52,15 @@ const { reducer, actions } = metaMaskSlice;
 
 // Export Actions
 // ------------------
-export const { updateMetaMaskWallet } = actions;
+export const { updateMetaMaskProvider } = actions;
 
 // Export Selectors
 // ------------------
-const selectMetaMaskWallet = (state: State) => {
-	return state.metaMask.wallet;
+const selectMetaMaskProvider = (state: State) => {
+	return state.metaMask.provider;
 };
 
-export { selectMetaMaskWallet };
+export { selectMetaMaskProvider };
 
 // Export Reducer
 // ------------------

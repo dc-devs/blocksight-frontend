@@ -1,7 +1,7 @@
 import { SyntheticEvent } from 'react';
 import generateMessage from './generateMessage';
 import signInUserMetaMask from './signInUserMetaMask';
-import { updateMetaMaskWallet } from '../../../../redux/slices/metamaskSlice';
+import { updateMetaMaskProvider } from '../../../../redux/slices/metamaskSlice';
 import { setAuthentication } from '../../../../redux/slices/authenticationSlice';
 import { updateIsMetaMaskConnected } from '../../../../redux/slices/metamaskConnectedSlice';
 
@@ -42,7 +42,7 @@ const connectMetaMaskWallet = ({
 
 				if (selectedAddress) {
 					dispatch(updateIsMetaMaskConnected(true));
-					dispatch(updateMetaMaskWallet(wallet));
+					dispatch(updateMetaMaskProvider(provider));
 
 					const { message } = generateMessage();
 
