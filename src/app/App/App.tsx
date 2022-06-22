@@ -7,6 +7,7 @@ import LayoutHome from '../layouts/LayoutHome';
 import { useNavigate } from 'react-router-dom';
 import IsAuthenticated from './IsAuthenticated';
 import { Routes, Route } from 'react-router-dom';
+import signOut from '../../utils/actions/signOut';
 import {
 	Home,
 	Users,
@@ -20,6 +21,7 @@ import {
 	fetchAuthentication,
 	selectAuthentication,
 	selectAuthenticationStatus,
+	setAuthentication,
 } from '../../redux/slices/authenticationSlice';
 import {
 	fetchMetaMaskProvider,
@@ -36,7 +38,7 @@ import {
 
 const App = () => {
 	const navigate = useNavigate();
-	const appDispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 	const authentication = useSelector(selectAuthentication);
 	const authenticationStatus = useSelector(selectAuthenticationStatus);
 	const metaMaskProvider = useSelector(selectMetaMaskProvider);
@@ -45,17 +47,17 @@ const App = () => {
 
 	useEffect(() => {
 		if (!isMetaMaskInstalled) {
-			appDispatch(fetchIsMetaMaskInstalled());
+			dispatch(fetchIsMetaMaskInstalled());
 		}
 
 		if (isMetaMaskInstalled && !isMetaMaskConnected) {
-			appDispatch(fetchIsMetaMaskConnected());
+			dispatch(fetchIsMetaMaskConnected());
 		}
 
 		if (isMetaMaskConnected) {
-			appDispatch(fetchMetaMaskProvider());
+			dispatch(fetchMetaMaskProvider());
 		}
-	}, [isMetaMaskInstalled, isMetaMaskConnected, appDispatch]);
+	}, [isMetaMaskInstalled, isMetaMaskConnected, dispatch]);
 
 	console.log('App - isMetaMaskInstalled', isMetaMaskInstalled);
 	console.log('App - isMetaMaskConnected', isMetaMaskConnected);
@@ -63,35 +65,58 @@ const App = () => {
 
 	useEffect(() => {
 		if (authentication && authenticationStatus === Status.IDLE) {
-			appDispatch(fetchAuthentication());
+			dispatch(fetchAuthentication());
 		}
-	}, [authenticationStatus, authentication, appDispatch, navigate]);
+	}, [authenticationStatus, authentication, dispatch, navigate]);
 
 	useEffect(() => {
 		if (authentication && authenticationStatus === Status.IDLE) {
-			appDispatch(fetchAuthentication());
+			dispatch(fetchAuthentication());
 		}
-	}, [authenticationStatus, authentication, appDispatch, navigate]);
+	}, [authenticationStatus, authentication, dispatch, navigate]);
 
-	// useEffect(() => {
-	// 	if (isMetaMaskConnected && metaMaskProvider.on) {
-	// 		metaMaskProvider.on('accountsChanged', (accounts: string[]) => {
-	// 			console.log('--- accountsChanged ---', accounts);
-	// 			console.log(metaMaskProvider.selectedAddress);
-	// 			console.log(authentication);
-	// 			// Handle the new accounts, or lack thereof.
-	// 			// "accounts" will always be an array, but it can be empty.
-	// 		});
+	useEffect(() => {
+		if (isMetaMaskConnected && metaMaskProvider.on) {
+			metaMaskProvider.on('accountsChanged', (accounts: string[]) => {
+				if (accounts.length < 1) {
+					if (authentication.user?.id) {
+						signOut({
+							userId: authentication.user.id,
+							dispatch,
+							navigate,
+						});
 
-	// 		metaMaskProvider.on('chainChanged', (chainId: string) => {
-	// 			console.log('--- chainChanged ---', chainId);
-	// 			console.log(authentication);
-	// 			// Handle the new chain.
-	// 			// Correctly handling chain changes can be complicated.
-	// 			// We recommend reloading the page unless you have good reason not to.
-	// 		});
-	// 	}
-	// }, [authentication, isMetaMaskConnected, metaMaskProvider]);
+					}
+				} else {
+					const selectedAddress = accounts[0];
+
+					const updatedAuthentication = { ...authentication };
+
+					if (updatedAuthentication && updatedAuthentication.wallet) {
+						updatedAuthentication.wallet = {
+							...updatedAuthentication.wallet,
+							selectedAddress: selectedAddress,
+						};
+					}
+
+					dispatch(setAuthentication(updatedAuthentication));
+				}
+			});
+
+			metaMaskProvider.on('chainChanged', (chainId: string) => {
+				const updatedAuthentication = { ...authentication };
+
+				if (updatedAuthentication && updatedAuthentication.wallet) {
+					updatedAuthentication.wallet = {
+						...updatedAuthentication.wallet,
+						chainId: String(Number(chainId)),
+					};
+				}
+
+				dispatch(setAuthentication(updatedAuthentication));
+			});
+		}
+	}, [dispatch, authentication, isMetaMaskConnected, metaMaskProvider]);
 
 	return (
 		<>

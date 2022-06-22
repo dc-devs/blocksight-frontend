@@ -3,6 +3,8 @@ interface IProvider {
 	isStatus?: boolean;
 	host?: string;
 	path?: string;
+	chainId?: string;
+	selectedAddress?: string;
 	sendAsync?: (
 		request: { method: string; params?: Array<any> },
 		callback: (error: any, response: any) => void
@@ -15,8 +17,7 @@ interface IProvider {
 		method: string;
 		params?: Array<any>;
 	}) => Promise<any>;
-	chainId?: string;
-	selectedAddress?: string;
+	on?: (event: string, callback?: CallableFunction) => void;
 }
 
 export default IProvider;
