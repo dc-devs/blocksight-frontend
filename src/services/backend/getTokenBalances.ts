@@ -1,24 +1,30 @@
-import axios from 'axios';
-import environment from '../../constants/environment';
+import { apolloClient } from '../apollo';
+import headers from '../../constants/headers';
+import { TOKEN_BALANCES } from '../../queries/tokenBalances';
 import TokenBalancesResponse from '../../interfaces/tokenBalancesResponseInterface';
 import GetTokenBalancesProps from '../../interfaces/getTokenBalancePropsInterface';
-
-const { NODE_ENV } = process.env;
-const { serverBaseUrl } = environment[NODE_ENV];
-
-interface AxiosResponse {
-	data: TokenBalancesResponse;
-}
 
 const getTokenBalances = async ({
 	address,
 	filter = '',
 }: GetTokenBalancesProps): Promise<TokenBalancesResponse> => {
-	const url = `${serverBaseUrl}/tokenBalances?address=${address}&currency=usd&filter=${filter}`;
-	const response: AxiosResponse = await axios.get(url);
-	const { data } = response;
+	const result = await apolloClient.mutate({
+		mutation: TOKEN_BALANCES,
+		variables: {
+			getTokenBalancesInput: {
+				address,
+				filter,
+			},
+		},
+		context: {
+			headers,
+		},
+	});
 
-	return data;
+	const { data } = result;
+	const { getTokenBalances } = data;
+
+	return getTokenBalances;
 };
 
 export default getTokenBalances;

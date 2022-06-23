@@ -3,7 +3,7 @@ interface Price {
 	formatted: string;
 }
 
-interface TotalValue {
+interface Value {
 	number: number;
 	formatted: string;
 }
@@ -15,7 +15,7 @@ interface TokenBalance {
 	contractAddress: string;
 	balance: string;
 	price: Price;
-	totalValue: TotalValue;
+	totalValue: Value;
 }
 
 export default TokenBalance;

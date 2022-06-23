@@ -1,12 +1,12 @@
 import TokenBalance from './tokenBalanceInterface';
 
-interface TotalValue {
-	string: string;
+interface Value {
+	number: string;
 	formatted: string;
 }
 
 interface TokenBalancesResponse {
-	totalValue: TotalValue;
+	totalValue: Value;
 	balances: TokenBalance[];
 }
 
