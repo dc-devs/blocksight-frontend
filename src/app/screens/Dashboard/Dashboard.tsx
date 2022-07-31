@@ -4,7 +4,6 @@ import { makeStyles } from 'tss-react/mui';
 import { useAppDispatch } from '../../../hooks';
 import AssetSummary from './components/AssetSummary';
 import AssetDollarSummary from './components/AssetDollarSummary';
-import filterTokenBalances from '../../../utils/filterTokenBalances';
 import { selectMetaMaskProvider } from '../../../redux/slices/metamaskSlice';
 import {
 	fetchTokenBalances,
@@ -50,20 +49,16 @@ const DashBoard = () => {
 		}
 	}, [tokenBalancesStatus, selectedAddress, appDispatch]);
 
-	const { totalValue, balances } = tokenBalances;
-
-	const filteredTokenBalances = filterTokenBalances({
-		balances,
-		filterZeros: true,
-	});
+	const { totalValue, networks, tokens, nfts, hidden, scam } = tokenBalances;
 
 	return (
 		<div className={classes.pageContainer}>
 			<div className={classes.dashboardDataContainer}>
 				<AssetDollarSummary totalValue={totalValue} />
 				<AssetSummary
+					networks={networks}
 					totalValue={totalValue?.formatted}
-					tokenBalances={filteredTokenBalances}
+					tokenBalances={tokenBalances?.tokens?.balances}
 				/>
 			</div>
 		</div>

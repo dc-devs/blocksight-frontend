@@ -14,6 +14,7 @@ import {
 	SignIn,
 	SignUp,
 	Settings,
+	Exchanges,
 	TokenInfo,
 	Dashboard,
 } from '../screens/';
@@ -85,7 +86,6 @@ const App = () => {
 							dispatch,
 							navigate,
 						});
-
 					}
 				} else {
 					const selectedAddress = accounts[0];
@@ -145,6 +145,16 @@ const App = () => {
 						<IsAuthenticated>
 							<LayoutApp>
 								<Dashboard />
+							</LayoutApp>
+						</IsAuthenticated>
+					}
+				/>
+				<Route
+					path="/exchanges"
+					element={
+						<IsAuthenticated>
+							<LayoutApp>
+								<Exchanges />
 							</LayoutApp>
 						</IsAuthenticated>
 					}

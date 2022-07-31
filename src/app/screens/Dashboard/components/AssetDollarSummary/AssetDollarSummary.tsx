@@ -18,7 +18,7 @@ const useStyles = makeStyles()(() => ({
 }));
 
 interface Value {
-	number: string;
+	value: string;
 	formatted: string;
 }
 
@@ -44,7 +44,7 @@ const AssetDollarSummary = ({ totalValue }: Props) => {
 	const totalDepositsFormatted = totalDeposits.formatted;
 
 	const totalDepositsBN = new BigNumber(totalDepositsString);
-	const cryptoAssetValueBN = new BigNumber(totalValue?.number);
+	const cryptoAssetValueBN = new BigNumber(totalValue?.value);
 
 	const deltaValuePositive =
 		totalDepositsStatus === 'idle' || !totalDepositsFormatted

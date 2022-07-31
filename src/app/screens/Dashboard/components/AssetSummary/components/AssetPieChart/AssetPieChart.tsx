@@ -7,7 +7,7 @@ import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import generateSeriesData from './GenerateSeriesData';
 import { Pie, Cell, Label, Sector, Legend, PieChart } from 'recharts';
-import TokenBalance from '../../../../../../../interfaces/tokenBalanceInterface';
+import TokenBalance from '../../../../../../../interfaces/ITokenBalance';
 
 const useStyles = makeStyles()((theme) => ({
 	allocationPieChartContainer: {

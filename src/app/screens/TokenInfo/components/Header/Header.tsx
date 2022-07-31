@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { makeStyles } from 'tss-react/mui';
 import { textColors } from '../../../../../theme/colors';
-import TokenBalance from '../../../../../interfaces/tokenBalanceInterface';
+import TokenBalance from '../../../../../interfaces/ITokenBalance';
 
 const { coinbaseTableHeaderText } = textColors;
 

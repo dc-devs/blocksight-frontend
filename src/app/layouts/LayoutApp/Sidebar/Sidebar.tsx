@@ -6,7 +6,19 @@ import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 // import { AuthContext } from '../../../../contexts';
 import { Link as ReactLink } from 'react-router-dom';
-import { BarChart, Octagon, Repeat, Search } from 'react-feather';
+import {
+	BarChart,
+	Octagon,
+	Repeat,
+	Search,
+	DollarSign,
+	Server,
+} from 'react-feather';
+import { HiChevronDoubleUp } from 'react-icons/hi';
+import { BiWallet } from 'react-icons/bi';
+import { BsWallet2 } from 'react-icons/bs';
+import { IoWalletOutline } from 'react-icons/io5';
+
 import AccountDropdown from '../../../screens/Dashboard/components/AccountDropdown';
 
 const drawerWidth = 240;
@@ -83,14 +95,48 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						</Typography>
 					</Link>
 
-					{/* <Link
+					<Link
+						to="/exchanges"
+						color="primary"
+						underline="none"
+						component={ReactLink}
+						className={classes.sidebarLinkContainer}
+					>
+						<div>
+							<HiChevronDoubleUp
+								className={classes.sidebarLinkLogo}
+							/>
+						</div>
+						<Typography className={classes.sidebarLinkText}>
+							Exchanges
+						</Typography>
+					</Link>
+
+					<Link
 						to="/token"
 						color="primary"
 						underline="none"
 						component={ReactLink}
 						className={classes.sidebarLinkContainer}
 					>
-						<Octagon className={classes.sidebarLinkLogo} />
+						<div>
+							<IoWalletOutline
+								className={classes.sidebarLinkLogo}
+							/>
+						</div>
+						<Typography className={classes.sidebarLinkText}>
+							Wallets
+						</Typography>
+					</Link>
+
+					<Link
+						to="/token"
+						color="primary"
+						underline="none"
+						component={ReactLink}
+						className={classes.sidebarLinkContainer}
+					>
+						<DollarSign className={classes.sidebarLinkLogo} />
 						<Typography className={classes.sidebarLinkText}>
 							Tokens
 						</Typography>
@@ -118,7 +164,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Wallet Mapper
 						</Typography>
-					</Link> */}
+					</Link>
 				</div>
 			</div>
 		</Paper>

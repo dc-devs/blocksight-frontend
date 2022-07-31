@@ -1,13 +1,13 @@
 import { apolloClient } from '../apollo';
 import headers from '../../constants/headers';
 import { TOKEN_BALANCES } from '../../queries/tokenBalances';
-import TokenBalancesResponse from '../../interfaces/tokenBalancesResponseInterface';
+import ITokenBalancesResponse from '../../interfaces/ITokenBalancesResponse';
 import GetTokenBalancesProps from '../../interfaces/getTokenBalancePropsInterface';
 
 const getTokenBalances = async ({
 	address,
 	filter = '',
-}: GetTokenBalancesProps): Promise<TokenBalancesResponse> => {
+}: GetTokenBalancesProps): Promise<ITokenBalancesResponse> => {
 	const result = await apolloClient.mutate({
 		mutation: TOKEN_BALANCES,
 		variables: {
@@ -20,11 +20,12 @@ const getTokenBalances = async ({
 			headers,
 		},
 	});
-
+	
 	const { data } = result;
 	const { getTokenBalances } = data;
+	const tokenBalances: ITokenBalancesResponse = getTokenBalances;
 
-	return getTokenBalances;
+	return tokenBalances;
 };
 
 export default getTokenBalances;

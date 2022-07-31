@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 import TokenBalances from './components/TokenBalances';
 import AssetPieChart from './components/AssetPieChart';
-import TokenBalance from '../../../../../interfaces/tokenBalanceInterface';
+import { ITokenBalance, INetwork } from '../../../../../interfaces';
 
 const useStyles = makeStyles()(() => ({
 	assetSummaryContainer: {
@@ -16,10 +16,11 @@ const useStyles = makeStyles()(() => ({
 
 interface Props {
 	totalValue: string;
-	tokenBalances: TokenBalance[];
+	networks: INetwork[];
+	tokenBalances: ITokenBalance[];
 }
 
-const AssetDolllarSummary = ({ totalValue, tokenBalances }: Props) => {
+const AssetDolllarSummary = ({ networks, totalValue, tokenBalances }: Props) => {
 	const { classes } = useStyles();
 
 	return (
@@ -40,7 +41,10 @@ const AssetDolllarSummary = ({ totalValue, tokenBalances }: Props) => {
 					</div>
 				</Grid>
 				<Grid item xs={8}>
-					<TokenBalances tokenBalances={tokenBalances} />
+					<TokenBalances
+						networks={networks}
+						tokenBalances={tokenBalances}
+					/>
 				</Grid>
 			</Grid>
 		</div>

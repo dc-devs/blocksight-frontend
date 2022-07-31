@@ -9,7 +9,9 @@ const generateMessage = () => {
 			version: '1.0.0',
 		},
 		message: {
-			Sign: `Hello from BlockSight! Sign this message to prove you have access to this wallet and we’ll log you in. This won't cost you any Ether.`,
+			Sign: `Hello from BlockSight! Sign this message to prove you have access to this wallet and we’ll log you in.
+			
+			Note: This action does not make any on-chain transactions and won't cost you any Ether.`,
 		},
 		// Refers to the keys of the *types* object below.
 		primaryType: 'Message',

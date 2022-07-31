@@ -1,4 +1,4 @@
-import TokenBalance from '../../../../../../../../interfaces/tokenBalanceInterface';
+import TokenBalance from '../../../../../../../../interfaces/ITokenBalance';
 import RechartPieDataPoint from '../../../../../../../../interfaces/rechartPieDataPointInterface';
 
 interface Props {
@@ -11,7 +11,7 @@ const generateSeriesData = ({
 	const seriesData = tokenBalances.map((token) => {
 		const { totalValue, symbol } = token;
 		const name = symbol;
-		const value = Math.floor(totalValue.number);
+		const value = Math.floor(totalValue.value);
 
 		return { name, value };
 	});

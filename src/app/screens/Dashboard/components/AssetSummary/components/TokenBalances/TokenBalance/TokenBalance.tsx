@@ -1,5 +1,5 @@
 import { makeStyles } from 'tss-react/mui';
-import TokenBalanceInterface from '../../../../../../../../interfaces/tokenBalanceInterface';
+import TokenBalanceInterface from '../../../../../../../../interfaces/ITokenBalance';
 // import { Link as ReactLink } from 'react-router-dom';
 // import Link from '@mui/material/Link';
 import textColors from '../../../../../../../../theme/colors/textColors';

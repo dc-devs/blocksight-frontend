@@ -1,9 +1,11 @@
+import Network from './Network';
 import Paper from '@mui/material/Paper';
 import TokenBalance from './TokenBalance';
-import Typography from '@mui/material/Typography';
 import { makeStyles } from 'tss-react/mui';
-import TokenBalanceInterface from '../../../../../../../interfaces/tokenBalanceInterface';
+import Typography from '@mui/material/Typography';
 import { themeColors } from '../../../../../../../theme/colors';
+import { ITokenBalance, INetwork } from '../../../../../../../interfaces';
+
 const { coinbaseBorderColor } = themeColors;
 
 const useStyles = makeStyles()((theme) => ({
@@ -11,13 +13,22 @@ const useStyles = makeStyles()((theme) => ({
 		padding: theme.spacing(2),
 		borderRadius: '10px',
 	},
+	networksContainer: {
+		display: 'flex',
+		justifyContent: 'start',
+		alignContent: 'center',
+		alignItems: 'center',
+		padding: theme.spacing(2),
+		paddingLeft: '0',
+		paddingTop: '0'
+	},
 	tokenBalancesTable: {
 		borderRadius: '10px',
 		border: `1px solid ${coinbaseBorderColor}`,
 	},
 	tokenBalanceHeader: {
 		fontSize: '1.2rem',
-		marginBottom: theme.spacing(2),
+		marginBottom: theme.spacing(1.5),
 	},
 	tokenBalancesHeader: {
 		fontSize: '.95rem',
@@ -49,13 +60,19 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 interface Props {
-	tokenBalances: TokenBalanceInterface[];
+	networks: INetwork[];
+	tokenBalances: ITokenBalance[];
 }
 
-const TokenBalances = ({ tokenBalances = [] }: Props) => {
+const TokenBalances = ({ networks, tokenBalances = [] }: Props) => {
 	const { classes } = useStyles();
 
-	const tokenBalanceComponents = tokenBalances.map((token) => {
+	const networkComponents = networks?.map((network) => {
+		const { chainId } = network;
+		return <Network key={chainId} network={network} />;
+	});
+
+	const tokenBalanceComponents = tokenBalances?.map((token) => {
 		const { contractAddress } = token;
 		return <TokenBalance key={contractAddress} token={token} />;
 	});
@@ -65,6 +82,7 @@ const TokenBalances = ({ tokenBalances = [] }: Props) => {
 			<Typography className={classes.tokenBalanceHeader}>
 				Tokens
 			</Typography>
+			<div className={classes.networksContainer}>{networkComponents}</div>
 			<div className={classes.tokenBalancesTable}>
 				<div className={classes.tokenBalancesHeader}>
 					<div

@@ -47,8 +47,8 @@ const TokenInfo = () => {
 		}
 	}, [tokenBalancesStatus, selectedAddress, appDispatch, symbol]);
 
-	if (tokenBalances.balances) {
-		const tokenBalance = tokenBalances.balances[0];
+	if (tokenBalances.tokens.balances) {
+		const tokenBalance = tokenBalances.tokens.balances[0];
 		tokeHeaderComponent = <Header tokenBalance={tokenBalance} />;
 		tokenomicsComponent = <Tokenomics tokenBalance={tokenBalance} />;
 		transactionsComponent = <Transactions tokenBalance={tokenBalance} />;

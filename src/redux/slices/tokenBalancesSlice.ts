@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getTokenBalances from '../../services/backend/getTokenBalances';
-import TokenBalancesResponse from '../../interfaces/tokenBalancesResponseInterface';
+import TokenBalancesResponse from '../../interfaces/ITokenBalancesResponse';
 import GetTokenBalancesProps from '../../interfaces/getTokenBalancePropsInterface';
 
 interface Transaction {

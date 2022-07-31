@@ -2,7 +2,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from 'tss-react/mui';
 import { themeColors } from '../../../../../theme/colors';
-import TokenBalance from '../../../../../interfaces/tokenBalanceInterface';
+import TokenBalance from '../../../../../interfaces/ITokenBalance';
 
 const { coinbaseBorderColor } = themeColors;
 

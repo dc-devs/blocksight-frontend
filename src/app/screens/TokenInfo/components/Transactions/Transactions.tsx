@@ -12,7 +12,7 @@ import {
 	selectTransactionsStatus,
 	// selectTransactionsError,
 } from '../../../../../redux/slices/transactionsSlice';
-import TokenBalance from '../../../../../interfaces/tokenBalanceInterface';
+import TokenBalance from '../../../../../interfaces/ITokenBalance';
 import { selectMetaMaskProvider } from '../../../../../redux/slices/metamaskSlice';
 
 const useStyles = makeStyles()((theme) => ({
