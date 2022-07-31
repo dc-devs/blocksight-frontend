@@ -12,11 +12,11 @@ import {
 	Repeat,
 	Search,
 	DollarSign,
-	Server,
+	Box,
 } from 'react-feather';
+// BsBox;
+// FiLayers - Exchange?
 import { HiChevronDoubleUp } from 'react-icons/hi';
-import { BiWallet } from 'react-icons/bi';
-import { BsWallet2 } from 'react-icons/bs';
 import { IoWalletOutline } from 'react-icons/io5';
 
 import AccountDropdown from '../../../screens/Dashboard/components/AccountDropdown';
@@ -34,17 +34,24 @@ const useStyles = makeStyles()((theme) => ({
 		width: drawerWidth,
 		height: '100vh',
 	},
-	logo: {
+	logoContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignContent: 'center',
+		alignItems: 'center',
 		marginTop: theme.spacing(2),
+	},
+	logoContainerLogo: {
+		marginRight: theme.spacing(1),
+	},
+	logoContainerText: {
+		textAlign: 'center',
+		fontSize: '2rem',
+		fontWeight: '300',
 	},
 	sidebarContent: {
 		padding: theme.spacing(3),
 		height: '100vh',
-	},
-	logoText: {
-		textAlign: 'center',
-		fontSize: '2rem',
-		fontWeight: '300',
 	},
 	sidebarLinksContainer: {
 		marginTop: '50px',
@@ -75,8 +82,13 @@ const PermanentDrawer = ({ logoText }: Props) => {
 	return (
 		<Paper elevation={2} square={true} className={classes.sidebar}>
 			<div className={classes.sidebarContent}>
-				<div className={classes.logo}>
-					<Typography className={classes.logoText}>
+				<div className={classes.logoContainer}>
+					<Box
+						height={25}
+						width={25}
+						className={classes.logoContainerLogo}
+					/>
+					<Typography className={classes.logoContainerText}>
 						{logoText}
 					</Typography>
 				</div>

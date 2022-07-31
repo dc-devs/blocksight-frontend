@@ -2,6 +2,7 @@ import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import { Link as ReactLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
+import { Box } from 'react-feather';
 
 const useStyles = makeStyles()(() => ({
 	logoContainer: {
@@ -37,7 +38,7 @@ const Logo = () => {
 					variant="h5"
 					className={classes.logoImage}
 				>
-					b
+					<Box width={17} height={17} />
 				</Typography>
 				<Typography data-testid="LogoText" variant="h6">
 					blocksight
