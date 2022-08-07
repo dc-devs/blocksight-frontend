@@ -34,7 +34,7 @@ const Exchanges = () => {
 
 	const importedExchanges = exchanges.filter(
 		(usersExchanges: IUsersExchanges) => {
-			return usersExchanges.userId === (user && user?.id);
+			return true; //usersExchanges.userId === (user && user?.id);
 		}
 	);
 	const userHasImportedExchanges = importedExchanges.length > 0;

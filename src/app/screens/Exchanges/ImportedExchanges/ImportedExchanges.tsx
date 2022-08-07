@@ -4,17 +4,21 @@ import Typography from '@mui/material/Typography';
 import { IUser, IUsersExchanges } from '../../../../interfaces';
 
 const useStyles = makeStyles()((theme) => ({
-	exchangesContainer: {
-		display: 'flex',
-		flexDirection: 'column',
-	},
 	importedExchangesContainer: {
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'start',
+		marginTop: '100px',
 	},
 	importedExchangesTypography: {
 		fontSize: '2rem',
+	},
+	exchangesContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	exchangeContainer: {
+		margin: `${theme.spacing(1)} 0`,
 	},
 }));
 
@@ -30,7 +34,11 @@ const ImportedExchanges = ({ user, exchanges }: IProps) => {
 		(usersExchange: IUsersExchanges) => {
 			const { exchange } = usersExchange;
 
-			return <Exchange key={exchange.id} exchange={exchange} />;
+			return (
+				<div className={classes.exchangeContainer}>
+					<Exchange key={exchange.id} exchange={exchange} />
+				</div>
+			);
 		}
 	);
 
@@ -38,7 +46,7 @@ const ImportedExchanges = ({ user, exchanges }: IProps) => {
 		<>
 			<div className={classes.importedExchangesContainer}>
 				<Typography className={classes.importedExchangesTypography}>
-					Imported Exchanges
+					Integrated Exchanges
 				</Typography>
 			</div>
 			<div className={classes.exchangesContainer}>

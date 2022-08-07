@@ -13,6 +13,7 @@ const useStyles = makeStyles()((theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'start',
+		marginTop: '50px',
 	},
 	importExchangesAutocomplete: {
 		marginTop: theme.spacing(3),
@@ -44,7 +45,7 @@ const ImportExchanges = ({ user, exchanges }: IProps) => {
 		<>
 			<div className={classes.importExchangesContainer}>
 				<Typography className={classes.importExchangesTypography}>
-					Import Exchanges
+					Add an Exchange
 				</Typography>
 
 				<Autocomplete

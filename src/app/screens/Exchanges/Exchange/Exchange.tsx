@@ -11,9 +11,13 @@ const useStyles = makeStyles()((theme) => ({
 		justifyContent: 'start',
 		alignContent: 'center',
 		alignItems: 'center',
-		height: '50px',
+		height: '58px',
 		padding: `${theme.spacing(1)}`,
-		margin: `${theme.spacing(1)} 0`,
+		cursor: 'pointer',
+		'&:hover': {
+			backgroundColor: 'rgba(17, 51, 83, 0.04)',
+			borderRadius: 0,
+		},
 	},
 	exchangeContainerImage: {
 		display: 'flex',
@@ -42,9 +46,13 @@ interface IProps {
 
 const Exchange = ({ exchange, elevation = 1 }: IProps) => {
 	const { classes } = useStyles();
+	const hoverable = true;
+	const containerClass = hoverable
+		? `${classes.exchangeContainer} ${classes.exchangeContainer}`
+		: `${classes.exchangeContainer}`;
 
 	return (
-		<Paper className={classes.exchangeContainer} elevation={elevation}>
+		<Paper className={containerClass} elevation={elevation}>
 			<div
 				className={`${classes.exchangeContainerItem} ${classes.exchangeContainerImage}`}
 			>
