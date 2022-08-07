@@ -36,14 +36,15 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 interface IProps {
+	elevation?: number;
 	exchange: IExchange;
 }
 
-const Exchange = ({ exchange }: IProps) => {
+const Exchange = ({ exchange, elevation = 1 }: IProps) => {
 	const { classes } = useStyles();
 
 	return (
-		<Paper className={classes.exchangeContainer}>
+		<Paper className={classes.exchangeContainer} elevation={elevation}>
 			<div
 				className={`${classes.exchangeContainerItem} ${classes.exchangeContainerImage}`}
 			>

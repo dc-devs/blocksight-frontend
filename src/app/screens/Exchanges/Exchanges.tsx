@@ -4,6 +4,7 @@ import { makeStyles } from 'tss-react/mui';
 import { useAppDispatch } from '../../../hooks';
 import { Status } from '../../../redux/enums';
 import Container from '@mui/material/Container';
+import ImportExchanges from './ImportExchanges';
 import ImportedExchanges from './ImportedExchanges';
 import { IUsersExchanges } from '../../../interfaces';
 import { selectAuthentication } from '../../../redux/slices/authenticationSlice';
@@ -36,12 +37,13 @@ const Exchanges = () => {
 			return usersExchanges.userId === (user && user?.id);
 		}
 	);
-
 	const userHasImportedExchanges = importedExchanges.length > 0;
 
 	return (
 		<>
 			<Container maxWidth="xl">
+				<ImportExchanges user={user} exchanges={exchanges} />
+
 				{userHasImportedExchanges && (
 					<ImportedExchanges
 						user={user}

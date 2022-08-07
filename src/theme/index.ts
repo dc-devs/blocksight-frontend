@@ -41,15 +41,17 @@ const theme = createTheme({
 			primary: primaryText,
 		},
 	},
-	// overrides: {
-	// 	MuiInput: {
-	// 		underline: {
-	// 			'&:hover:not($disabled):not($focused):not($error):before': {
-	// 				borderBottom: `1px solid ${primaryMain}`,
-	// 			},
-	// 		},
-	// 	},
-	// },
+	components: {
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					'&:hover .MuiOutlinedInput-notchedOutline': {
+						borderColor: primaryMain,
+					},
+				},
+			},
+		},
+	},
 });
 
 export default theme;
