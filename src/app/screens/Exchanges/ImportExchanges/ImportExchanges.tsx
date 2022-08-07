@@ -1,5 +1,6 @@
-import { Search } from 'react-feather';
+import { useState } from 'react';
 import Exchange from '../Exchange';
+import { Search } from 'react-feather';
 import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
@@ -24,6 +25,12 @@ const useStyles = makeStyles()((theme) => ({
 	importExchangesTypography: {
 		fontSize: '2rem',
 	},
+	renderOptionLi: {
+		background: 'transparent',
+		'&:hover': {
+			background: 'transparent',
+		},
+	},
 }));
 
 interface IProps {
@@ -33,12 +40,13 @@ interface IProps {
 
 const ImportExchanges = ({ user, exchanges }: IProps) => {
 	const { classes } = useStyles();
+	const [value, setValue] = useState<IExchange | null>(null);
+	console.log('Value:', value);
 
 	const options = exchanges.map((usersExchanges) => {
 		const { exchange } = usersExchanges;
-		const { name } = exchange;
 
-		return { label: name, ...exchange };
+		return { ...exchange };
 	});
 
 	return (
@@ -49,18 +57,29 @@ const ImportExchanges = ({ user, exchanges }: IProps) => {
 				</Typography>
 
 				<Autocomplete
-					className={classes.importExchangesAutocomplete}
+					clearOnEscape
 					id="import-exchanges-autocomplete"
-					disableClearable
 					options={options}
+					isOptionEqualToValue={(option, value) =>
+						option.id === value.id
+					}
+					getOptionLabel={(option) => option.name}
+					className={classes.importExchangesAutocomplete}
 					classes={{
 						listbox: `${classes.autoCompleteListBox}`,
 					}}
+					onChange={(event: any, newValue: IExchange | null) => {
+						setValue(newValue);
+					}}
 					renderOption={(props, option) => (
-						<div key={option.id}>
+						<li
+							{...props}
+							key={option.id}
+							className={classes.renderOptionLi}
+						>
 							<Exchange exchange={option} elevation={0} />
 							<Divider />
-						</div>
+						</li>
 					)}
 					renderInput={(params) => {
 						return (

@@ -9,6 +9,7 @@ const useStyles = makeStyles()((theme) => ({
 		flexDirection: 'row',
 		justifyContent: 'start',
 		marginTop: '100px',
+		marginBottom: '3px',
 	},
 	importedExchangesTypography: {
 		fontSize: '2rem',
@@ -30,7 +31,13 @@ interface IProps {
 const ImportedExchanges = ({ user, exchanges }: IProps) => {
 	const { classes } = useStyles();
 
-	const exchangeComponents = exchanges.map(
+	const importedExchanges = exchanges.filter(
+		(usersExchanges: IUsersExchanges) => {
+			return usersExchanges.userId === (user && user?.id);
+		}
+	);
+
+	const exchangeComponents = importedExchanges.map(
 		(usersExchange: IUsersExchanges) => {
 			const { exchange } = usersExchange;
 
@@ -41,12 +48,15 @@ const ImportedExchanges = ({ user, exchanges }: IProps) => {
 			);
 		}
 	);
+	const userHasImportedExchanges = importedExchanges.length > 0;
 
 	return (
 		<>
 			<div className={classes.importedExchangesContainer}>
 				<Typography className={classes.importedExchangesTypography}>
-					Integrated Exchanges
+					{!userHasImportedExchanges ? 'No ' : ''}
+					Imported Exchanges
+					{!userHasImportedExchanges ? '...' : ''}
 				</Typography>
 			</div>
 			<div className={classes.exchangesContainer}>

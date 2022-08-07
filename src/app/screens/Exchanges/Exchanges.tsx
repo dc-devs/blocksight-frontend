@@ -32,24 +32,11 @@ const Exchanges = () => {
 		}
 	}, [exchangesStatus, exchanges, dispatch]);
 
-	const importedExchanges = exchanges.filter(
-		(usersExchanges: IUsersExchanges) => {
-			return true; //usersExchanges.userId === (user && user?.id);
-		}
-	);
-	const userHasImportedExchanges = importedExchanges.length > 0;
-
 	return (
 		<>
 			<Container maxWidth="xl">
 				<ImportExchanges user={user} exchanges={exchanges} />
-
-				{userHasImportedExchanges && (
-					<ImportedExchanges
-						user={user}
-						exchanges={importedExchanges}
-					/>
-				)}
+				<ImportedExchanges user={user} exchanges={exchanges} />
 			</Container>
 		</>
 	);
