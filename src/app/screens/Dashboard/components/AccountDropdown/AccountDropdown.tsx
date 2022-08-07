@@ -181,9 +181,6 @@ const AccountDropdown = () => {
 						className={classes.dropdownArrow}
 					/>
 				</Button>
-				<Typography className={classes.walletAddress}>
-					Chain Id: {chainId}
-				</Typography>
 				<Popper
 					open={open}
 					anchorEl={anchorRef.current}

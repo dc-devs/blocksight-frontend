@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import metaMaskReducer from './slices/metamaskSlice';
+import exchangesReducer from './slices/exchangesSlice';
 import transactionsReducer from './slices/transactionsSlice';
 import totalDepositsReducer from './slices/totalDepositsSlice';
 import tokenBalancesReducer from './slices/tokenBalancesSlice';
@@ -11,6 +12,7 @@ import metaMaskInstalledReducer from './slices/metamaskInstalledSlice';
 const store = configureStore({
 	reducer: {
 		metaMask: metaMaskReducer,
+		exchanges: exchangesReducer,
 		transactions: transactionsReducer,
 		authentication: authenticationReducer,
 		tokenBalances: tokenBalancesReducer,

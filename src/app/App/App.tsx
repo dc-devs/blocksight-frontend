@@ -71,12 +71,6 @@ const App = () => {
 	}, [authenticationStatus, authentication, dispatch, navigate]);
 
 	useEffect(() => {
-		if (authentication && authenticationStatus === Status.IDLE) {
-			dispatch(fetchAuthentication());
-		}
-	}, [authenticationStatus, authentication, dispatch, navigate]);
-
-	useEffect(() => {
 		if (isMetaMaskConnected && metaMaskProvider.on) {
 			metaMaskProvider.on('accountsChanged', (accounts: string[]) => {
 				if (accounts.length < 1) {

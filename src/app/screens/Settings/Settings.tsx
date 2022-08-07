@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
 import { useMutation } from '@apollo/client';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { UPDATE_USER } from '../../../queries/users';
 import emailRegex from '../../../constants/emailRegex';
+import { selectAuthentication } from '../../../redux/slices/authenticationSlice';
 
 interface ErrorAttributes {
 	type: string;
@@ -47,6 +50,9 @@ const useStyles = makeStyles()((theme) => ({
 
 const Settings = () => {
 	const { classes } = useStyles();
+	const authentication = useSelector(selectAuthentication);
+	const { user, wallet } = authentication;
+
 	const defaultErrorState = {
 		email: {
 			type: '',
@@ -73,7 +79,7 @@ const Settings = () => {
 	const onSubmit = async (updateUserInput: any) => {
 		updateUser({
 			variables: {
-				id: 1,
+				id: user?.id,
 				updateUserInput,
 			},
 		});
@@ -89,6 +95,20 @@ const Settings = () => {
 
 	return (
 		<div className={classes.pageContainer}>
+			<div>
+				<Typography>Chain Id: {wallet?.chainId}</Typography>
+			</div>
+			<div>
+				<Typography>User Id: {user?.id}</Typography>
+			</div>
+			<div>
+				<Typography>
+					Primary Wallet Address: {user?.primaryWalletAddress}
+				</Typography>
+			</div>
+			<div>
+				<Typography>Email: {user?.email}</Typography>
+			</div>
 			<div className={classes.updateContainer}>
 				<form
 					className={classes.form}

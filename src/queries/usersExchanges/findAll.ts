@@ -19,14 +19,6 @@ const FIND_ALL = gql`
 				createdAt
 				updatedAt
 			}
-			user {
-				id
-				email
-				primaryWalletAddress
-				role
-				createdAt
-				updatedAt
-			}
 			createdAt
 			updatedAt
 		}
