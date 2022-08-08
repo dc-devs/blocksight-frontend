@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Exchange from '../../Exchange';
 import { Search } from 'react-feather';
 import { makeStyles } from 'tss-react/mui';
@@ -7,6 +6,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import { IExchange } from '../../../../../interfaces';
+
+import { useContext } from 'react';
+import ImportExchangeApi from '../../contexts/ImportExchangeContext';
 
 const useStyles = makeStyles()((theme) => ({
 	importExchangesContainer: {
@@ -34,11 +36,12 @@ const useStyles = makeStyles()((theme) => ({
 
 interface IProps {
 	options: IExchange[];
-	setValue: CallableFunction;
 }
 
-const ImportExchangeAutoComplete = ({ options, setValue }: IProps) => {
+const ImportExchangeAutoComplete = ({ options }: IProps) => {
 	const { classes } = useStyles();
+	const importExchangeApi = useContext(ImportExchangeApi);
+	const { setSelectedUsersExchanges } = importExchangeApi;
 
 	return (
 		<Autocomplete
@@ -51,8 +54,13 @@ const ImportExchangeAutoComplete = ({ options, setValue }: IProps) => {
 			classes={{
 				listbox: `${classes.autoCompleteListBox}`,
 			}}
-			onChange={(event: any, newValue: IExchange | null) => {
-				setValue(newValue);
+			onChange={(
+				event: any,
+				selectedUsersExchanges: IExchange | null
+			) => {
+				if (setSelectedUsersExchanges) {
+					setSelectedUsersExchanges(selectedUsersExchanges);
+				}
 			}}
 			renderOption={(props, option) => (
 				<li

@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import ImportExchangeAutoComplete from './ImportExchangeAutoComplete';
-import { IUser, IExchange, IUsersExchanges } from '../../../../interfaces';
-
+import { IUser, IUsersExchanges } from '../../../../interfaces';
 const useStyles = makeStyles()((theme) => ({
 	importExchangesContainer: {
 		display: 'flex',
@@ -35,9 +33,6 @@ interface IProps {
 
 const ImportExchanges = ({ user, exchanges }: IProps) => {
 	const { classes } = useStyles();
-	const [value, setValue] = useState<IExchange | null>(null);
-	console.log('Value:', value);
-
 	const options = exchanges.map((usersExchanges) => {
 		const { exchange } = usersExchanges;
 		return { ...exchange };
@@ -49,10 +44,7 @@ const ImportExchanges = ({ user, exchanges }: IProps) => {
 				<Typography className={classes.importExchangesTypography}>
 					Add an Exchange
 				</Typography>
-				<ImportExchangeAutoComplete
-					options={options}
-					setValue={setValue}
-				/>
+				<ImportExchangeAutoComplete options={options} />
 			</div>
 		</>
 	);
