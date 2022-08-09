@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 interface IImportExchangeApi {
-	setSelectedUsersExchanges?: CallableFunction;
+	setSelectedExchange?: CallableFunction;
 }
 
 const importExchangeApi: IImportExchangeApi = {};

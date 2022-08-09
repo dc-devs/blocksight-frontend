@@ -1,7 +1,7 @@
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import ImportExchangeAutoComplete from './ImportExchangeAutoComplete';
-import { IUser, IUsersExchanges } from '../../../../interfaces';
+import { IExchange } from '../../../../interfaces';
 const useStyles = makeStyles()((theme) => ({
 	importExchangesContainer: {
 		display: 'flex',
@@ -27,14 +27,12 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 interface IProps {
-	user: IUser | undefined;
-	exchanges: IUsersExchanges[];
+	exchanges: IExchange[];
 }
 
-const ImportExchanges = ({ user, exchanges }: IProps) => {
+const ImportExchanges = ({ exchanges }: IProps) => {
 	const { classes } = useStyles();
-	const options = exchanges.map((usersExchanges) => {
-		const { exchange } = usersExchanges;
+	const options = exchanges.map((exchange) => {
 		return { ...exchange };
 	});
 

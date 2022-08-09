@@ -21,15 +21,16 @@ const useStyles = makeStyles()((theme) => ({
 
 const Exchanges = () => {
 	const { classes } = useStyles();
-	const [selectedUsersExchanges, setSelectedUsersExchanges] =
-		useState<IExchange | null>(null);
-	console.log('Value Exchanges Level:', selectedUsersExchanges);
+	const [selectedExchange, setSelectedExchange] = useState<IExchange | null>(
+		null
+	);
+	console.log('selectedExchange', selectedExchange);
 	const dispatch = useAppDispatch();
 	const exchanges = useSelector(selectExchanges);
 	const exchangesStatus = useSelector(selectExchangesStatus);
 	const authentication = useSelector(selectAuthentication);
 	const { user } = authentication;
-	const importExchangeApi = { setSelectedUsersExchanges };
+	const importExchangeApi = { setSelectedExchange };
 
 	useEffect(() => {
 		if (exchanges && exchangesStatus === Status.IDLE) {
@@ -37,13 +38,36 @@ const Exchanges = () => {
 		}
 	}, [exchangesStatus, exchanges, dispatch]);
 
-	// Might need to update passing UsersExchanges so that yuo have that model on hand
+	// Need to Update Queries,
+	// ImportExchanges should actually import Exchanges
+	// ImportedExchanges should actually import UsersExchanges
+	//
+	// Once a user selects an actual exchange, display the setup steps for that exhange
+
+	// interface IP {
+	// 	exchange: IExchange;
+	// }
+
+	// const ImportExchangeScreen = () => {
+	// 	return (
+	// 		<>
+	// 			<div>Exchange Selected!!</div>
+	// 		</>
+	// 	);
+	// };
+
+	// const selectedScreenComponent = selectedExchange ? (
+	// 	<ImportExchangeScreen />
+	// ) : (
+	// 	<ImportedExchanges user={user} exchanges={exchanges} />
+	// );
+
 	return (
 		<>
 			<ImportExchangeApi.Provider value={importExchangeApi}>
 				<Container maxWidth="xl">
-					<ImportExchanges user={user} exchanges={exchanges} />
-					<ImportedExchanges user={user} exchanges={exchanges} />
+					<ImportExchanges exchanges={exchanges} />
+					{/* {selectedScreenComponent} */}
 				</Container>
 			</ImportExchangeApi.Provider>
 		</>

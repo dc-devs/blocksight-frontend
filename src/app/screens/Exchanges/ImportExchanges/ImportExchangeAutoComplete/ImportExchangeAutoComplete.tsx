@@ -41,7 +41,7 @@ interface IProps {
 const ImportExchangeAutoComplete = ({ options }: IProps) => {
 	const { classes } = useStyles();
 	const importExchangeApi = useContext(ImportExchangeApi);
-	const { setSelectedUsersExchanges } = importExchangeApi;
+	const { setSelectedExchange } = importExchangeApi;
 
 	return (
 		<Autocomplete
@@ -54,12 +54,9 @@ const ImportExchangeAutoComplete = ({ options }: IProps) => {
 			classes={{
 				listbox: `${classes.autoCompleteListBox}`,
 			}}
-			onChange={(
-				event: any,
-				selectedUsersExchanges: IExchange | null
-			) => {
-				if (setSelectedUsersExchanges) {
-					setSelectedUsersExchanges(selectedUsersExchanges);
+			onChange={(event: any, selectedExchange: IExchange | null) => {
+				if (setSelectedExchange) {
+					setSelectedExchange(selectedExchange);
 				}
 			}}
 			renderOption={(props, option) => (

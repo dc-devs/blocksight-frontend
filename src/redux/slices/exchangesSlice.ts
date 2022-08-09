@@ -1,7 +1,7 @@
 import { Status } from '../enums';
 import { apolloClient } from '../../services/apollo';
-import { IUsersExchanges } from '../../interfaces';
-import { FIND_ALL } from '../../queries/usersExchanges';
+import { IExchange } from '../../interfaces';
+import { FIND_ALL } from '../../queries/exchanges';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const enum Model {
@@ -9,7 +9,7 @@ const enum Model {
 }
 
 interface Transaction {
-	exchanges: IUsersExchanges[];
+	exchanges: IExchange[];
 	status: string;
 	error: null | string;
 }
@@ -26,13 +26,13 @@ export const fetchExchanges = createAsyncThunk(
 		const { data } = await apolloClient.query({
 			query: FIND_ALL,
 			variables: {
-				findAllUsersExchangesInput: {},
+				findAllExchangesInput: {},
 			},
 		});
 
-		const { findAllUsersExchanges } = data;
+		const { findAllExchanges } = data;
 
-		return findAllUsersExchanges;
+		return findAllExchanges;
 	}
 );
 
