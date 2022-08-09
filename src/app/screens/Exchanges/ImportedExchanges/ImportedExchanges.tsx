@@ -1,7 +1,7 @@
 import Exchange from '../Exchange';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
-import { IUser, IUsersExchanges } from '../../../../interfaces';
+import { IUsersExchanges } from '../../../../interfaces';
 
 const useStyles = makeStyles()((theme) => ({
 	importedExchangesContainer: {
@@ -23,21 +23,30 @@ const useStyles = makeStyles()((theme) => ({
 	},
 }));
 
+const buildHeader = (userHasImportedExchanges: boolean) => {
+	let header = '';
+
+	if (!userHasImportedExchanges) {
+		header += 'No ';
+	}
+
+	header += 'Imported Exchanges';
+
+	if (!userHasImportedExchanges) {
+		header += '...';
+	}
+
+	return header;
+};
+
 interface IProps {
-	user: IUser | undefined;
-	exchanges: IUsersExchanges[];
+	usersExchanges: IUsersExchanges[];
 }
 
-const ImportedExchanges = ({ user, exchanges }: IProps) => {
+const ImportedExchanges = ({ usersExchanges }: IProps) => {
 	const { classes } = useStyles();
 
-	const importedExchanges = exchanges.filter(
-		(usersExchanges: IUsersExchanges) => {
-			return usersExchanges.userId === (user && user?.id);
-		}
-	);
-
-	const exchangeComponents = importedExchanges.map(
+	const exchangeComponents = usersExchanges.map(
 		(usersExchange: IUsersExchanges) => {
 			const { exchange } = usersExchange;
 
@@ -48,15 +57,14 @@ const ImportedExchanges = ({ user, exchanges }: IProps) => {
 			);
 		}
 	);
-	const userHasImportedExchanges = importedExchanges.length > 0;
+	const userHasImportedExchanges = usersExchanges.length > 0;
+	const header = buildHeader(userHasImportedExchanges);
 
 	return (
 		<>
 			<div className={classes.importedExchangesContainer}>
 				<Typography className={classes.importedExchangesTypography}>
-					{!userHasImportedExchanges ? 'No ' : ''}
-					Imported Exchanges
-					{!userHasImportedExchanges ? '...' : ''}
+					{header}
 				</Typography>
 			</div>
 			<div className={classes.exchangesContainer}>

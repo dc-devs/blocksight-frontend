@@ -30,7 +30,7 @@ interface IProps {
 	exchanges: IExchange[];
 }
 
-const ImportExchanges = ({ exchanges }: IProps) => {
+const FindExchange = ({ exchanges }: IProps) => {
 	const { classes } = useStyles();
 	const options = exchanges.map((exchange) => {
 		return { ...exchange };
@@ -48,4 +48,4 @@ const ImportExchanges = ({ exchanges }: IProps) => {
 	);
 };
 
-export default ImportExchanges;
+export default FindExchange;
