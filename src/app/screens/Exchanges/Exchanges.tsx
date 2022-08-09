@@ -50,10 +50,14 @@ const Exchanges = () => {
 	}, [exchangesStatus, exchanges, dispatch]);
 
 	useEffect(() => {
-		if (usersExchanges && usersExchangesStatus === Status.IDLE) {
-			dispatch(fetchUsersExchanges());
+		if (
+			user?.id &&
+			usersExchanges &&
+			usersExchangesStatus === Status.IDLE
+		) {
+			dispatch(fetchUsersExchanges({ userId: user.id }));
 		}
-	}, [usersExchangesStatus, usersExchanges, dispatch]);
+	}, [user, usersExchangesStatus, usersExchanges, dispatch]);
 
 	return (
 		<>
@@ -61,7 +65,10 @@ const Exchanges = () => {
 				<Container maxWidth="xl">
 					<FindExchange exchanges={exchanges} />
 					{selectedExchange ? (
-						<ImportExchangeData exchange={selectedExchange} />
+						<ImportExchangeData
+							user={user}
+							exchange={selectedExchange}
+						/>
 					) : (
 						<ImportedExchanges usersExchanges={usersExchanges} />
 					)}

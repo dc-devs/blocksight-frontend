@@ -18,15 +18,23 @@ interface State {
 	usersExchanges: Transaction;
 }
 
+interface IFetchProps {
+	userId: number;
+}
+
 // Export Thunks
 // ---------------
 export const fetchUsersExchanges = createAsyncThunk(
 	'usersExchanges/fetchUsersExchanges',
-	async () => {
+	async ({ userId }: IFetchProps) => {
 		const { data } = await apolloClient.query({
 			query: FIND_ALL,
 			variables: {
-				findAllUsersExchangesInput: {},
+				findAllUsersExchangesInput: {
+					where: {
+						userId,
+					},
+				},
 			},
 		});
 

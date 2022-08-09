@@ -51,8 +51,8 @@ const ImportedExchanges = ({ usersExchanges }: IProps) => {
 			const { exchange } = usersExchange;
 
 			return (
-				<div className={classes.exchangeContainer}>
-					<Exchange key={exchange.id} exchange={exchange} />
+				<div key={exchange.id} className={classes.exchangeContainer}>
+					<Exchange exchange={exchange} />
 				</div>
 			);
 		}

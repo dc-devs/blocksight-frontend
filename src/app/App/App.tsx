@@ -60,9 +60,9 @@ const App = () => {
 		}
 	}, [isMetaMaskInstalled, isMetaMaskConnected, dispatch]);
 
-	console.log('App - isMetaMaskInstalled', isMetaMaskInstalled);
-	console.log('App - isMetaMaskConnected', isMetaMaskConnected);
-	console.log('App - metaMaskProvider', metaMaskProvider);
+	// console.log('App - isMetaMaskInstalled', isMetaMaskInstalled);
+	// console.log('App - isMetaMaskConnected', isMetaMaskConnected);
+	// console.log('App - metaMaskProvider', metaMaskProvider);
 
 	useEffect(() => {
 		if (authentication && authenticationStatus === Status.IDLE) {

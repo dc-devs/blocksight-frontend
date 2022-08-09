@@ -8,6 +8,10 @@ const FIND_ALL = gql`
 			id
 			userId
 			exchangeId
+			apiKey
+			apiSecret
+			apiPassphrase
+			apiNickname
 			exchange {
 				id
 				name

@@ -12,12 +12,15 @@ const useStyles = makeStyles()((theme) => ({
 		alignContent: 'center',
 		alignItems: 'center',
 		height: '58px',
+		width: '100%',
 		padding: `${theme.spacing(1)}`,
 		cursor: 'pointer',
 		'&:hover': {
 			backgroundColor: 'rgba(17, 51, 83, 0.04)',
-			borderRadius: 0,
 		},
+	},
+	noBorderRadius: {
+		borderRadius: 0,
 	},
 	exchangeContainerImage: {
 		display: 'flex',
@@ -42,17 +45,26 @@ const useStyles = makeStyles()((theme) => ({
 interface IProps {
 	elevation?: number;
 	exchange: IExchange;
+	noBorderRadius?: boolean;
 }
 
-const Exchange = ({ exchange, elevation = 1 }: IProps) => {
+const Exchange = ({
+	exchange,
+	elevation = 1,
+	noBorderRadius = false,
+}: IProps) => {
+	let additionalContainerClasses = '';
 	const { classes } = useStyles();
-	const hoverable = true;
-	const containerClass = hoverable
-		? `${classes.exchangeContainer} ${classes.exchangeContainer}`
-		: `${classes.exchangeContainer}`;
+
+	if (noBorderRadius) {
+		additionalContainerClasses += ` ${classes.noBorderRadius}`;
+	}
 
 	return (
-		<Paper className={containerClass} elevation={elevation}>
+		<Paper
+			className={`${classes.exchangeContainer} ${additionalContainerClasses}`}
+			elevation={elevation}
+		>
 			<div
 				className={`${classes.exchangeContainerItem} ${classes.exchangeContainerImage}`}
 			>
