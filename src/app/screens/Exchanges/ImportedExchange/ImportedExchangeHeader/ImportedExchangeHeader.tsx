@@ -2,7 +2,7 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
-import { IExchange } from '../../../../interfaces';
+import { IExchange } from '../../../../../interfaces';
 
 const useStyles = makeStyles()((theme) => ({
 	exchangeContainer: {
@@ -48,7 +48,7 @@ interface IProps {
 	noBorderRadius?: boolean;
 }
 
-const Exchange = ({
+const ImportedExchangeHeader = ({
 	exchange,
 	elevation = 1,
 	noBorderRadius = false,
@@ -91,4 +91,4 @@ const Exchange = ({
 	);
 };
 
-export default Exchange;
+export default ImportedExchangeHeader;

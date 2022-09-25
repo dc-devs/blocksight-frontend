@@ -1,4 +1,4 @@
-import Exchange from '../../Exchange';
+import ImportedExchangeHeader from '../../ImportedExchange/ImportedExchangeHeader';
 import { Search } from 'react-feather';
 import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
@@ -65,7 +65,7 @@ const ImportExchangeAutoComplete = ({ options }: IProps) => {
 					key={option.id}
 					className={classes.renderOptionLi}
 				>
-					<Exchange exchange={option} elevation={0} />
+					<ImportedExchangeHeader exchange={option} elevation={0} />
 					<Divider />
 				</li>
 			)}

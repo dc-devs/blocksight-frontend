@@ -1,4 +1,4 @@
-import Exchange from '../Exchange';
+import ImportedExchangeHeader from '../ImportedExchange/ImportedExchangeHeader';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import { IUsersExchanges } from '../../../../interfaces';
@@ -47,12 +47,12 @@ const ImportedExchanges = ({ usersExchanges }: IProps) => {
 	const { classes } = useStyles();
 
 	const exchangeComponents = usersExchanges.map(
-		(usersExchange: IUsersExchanges) => {
+		(usersExchange: IUsersExchanges, index) => {
 			const { exchange } = usersExchange;
 
 			return (
 				<div key={exchange.id} className={classes.exchangeContainer}>
-					<Exchange exchange={exchange} />
+					<ImportedExchangeHeader exchange={exchange} />
 				</div>
 			);
 		}

@@ -7,7 +7,7 @@ import { IExchange } from '../../../interfaces';
 import Container from '@mui/material/Container';
 import { useAppDispatch } from '../../../hooks';
 import ImportedExchanges from './ImportedExchanges';
-import ImportExchangeData from './ImportExchangeData';
+import ImportedExchange from './ImportedExchange';
 import { selectAuthentication } from '../../../redux/slices/authenticationSlice';
 import {
 	fetchExchanges,
@@ -65,7 +65,7 @@ const Exchanges = () => {
 				<Container maxWidth="xl">
 					<FindExchange exchanges={exchanges} />
 					{selectedExchange ? (
-						<ImportExchangeData
+						<ImportedExchange
 							user={user}
 							exchange={selectedExchange}
 						/>
