@@ -1,11 +1,11 @@
-import ImportedExchangeHeader from '../../ImportedExchange/ImportedExchangeHeader';
 import { Search } from 'react-feather';
 import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import InputAdornment from '@mui/material/InputAdornment';
 import { IExchange } from '../../../../../interfaces';
+import InputAdornment from '@mui/material/InputAdornment';
+import ImportExchangeSummary from '../../ImportExchange/ImportExchangeSummary';
 
 import { useContext } from 'react';
 import ImportExchangeApi from '../../contexts/ImportExchangeContext';
@@ -45,7 +45,6 @@ const ImportExchangeAutoComplete = ({ options }: IProps) => {
 
 	return (
 		<Autocomplete
-			clearOnEscape
 			id="import-exchanges-autocomplete"
 			options={options}
 			isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -65,7 +64,10 @@ const ImportExchangeAutoComplete = ({ options }: IProps) => {
 					key={option.id}
 					className={classes.renderOptionLi}
 				>
-					<ImportedExchangeHeader exchange={option} />
+					<ImportExchangeSummary
+						exchange={option}
+						isAccordianMode={false}
+					/>
 					<Divider />
 				</li>
 			)}
@@ -77,7 +79,7 @@ const ImportExchangeAutoComplete = ({ options }: IProps) => {
 						label="Select Exchange"
 						InputProps={{
 							...params.InputProps,
-							type: 'search',
+							type: 'text',
 							startAdornment: (
 								<InputAdornment position="start">
 									<Search />

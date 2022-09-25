@@ -10,10 +10,6 @@ import { CREATE_USERS_EXCHANGES } from '../../../../../queries/usersExchanges';
 
 const useStyles = makeStyles()((theme) => ({
 	importExchangeDataContentContainer: {
-		// display: 'flex',
-		// flexDirection: 'row',
-		// justifyContent: 'space-between',
-		// marginTop: '100px',
 		padding: theme.spacing(4),
 	},
 	importExchangeDataFormContainer: {},
@@ -52,7 +48,7 @@ interface IProps {
 	exchange: IExchange;
 }
 
-const ImportedExchangeAccordianDetails = ({ user, exchange }: IProps) => {
+const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 	const { classes } = useStyles();
 
 	const [createUsersExchanges] = useMutation(CREATE_USERS_EXCHANGES, {
@@ -93,7 +89,6 @@ const ImportedExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 		<AccordionDetails
 			className={classes.importExchangeDataContentContainer}
 		>
-			{/* <div> */}
 			<Grid container spacing={2}>
 				<Grid item xs={6}>
 					<div className={classes.importExchangeDataFormContainer}>
@@ -159,9 +154,8 @@ const ImportedExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 					<div>Instructions</div>
 				</Grid>
 			</Grid>
-			{/* </div> */}
 		</AccordionDetails>
 	);
 };
 
-export default ImportedExchangeAccordianDetails;
+export default ImportExchangeAccordianDetails;

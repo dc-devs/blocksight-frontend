@@ -48,14 +48,19 @@ const useStyles = makeStyles()((theme) => ({
 
 interface IProps {
 	exchange: IExchange;
+	isAccordianMode?: boolean;
 }
 
-const ImportedExchangeHeader = ({ exchange }: IProps) => {
+const ImportExchangeSummary = ({
+	exchange,
+	isAccordianMode = true,
+}: IProps) => {
 	const { classes } = useStyles();
+	const ExpandIcon = isAccordianMode ? <ExpandMoreIcon /> : '';
 
 	return (
 		<AccordionSummary
-			expandIcon={<ExpandMoreIcon />}
+			expandIcon={ExpandIcon}
 			aria-controls="panel1bh-content"
 			id="panel1bh-header"
 			className={classes.accordianSummary}
@@ -87,4 +92,4 @@ const ImportedExchangeHeader = ({ exchange }: IProps) => {
 	);
 };
 
-export default ImportedExchangeHeader;
+export default ImportExchangeSummary;

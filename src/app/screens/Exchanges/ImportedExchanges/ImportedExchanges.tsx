@@ -1,7 +1,7 @@
-import ImportedExchangeHeader from '../ImportedExchange/ImportedExchangeHeader';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import { IUsersExchanges } from '../../../../interfaces';
+import ImportExchangeSummary from '../ImportExchange/ImportExchangeSummary';
 
 const useStyles = makeStyles()((theme) => ({
 	importedExchangesContainer: {
@@ -52,7 +52,7 @@ const ImportedExchanges = ({ usersExchanges }: IProps) => {
 
 			return (
 				<div key={exchange.id} className={classes.exchangeContainer}>
-					<ImportedExchangeHeader exchange={exchange} />
+					<ImportExchangeSummary exchange={exchange} />
 				</div>
 			);
 		}

@@ -1,10 +1,9 @@
-import Paper from '@mui/material/Paper';
 import { makeStyles } from 'tss-react/mui';
 import Accordion from '@mui/material/Accordion';
 import { useState, SyntheticEvent } from 'react';
 import { IUser, IExchange } from '../../../../interfaces';
-import ImportedExchangeAccordianSummary from './ImportedExchangeAccordianSummary';
-import ImportedExchangeAccordianDetails from './ImportedExchangeAccordianDetails';
+import ImportExchangeSummary from './ImportExchangeSummary';
+import ImportExchangeAccordianDetails from './ImportExchangeDetails';
 
 // LEFT OFF:
 // Add Accordian
@@ -25,7 +24,7 @@ interface IProps {
 	exchange: IExchange;
 }
 
-const ImportedExchange = ({ user, exchange }: IProps) => {
+const ImportExchange = ({ user, exchange }: IProps) => {
 	const { classes } = useStyles();
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const handleAccordianChange =
@@ -41,10 +40,8 @@ const ImportedExchange = ({ user, exchange }: IProps) => {
 				disableGutters
 				elevation={1}
 			>
-				<ImportedExchangeAccordianSummary
-					exchange={exchange}
-				/>
-				<ImportedExchangeAccordianDetails
+				<ImportExchangeSummary exchange={exchange} />
+				<ImportExchangeAccordianDetails
 					user={user}
 					exchange={exchange}
 				/>
@@ -53,4 +50,4 @@ const ImportedExchange = ({ user, exchange }: IProps) => {
 	);
 };
 
-export default ImportedExchange;
+export default ImportExchange;

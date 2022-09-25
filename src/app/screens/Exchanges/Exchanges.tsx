@@ -2,12 +2,12 @@ import { useSelector } from 'react-redux';
 import FindExchange from './FindExchange';
 import { makeStyles } from 'tss-react/mui';
 import { useEffect, useState } from 'react';
+import ImportExchange from './ImportExchange';
 import { Status } from '../../../redux/enums';
 import { IExchange } from '../../../interfaces';
 import Container from '@mui/material/Container';
 import { useAppDispatch } from '../../../hooks';
 import ImportedExchanges from './ImportedExchanges';
-import ImportedExchange from './ImportedExchange';
 import { selectAuthentication } from '../../../redux/slices/authenticationSlice';
 import {
 	fetchExchanges,
@@ -65,7 +65,7 @@ const Exchanges = () => {
 				<Container maxWidth="xl">
 					<FindExchange exchanges={exchanges} />
 					{selectedExchange ? (
-						<ImportedExchange
+						<ImportExchange
 							user={user}
 							exchange={selectedExchange}
 						/>
