@@ -22,19 +22,7 @@ const ImportedExchangeAccordianSummary = ({
 }: IProps) => {
 	const { classes } = useStyles();
 
-	return (
-		<AccordionSummary
-			expandIcon={<ExpandMoreIcon />}
-			aria-controls="panel1bh-content"
-			id="panel1bh-header"
-		>
-			<ImportedExchangeHeader
-				exchange={exchange}
-				elevation={elevation}
-				noBorderRadius={noBorderRadius}
-			/>
-		</AccordionSummary>
-	);
+	return <ImportedExchangeHeader exchange={exchange} />;
 };
 
 export default ImportedExchangeAccordianSummary;

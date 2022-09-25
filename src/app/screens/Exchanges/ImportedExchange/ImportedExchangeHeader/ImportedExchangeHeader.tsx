@@ -3,21 +3,25 @@ import Paper from '@mui/material/Paper';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
 import { IExchange } from '../../../../../interfaces';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const useStyles = makeStyles()((theme) => ({
-	exchangeContainer: {
+	accordianSummary: {
+		height: '58px',
+		width: '100%',
+		cursor: 'pointer',
+		'&:hover': {
+			backgroundColor: 'rgba(17, 51, 83, 0.04)',
+		},
+	},
+	accordianSummaryContent: {
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'start',
 		alignContent: 'center',
 		alignItems: 'center',
-		height: '58px',
-		width: '100%',
 		padding: `${theme.spacing(1)}`,
-		cursor: 'pointer',
-		'&:hover': {
-			backgroundColor: 'rgba(17, 51, 83, 0.04)',
-		},
 	},
 	noBorderRadius: {
 		borderRadius: 0,
@@ -43,27 +47,19 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 interface IProps {
-	elevation?: number;
 	exchange: IExchange;
-	noBorderRadius?: boolean;
 }
 
-const ImportedExchangeHeader = ({
-	exchange,
-	elevation = 1,
-	noBorderRadius = false,
-}: IProps) => {
-	let additionalContainerClasses = '';
+const ImportedExchangeHeader = ({ exchange }: IProps) => {
 	const { classes } = useStyles();
 
-	if (noBorderRadius) {
-		additionalContainerClasses += ` ${classes.noBorderRadius}`;
-	}
-
 	return (
-		<Paper
-			className={`${classes.exchangeContainer} ${additionalContainerClasses}`}
-			elevation={elevation}
+		<AccordionSummary
+			expandIcon={<ExpandMoreIcon />}
+			aria-controls="panel1bh-content"
+			id="panel1bh-header"
+			className={classes.accordianSummary}
+			classes={{ content: classes.accordianSummaryContent }}
 		>
 			<div
 				className={`${classes.exchangeContainerItem} ${classes.exchangeContainerImage}`}
@@ -87,7 +83,7 @@ const ImportedExchangeHeader = ({
 					variant="outlined"
 				/>
 			</div>
-		</Paper>
+		</AccordionSummary>
 	);
 };
 

@@ -34,21 +34,22 @@ const ImportedExchange = ({ user, exchange }: IProps) => {
 		};
 
 	return (
-		<Paper className={classes.importExchangeDataContainer}>
+		<div className={classes.importExchangeDataContainer}>
 			<Accordion
 				expanded={expanded === 'panel1'}
 				onChange={handleAccordianChange('panel1')}
+				disableGutters
+				elevation={1}
 			>
 				<ImportedExchangeAccordianSummary
 					exchange={exchange}
-					noBorderRadius={true}
 				/>
 				<ImportedExchangeAccordianDetails
 					user={user}
 					exchange={exchange}
 				/>
 			</Accordion>
-		</Paper>
+		</div>
 	);
 };
 

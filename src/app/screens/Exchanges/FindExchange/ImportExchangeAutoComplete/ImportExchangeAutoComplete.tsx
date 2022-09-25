@@ -65,7 +65,7 @@ const ImportExchangeAutoComplete = ({ options }: IProps) => {
 					key={option.id}
 					className={classes.renderOptionLi}
 				>
-					<ImportedExchangeHeader exchange={option} elevation={0} />
+					<ImportedExchangeHeader exchange={option} />
 					<Divider />
 				</li>
 			)}

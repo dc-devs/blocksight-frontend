@@ -90,76 +90,76 @@ const ImportedExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 	} = useForm();
 
 	return (
-		<AccordionDetails>
-			<div className={classes.importExchangeDataContentContainer}>
-				<Grid container spacing={2}>
-					<Grid item xs={6}>
-						<div
-							className={classes.importExchangeDataFormContainer}
+		<AccordionDetails
+			className={classes.importExchangeDataContentContainer}
+		>
+			{/* <div> */}
+			<Grid container spacing={2}>
+				<Grid item xs={6}>
+					<div className={classes.importExchangeDataFormContainer}>
+						<form
+							className={classes.form}
+							noValidate
+							autoComplete="off"
+							onSubmit={handleSubmit(onSubmit)}
 						>
-							<form
-								className={classes.form}
-								noValidate
+							<TextField
+								fullWidth={true}
 								autoComplete="off"
-								onSubmit={handleSubmit(onSubmit)}
+								id="apiKey"
+								label="API Key *"
+								error={!!errors.apiKey}
+								{...register('apiKey', {
+									required: true,
+								})}
+							/>
+
+							<TextField
+								fullWidth={true}
+								autoComplete="off"
+								id="apiSecret"
+								label="API Secret *"
+								error={!!errors.apiSecret}
+								{...register('apiSecret', {
+									required: true,
+								})}
+							/>
+
+							<TextField
+								fullWidth={true}
+								autoComplete="off"
+								id="apiPassphrase"
+								label="API Passphrase *"
+								error={!!errors.apiPassphrase}
+								{...register('apiPassphrase', {
+									required: true,
+								})}
+							/>
+
+							<TextField
+								fullWidth={true}
+								autoComplete="off"
+								id="apiNickname"
+								label="API Nickname (optional)"
+								{...register('apiNickname')}
+							/>
+
+							<Button
+								type="submit"
+								color="primary"
+								variant="contained"
+								className={classes.submitButton}
 							>
-								<TextField
-									fullWidth={true}
-									autoComplete="off"
-									id="apiKey"
-									label="API Key *"
-									error={!!errors.apiKey}
-									{...register('apiKey', {
-										required: true,
-									})}
-								/>
-
-								<TextField
-									fullWidth={true}
-									autoComplete="off"
-									id="apiSecret"
-									label="API Secret *"
-									error={!!errors.apiSecret}
-									{...register('apiSecret', {
-										required: true,
-									})}
-								/>
-
-								<TextField
-									fullWidth={true}
-									autoComplete="off"
-									id="apiPassphrase"
-									label="API Passphrase *"
-									error={!!errors.apiPassphrase}
-									{...register('apiPassphrase', {
-										required: true,
-									})}
-								/>
-
-								<TextField
-									fullWidth={true}
-									autoComplete="off"
-									id="apiNickname"
-									label="API Nickname (optional)"
-									{...register('apiNickname')}
-								/>
-
-								<Button
-									type="submit"
-									color="primary"
-									variant="contained"
-									className={classes.submitButton}
-								>
-									Import Exchange
-								</Button>
-							</form>
-						</div>
-					</Grid>
-					<Grid item xs={6}>
-						<div>Instructions</div>
-					</Grid>
+								Import Exchange
+							</Button>
+						</form>
+					</div>
 				</Grid>
-			</div>
+				<Grid item xs={6}>
+					<div>Instructions</div>
+				</Grid>
+			</Grid>
+			{/* </div> */}
 		</AccordionDetails>
 	);
 };
