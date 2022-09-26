@@ -15,6 +15,10 @@ const useStyles = makeStyles()((theme) => ({
 			backgroundColor: 'rgba(17, 51, 83, 0.04)',
 		},
 	},
+	accordianSummarIsOpen: {
+		backgroundColor: 'rgba(17, 51, 83, 0.04)',
+		borderBottom: `1px solid rgba(17, 51, 83, 0.06)`,
+	},
 	accordianSummaryContent: {
 		display: 'flex',
 		flexDirection: 'row',
@@ -48,22 +52,27 @@ const useStyles = makeStyles()((theme) => ({
 
 interface IProps {
 	exchange: IExchange;
+	isExpanded?: boolean;
 	isAccordianMode?: boolean;
 }
 
 const ImportExchangeSummary = ({
 	exchange,
+	isExpanded = false,
 	isAccordianMode = true,
 }: IProps) => {
 	const { classes } = useStyles();
 	const ExpandIcon = isAccordianMode ? <ExpandMoreIcon /> : '';
+
+	const isExpandedClass =
+		isAccordianMode && isExpanded ? classes.accordianSummarIsOpen : '';
 
 	return (
 		<AccordionSummary
 			expandIcon={ExpandIcon}
 			aria-controls="panel1bh-content"
 			id="panel1bh-header"
-			className={classes.accordianSummary}
+			className={`${classes.accordianSummary} ${isExpandedClass}`}
 			classes={{ content: classes.accordianSummaryContent }}
 		>
 			<div

@@ -23,6 +23,9 @@ import ImportExchangeApi from './contexts/ImportExchangeContext';
 
 const useStyles = makeStyles()((theme) => ({
 	root: {},
+	selectedImportExchangeContainer: {
+		marginTop: '100px',
+	},
 }));
 
 const Exchanges = () => {
@@ -65,10 +68,15 @@ const Exchanges = () => {
 				<Container maxWidth="xl">
 					<FindExchange exchanges={exchanges} />
 					{selectedExchange ? (
-						<ImportExchange
-							user={user}
-							exchange={selectedExchange}
-						/>
+						<div
+							className={classes.selectedImportExchangeContainer}
+						>
+							<ImportExchange
+								user={user}
+								exchange={selectedExchange}
+								fixedExpansion={true}
+							/>
+						</div>
 					) : (
 						<ImportedExchanges usersExchanges={usersExchanges} />
 					)}

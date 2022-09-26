@@ -48,6 +48,9 @@ const theme = createTheme({
 					'&:hover .MuiOutlinedInput-notchedOutline': {
 						borderColor: primaryMain,
 					},
+					'&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
+						borderColor: '#cc0101 !important',
+					},
 				},
 			},
 		},

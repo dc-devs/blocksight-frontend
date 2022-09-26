@@ -1,3 +1,4 @@
+import { SyntheticEvent } from 'react';
 import { Search } from 'react-feather';
 import { makeStyles } from 'tss-react/mui';
 import Divider from '@mui/material/Divider';
@@ -53,7 +54,10 @@ const ImportExchangeAutoComplete = ({ options }: IProps) => {
 			classes={{
 				listbox: `${classes.autoCompleteListBox}`,
 			}}
-			onChange={(event: any, selectedExchange: IExchange | null) => {
+			onChange={(
+				event: SyntheticEvent,
+				selectedExchange: IExchange | null
+			) => {
 				if (setSelectedExchange) {
 					setSelectedExchange(selectedExchange);
 				}

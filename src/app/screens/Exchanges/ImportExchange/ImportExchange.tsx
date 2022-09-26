@@ -6,41 +6,43 @@ import ImportExchangeSummary from './ImportExchangeSummary';
 import ImportExchangeAccordianDetails from './ImportExchangeDetails';
 
 // LEFT OFF:
-// Add Accordian
-// Add this module to load on imported exchanges
 // Add Delete Button (ensure Deletion's cascade)
-
 const useStyles = makeStyles()((theme) => ({
 	importExchangeDataContainer: {
 		display: 'flex',
 		flexDirection: 'column',
-		// justifyContent: 'start',
-		marginTop: '100px',
 	},
 }));
 
 interface IProps {
-	user: IUser | undefined;
 	exchange: IExchange;
+	fixedExpansion?: boolean;
+	user: IUser | undefined;
 }
 
-const ImportExchange = ({ user, exchange }: IProps) => {
+const ImportExchange = ({ user, exchange, fixedExpansion = false }: IProps) => {
 	const { classes } = useStyles();
+	const panelName = 'panel1';
 	const [expanded, setExpanded] = useState<string | false>(false);
 	const handleAccordianChange =
-		(panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
-			setExpanded(isExpanded ? panel : false);
+		(panelName: string) => (event: SyntheticEvent, isExpanded: boolean) => {
+			setExpanded(isExpanded ? panelName : false);
 		};
+
+	const isExpanded = fixedExpansion || expanded === panelName;
 
 	return (
 		<div className={classes.importExchangeDataContainer}>
 			<Accordion
-				expanded={expanded === 'panel1'}
-				onChange={handleAccordianChange('panel1')}
+				expanded={isExpanded}
+				onChange={handleAccordianChange(panelName)}
 				disableGutters
 				elevation={1}
 			>
-				<ImportExchangeSummary exchange={exchange} />
+				<ImportExchangeSummary
+					exchange={exchange}
+					isExpanded={isExpanded}
+				/>
 				<ImportExchangeAccordianDetails
 					user={user}
 					exchange={exchange}

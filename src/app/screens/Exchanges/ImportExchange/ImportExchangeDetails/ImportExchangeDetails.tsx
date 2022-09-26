@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useForm } from 'react-hook-form';
@@ -34,13 +35,16 @@ const useStyles = makeStyles()((theme) => ({
 	},
 }));
 
-interface ErrorAttributes {
+interface IErrorAttributes {
 	type: string;
 	message: string;
 }
 
-interface ErrorProps {
-	email: ErrorAttributes;
+interface IErrors {
+	apiKey?: string;
+	apiSecret?: string;
+	apiPassphrase?: string;
+	uniqueUserExchange?: IErrorAttributes;
 }
 
 interface IProps {
@@ -49,14 +53,16 @@ interface IProps {
 }
 
 const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
+	let defaultErrorState: IErrors = {};
 	const { classes } = useStyles();
+	const [serverErrors, setServerErrors] = useState(defaultErrorState);
 
 	const [createUsersExchanges] = useMutation(CREATE_USERS_EXCHANGES, {
 		onError: (error) => {
-			const errors = error.graphQLErrors[0].extensions
-				.errors as ErrorProps;
+			const errors = error.graphQLErrors[0].extensions.errors as IErrors;
 
 			if (errors) {
+				setServerErrors(errors);
 				console.error(errors);
 			}
 		},
@@ -66,6 +72,8 @@ const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 	});
 
 	const onSubmit = async (data: any) => {
+		setServerErrors(defaultErrorState);
+
 		if (user) {
 			createUsersExchanges({
 				variables: {
@@ -82,8 +90,18 @@ const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors: formErrors },
 	} = useForm();
+
+	const hasFormErrors =
+		formErrors.apiKey || formErrors.apiSecret || formErrors.apiPassphrase;
+	const hasServerErrors = serverErrors.uniqueUserExchange;
+
+	if (hasServerErrors && hasFormErrors) {
+		setServerErrors(defaultErrorState);
+	}
+
+	const errors = { ...serverErrors, ...formErrors };
 
 	return (
 		<AccordionDetails
@@ -138,6 +156,12 @@ const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 								label="API Nickname (optional)"
 								{...register('apiNickname')}
 							/>
+
+							{errors.uniqueUserExchange && (
+								<div className={classes.errorContainer}>
+									{errors.uniqueUserExchange.message}
+								</div>
+							)}
 
 							<Button
 								type="submit"

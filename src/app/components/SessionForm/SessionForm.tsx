@@ -3,7 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 import HaveAnAccount from './HaveAnAccount';
 import SignInOptions from './SessionOptions';
 import TextField from '@mui/material/TextField';
-import FormErrorType from './enums/FormErrorType';
+import FormErrorType from '../../../enums/FormErrorType';
 import emailRegex from '../../../constants/emailRegex';
 import FormErrorMessage from './enums/FormErrorMessage';
 

@@ -3,6 +3,7 @@ import Logo from '../../icons/Logo';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
 import { useMutation } from '@apollo/client';
+import { FormErrorType } from '../../../enums';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import headers from '../../../constants/headers';
@@ -10,10 +11,7 @@ import { SIGN_IN } from '../../../queries/sessions';
 import SignInForm from '../../components/SessionForm';
 import { defaultErrorState } from '../../components/SessionForm/constants';
 import { setAuthentication } from '../../../redux/slices/authenticationSlice';
-import {
-	FormErrorType,
-	FormErrorMessage,
-} from '../../components/SessionForm/enums';
+import { FormErrorMessage } from '../../components/SessionForm/enums';
 
 const useStyles = makeStyles()((theme) => ({
 	pageContainer: {
