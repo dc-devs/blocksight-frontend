@@ -1,6 +1,6 @@
 import { Status } from '../enums';
 import { apolloClient } from '../../services/apollo';
-import { IUsersExchanges } from '../../interfaces';
+import { IUsersExchange } from '../../interfaces';
 import { FIND_ALL } from '../../queries/usersExchanges';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -9,7 +9,7 @@ const enum Model {
 }
 
 interface Transaction {
-	usersExchanges: IUsersExchanges[];
+	usersExchanges: IUsersExchange[];
 	status: string;
 	error: null | string;
 }

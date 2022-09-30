@@ -5,8 +5,8 @@ import IWallet from './IWallet';
 import INetwork from './INetwork';
 import IExchange from './IExchange';
 import ITokenBalance from './ITokenBalance';
+import IUsersExchange from './IUsersExchange';
 import IAuthentication from './IAuthentication';
-import IUsersExchanges from './IUsersExchanges';
 import ITokenBalancesResponse from './ITokenBalancesResponse';
 
 export type {
@@ -17,7 +17,7 @@ export type {
 	INetwork,
 	IExchange,
 	ITokenBalance,
-	IUsersExchanges,
+	IUsersExchange,
 	IAuthentication,
 	ITokenBalancesResponse,
 };

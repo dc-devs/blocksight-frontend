@@ -1,10 +1,9 @@
 import Chip from '@mui/material/Chip';
-import Paper from '@mui/material/Paper';
 import { makeStyles } from 'tss-react/mui';
 import Typography from '@mui/material/Typography';
-import { IExchange } from '../../../../../interfaces';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ImportExchangeSummaryMenu from './ImportExchangeSummaryMenu'
+import { IExchange, IUsersExchange } from '../../../../../interfaces';
 
 const useStyles = makeStyles()((theme) => ({
 	accordianSummary: {
@@ -40,7 +39,12 @@ const useStyles = makeStyles()((theme) => ({
 		height: '30px',
 	},
 	exchangeContainerItem: {
+		display: 'flex',
+		alignItems: 'center',
 		marginRight: '10px',
+		'&:last-of-type': {
+			marginLeft: 'auto',
+		},
 	},
 	exchangeName: {
 		fontSize: '1.2rem',
@@ -54,22 +58,27 @@ interface IProps {
 	exchange: IExchange;
 	isExpanded?: boolean;
 	isAccordianMode?: boolean;
+	usersExchange?: IUsersExchange;
 }
 
 const ImportExchangeSummary = ({
 	exchange,
+	usersExchange,
 	isExpanded = false,
 	isAccordianMode = true,
 }: IProps) => {
 	const { classes } = useStyles();
-	const ExpandIcon = isAccordianMode ? <ExpandMoreIcon /> : '';
+	const MenuComponent = isAccordianMode ? (
+		<ImportExchangeSummaryMenu usersExchange={usersExchange} />
+	) : (
+		''
+	);
 
 	const isExpandedClass =
 		isAccordianMode && isExpanded ? classes.accordianSummarIsOpen : '';
 
 	return (
 		<AccordionSummary
-			expandIcon={ExpandIcon}
 			aria-controls="panel1bh-content"
 			id="panel1bh-header"
 			className={`${classes.accordianSummary} ${isExpandedClass}`}
@@ -97,6 +106,8 @@ const ImportExchangeSummary = ({
 					variant="outlined"
 				/>
 			</div>
+
+			<div className={classes.exchangeContainerItem}>{MenuComponent}</div>
 		</AccordionSummary>
 	);
 };

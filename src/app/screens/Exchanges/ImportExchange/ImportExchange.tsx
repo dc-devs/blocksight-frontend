@@ -1,12 +1,21 @@
 import { makeStyles } from 'tss-react/mui';
 import Accordion from '@mui/material/Accordion';
 import { useState, SyntheticEvent } from 'react';
-import { IUser, IExchange } from '../../../../interfaces';
 import ImportExchangeSummary from './ImportExchangeSummary';
 import ImportExchangeAccordianDetails from './ImportExchangeDetails';
+import { IUser, IExchange, IUsersExchange } from '../../../../interfaces';
 
 // LEFT OFF:
 // Add Delete Button (ensure Deletion's cascade)
+// Add Clear button
+//
+// After Deletion is cleared, update search to bring UserExchange to top if already imported
+// update chips to be dynamic
+// Update Instructions
+//
+// Eventually Update UsersExchanges to have mulitple APIs (apiConnection becomes its own model)
+// Once you've already added a UserExchange, Submit button should be to add a new API, or update existing?
+
 const useStyles = makeStyles()((theme) => ({
 	importExchangeDataContainer: {
 		display: 'flex',
@@ -15,12 +24,13 @@ const useStyles = makeStyles()((theme) => ({
 }));
 
 interface IProps {
+	user: IUser | undefined;
 	exchange: IExchange;
 	fixedExpansion?: boolean;
-	user: IUser | undefined;
+	usersExchange?: IUsersExchange;
 }
 
-const ImportExchange = ({ user, exchange, fixedExpansion = false }: IProps) => {
+const ImportExchange = ({ user, exchange, usersExchange, fixedExpansion = false }: IProps) => {
 	const { classes } = useStyles();
 	const panelName = 'panel1';
 	const [expanded, setExpanded] = useState<string | false>(false);
@@ -42,6 +52,7 @@ const ImportExchange = ({ user, exchange, fixedExpansion = false }: IProps) => {
 				<ImportExchangeSummary
 					exchange={exchange}
 					isExpanded={isExpanded}
+					usersExchange={usersExchange}
 				/>
 				<ImportExchangeAccordianDetails
 					user={user}

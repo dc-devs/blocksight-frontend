@@ -1,7 +1,7 @@
 import { makeStyles } from 'tss-react/mui';
 import ImportExchange from '../ImportExchange';
 import Typography from '@mui/material/Typography';
-import { IUsersExchanges } from '../../../../interfaces';
+import { IUsersExchange } from '../../../../interfaces';
 
 const useStyles = makeStyles()((theme) => ({
 	importedExchangesContainer: {
@@ -40,19 +40,23 @@ const buildHeader = (userHasImportedExchanges: boolean) => {
 };
 
 interface IProps {
-	usersExchanges: IUsersExchanges[];
+	usersExchanges: IUsersExchange[];
 }
 
 const ImportedExchanges = ({ usersExchanges }: IProps) => {
 	const { classes } = useStyles();
 
 	const exchangeComponents = usersExchanges.map(
-		(usersExchange: IUsersExchanges, index) => {
+		(usersExchange: IUsersExchange, index) => {
 			const { exchange, user } = usersExchange;
 
 			return (
 				<div key={exchange.id} className={classes.exchangeContainer}>
-					<ImportExchange exchange={exchange} user={user} />
+					<ImportExchange
+						usersExchange={usersExchange}
+						exchange={exchange}
+						user={user}
+					/>
 				</div>
 			);
 		}

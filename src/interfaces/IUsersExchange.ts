@@ -1,7 +1,8 @@
 import IUser from './IUser';
 import IExchange from './IExchange';
 
-interface IUsersExchanges {
+interface IUsersExchange {
+	id: number;
 	apiKey: string;
 	apiNickname: string;
 	apiPassphrase: string;
@@ -14,4 +15,4 @@ interface IUsersExchanges {
 	updatedAt: Date;
 }
 
-export default IUsersExchanges;
+export default IUsersExchange;
