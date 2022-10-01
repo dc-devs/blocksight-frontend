@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
+import { Status } from '../../../redux/enums';
 import { useAppDispatch } from '../../../hooks';
 import AssetSummary from './components/AssetSummary';
 import AssetDollarSummary from './components/AssetDollarSummary';
@@ -35,7 +36,7 @@ const useStyles = makeStyles()((theme) => ({
 
 const DashBoard = () => {
 	const { classes } = useStyles();
-	const appDispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 	const { selectedAddress } = useSelector(selectMetaMaskProvider);
 
 	const tokenBalances = useSelector(selectTokenBalances);
@@ -44,10 +45,10 @@ const DashBoard = () => {
 
 	// GET Token Balances
 	useEffect(() => {
-		if (selectedAddress && tokenBalancesStatus === 'idle') {
-			appDispatch(fetchTokenBalances({ address: selectedAddress }));
+		if (selectedAddress && tokenBalancesStatus === Status.Idle) {
+			dispatch(fetchTokenBalances({ address: selectedAddress }));
 		}
-	}, [tokenBalancesStatus, selectedAddress, appDispatch]);
+	}, [tokenBalancesStatus, selectedAddress, dispatch]);
 
 	const { totalValue, networks, tokens, nfts, hidden, scam } = tokenBalances;
 
