@@ -1,8 +1,8 @@
 const enum Status {
-	IDLE = 'idle',
-	LOADING = 'loading',
-	SUCCEEDED = 'succeeded',
-	FAILED = 'failed',
+	Idle = 'idle',
+	Loading = 'loading',
+	Succeeded = 'succeeded',
+	Failed = 'failed',
 }
 
 export default Status;

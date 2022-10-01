@@ -70,7 +70,7 @@ export const authenticationSlice = createSlice({
 			const authentication = { ...payload } as IAuthentication;
 
 			state.authentication = authentication;
-			state.status = Status.SUCCEEDED;
+			state.status = Status.Succeeded;
 
 			localStorage.setItem(
 				Model.AUTHENTICATION,
@@ -83,23 +83,23 @@ export const authenticationSlice = createSlice({
 			};
 
 			state.authentication = authentication;
-			state.status = Status.SUCCEEDED;
+			state.status = Status.Succeeded;
 
 			localStorage.removeItem(Model.AUTHENTICATION);
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAuthentication.pending, (state, action) => {
-			state.status = Status.LOADING;
+			state.status = Status.Loading;
 		});
 
 		builder.addCase(fetchAuthentication.fulfilled, (state, action) => {
-			state.status = Status.SUCCEEDED;
+			state.status = Status.Succeeded;
 			state.authentication = action.payload;
 		});
 
 		builder.addCase(fetchAuthentication.rejected, (state, action) => {
-			state.status = Status.FAILED;
+			state.status = Status.Failed;
 		});
 	},
 });

@@ -21,19 +21,19 @@ const IsAuthenticated = ({ children }: IProps) => {
 	const authenticationStatus = useSelector(selectAuthenticationStatus);
 
 	useEffect(() => {
-		if (authentication && authenticationStatus === Status.IDLE) {
+		if (authentication && authenticationStatus === Status.Idle) {
 			appDispatch(fetchAuthentication());
 		}
 
 		if (
-			authenticationStatus === Status.SUCCEEDED &&
+			authenticationStatus === Status.Succeeded &&
 			!authentication.isAuthenticated
 		) {
 			navigate('/', { replace: true });
 		}
 	}, [authenticationStatus, authentication, appDispatch, navigate]);
 
-	if (authenticationStatus === Status.LOADING) {
+	if (authenticationStatus === Status.Loading) {
 		return <></>;
 	}
 

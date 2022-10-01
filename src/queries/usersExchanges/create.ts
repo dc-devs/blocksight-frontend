@@ -14,6 +14,25 @@ const CREATE = gql`
 			apiNickname
 			createdAt
 			updatedAt
+			exchange {
+				id
+				name
+				websiteUrl
+				logoUrl
+				companyLogoUrl
+				hasApi
+				hasCsv
+				createdAt
+				updatedAt
+			}
+			user {
+				id
+				email
+				primaryWalletAddress
+				role
+				createdAt
+				updatedAt
+			}
 		}
 	}
 `;

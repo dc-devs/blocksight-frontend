@@ -46,16 +46,16 @@ export const exchangesSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchExchanges.pending, (state) => {
-			state.status = Status.LOADING;
+			state.status = Status.Loading;
 		});
 
 		builder.addCase(fetchExchanges.fulfilled, (state, { payload }) => {
-			state.status = Status.SUCCEEDED;
+			state.status = Status.Succeeded;
 			state.exchanges = payload;
 		});
 
 		builder.addCase(fetchExchanges.rejected, (state) => {
-			state.status = Status.FAILED;
+			state.status = Status.Failed;
 		});
 	},
 });

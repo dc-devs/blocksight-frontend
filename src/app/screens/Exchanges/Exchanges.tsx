@@ -8,6 +8,7 @@ import { IExchange } from '../../../interfaces';
 import Container from '@mui/material/Container';
 import { useAppDispatch } from '../../../hooks';
 import ImportedExchanges from './ImportedExchanges';
+import ImportExchangeApi from './contexts/ImportExchangeContext';
 import { selectAuthentication } from '../../../redux/slices/authenticationSlice';
 import {
 	fetchExchanges,
@@ -19,7 +20,6 @@ import {
 	selectUsersExchanges,
 	selectUsersExchangesStatus,
 } from '../../../redux/slices/usersExchangesSlice';
-import ImportExchangeApi from './contexts/ImportExchangeContext';
 
 const useStyles = makeStyles()((theme) => ({
 	root: {},
@@ -47,7 +47,7 @@ const Exchanges = () => {
 	const { user } = authentication;
 
 	useEffect(() => {
-		if (exchanges && exchangesStatus === Status.IDLE) {
+		if (exchanges && exchangesStatus === Status.Idle) {
 			dispatch(fetchExchanges());
 		}
 	}, [exchangesStatus, exchanges, dispatch]);
@@ -56,7 +56,7 @@ const Exchanges = () => {
 		if (
 			user?.id &&
 			usersExchanges &&
-			usersExchangesStatus === Status.IDLE
+			usersExchangesStatus === Status.Idle
 		) {
 			dispatch(fetchUsersExchanges({ userId: user.id }));
 		}

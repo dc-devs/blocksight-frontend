@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { SyntheticEvent } from 'react';
 import { Search } from 'react-feather';
 import { makeStyles } from 'tss-react/mui';
@@ -6,10 +7,8 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { IExchange } from '../../../../../interfaces';
 import InputAdornment from '@mui/material/InputAdornment';
-import ImportExchangeSummary from '../../ImportExchange/ImportExchangeSummary';
-
-import { useContext } from 'react';
 import ImportExchangeApi from '../../contexts/ImportExchangeContext';
+import ImportExchangeSummary from '../../ImportExchange/ImportExchangeSummary';
 
 const useStyles = makeStyles()((theme) => ({
 	importExchangesContainer: {

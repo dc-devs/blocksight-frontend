@@ -1,13 +1,21 @@
-import { useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from 'tss-react/mui';
-import { useMutation } from '@apollo/client';
 import TextField from '@mui/material/TextField';
+import { useAppDispatch } from '../../../../../hooks';
+import { useState, useEffect, useContext } from 'react';
 import { IUser, IExchange } from '../../../../../interfaces';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import { CREATE } from '../../../../../queries/usersExchanges';
+import { Status, UsersExchangesType } from '../../../../../redux/enums';
+import ImportExchangeContext from '../../contexts/ImportExchangeContext';
+import {
+	resetType,
+	createUsersExchanges,
+	selectUsersExchangesType,
+	selectUsersExchangesStatus,
+} from '../../../../../redux/slices/usersExchangesSlice';
 
 const useStyles = makeStyles()((theme) => ({
 	importExchangeDataContentContainer: {
@@ -52,38 +60,44 @@ interface IProps {
 	exchange: IExchange;
 }
 
-const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
+const ImportExchangeDetails = ({ user, exchange }: IProps) => {
 	let defaultErrorState: IErrors = {};
 	const { classes } = useStyles();
+	const dispatch = useAppDispatch();
+	const importExchangeApi = useContext(ImportExchangeContext);
+	const { setSelectedExchange } = importExchangeApi;
+	const usersExchangesStatus = useSelector(selectUsersExchangesStatus);
+	const usersExchangesType = useSelector(selectUsersExchangesType);
 	const [serverErrors, setServerErrors] = useState(defaultErrorState);
 
-	const [createUsersExchanges] = useMutation(CREATE, {
-		onError: (error) => {
-			const errors = error.graphQLErrors[0].extensions.errors as IErrors;
-
-			if (errors) {
-				setServerErrors(errors);
-				console.error(errors);
+	useEffect(() => {
+		if (
+			usersExchangesStatus === Status.Succeeded &&
+			usersExchangesType === UsersExchangesType.Fulfilled
+		) {
+			if (setSelectedExchange) {
+				setSelectedExchange(null);
+				dispatch(resetType());
 			}
-		},
-		onCompleted: (data) => {
-			console.log('New UsersExchanges', data);
-		},
-	});
+		}
+	}, [
+		dispatch,
+		usersExchangesType,
+		setSelectedExchange,
+		usersExchangesStatus,
+	]);
 
 	const onSubmit = async (data: any) => {
 		setServerErrors(defaultErrorState);
 
 		if (user) {
-			createUsersExchanges({
-				variables: {
-					createUsersExchangesInput: {
-						userId: user.id,
-						exchangeId: exchange.id,
-						...data,
-					},
-				},
-			});
+			const createUsersExchangesInput = {
+				userId: user.id,
+				exchangeId: exchange.id,
+				...data,
+			};
+
+			dispatch(createUsersExchanges({ createUsersExchangesInput }));
 		}
 	};
 
@@ -182,4 +196,4 @@ const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 	);
 };
 
-export default ImportExchangeAccordianDetails;
+export default ImportExchangeDetails;

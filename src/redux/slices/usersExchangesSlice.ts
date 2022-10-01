@@ -1,14 +1,10 @@
 import { Status } from '../enums';
 import { IUsersExchange } from '../../interfaces';
 import { apolloClient } from '../../services/apollo';
-import { FIND_ALL, DELETE } from '../../queries/usersExchanges';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { FIND_ALL, DELETE, CREATE } from '../../queries/usersExchanges';
 
 // TODO: LEFT OFF
-// Create new Exchange should be a thunk
-// Ensure that after create new exhchange it clears form a displays
-// list of exchanges
-//
 // Perhaps moving forward, hard sync only hard syncs userExchange/User combo,
 // and not all
 //
@@ -20,6 +16,7 @@ const enum Model {
 interface Transaction {
 	usersExchanges: IUsersExchange[];
 	status: string;
+	type: string;
 	error: null | string;
 }
 
@@ -53,6 +50,22 @@ export const fetchUsersExchanges = createAsyncThunk(
 	}
 );
 
+export const createUsersExchanges = createAsyncThunk(
+	'usersExchanges/createUsersExchange',
+	async ({ createUsersExchangesInput }: any) => {
+		const { data } = await apolloClient.mutate({
+			mutation: CREATE,
+			variables: {
+				createUsersExchangesInput,
+			},
+		});
+
+		const { createUsersExchanges } = data;
+
+		return createUsersExchanges;
+	}
+);
+
 interface IDeleteProps {
 	usersExchangeId: number;
 }
@@ -76,35 +89,44 @@ export const deleteUsersExchanges = createAsyncThunk(
 export const usersExchangesSlice = createSlice({
 	name: Model.USERS_EXCHANGES,
 	initialState: {
-		usersExchanges: [],
+		usersExchanges: [] as IUsersExchange[],
 		status: 'idle',
+		type: '',
 		error: null,
 	},
-	reducers: {},
+	reducers: {
+		resetType: (state) => {
+			state.type = '';
+		},
+	},
 	extraReducers: (builder) => {
-		builder.addCase(fetchUsersExchanges.pending, (state) => {
-			state.status = Status.LOADING;
+		builder.addCase(fetchUsersExchanges.pending, (state, { type }) => {
+			state.type = type;
+			state.status = Status.Loading;
 		});
 
-		builder.addCase(fetchUsersExchanges.fulfilled, (state, { payload }) => {
-			state.status = Status.SUCCEEDED;
-			state.usersExchanges = payload;
+		builder.addCase(
+			fetchUsersExchanges.fulfilled,
+			(state, { payload, type }) => {
+				state.type = type;
+				state.status = Status.Succeeded;
+				state.usersExchanges = payload;
+			}
+		);
+
+		builder.addCase(fetchUsersExchanges.rejected, (state, { type }) => {
+			state.type = type;
+			state.status = Status.Failed;
 		});
 
-		builder.addCase(fetchUsersExchanges.rejected, (state) => {
-			state.status = Status.FAILED;
-		});
-
-		builder.addCase(deleteUsersExchanges.pending, (state) => {
-			console.log('deleteUsersExchanges', Status.LOADING);
-			state.status = Status.LOADING;
+		builder.addCase(deleteUsersExchanges.pending, (state, { type }) => {
+			state.type = type;
+			state.status = Status.Loading;
 		});
 
 		builder.addCase(
 			deleteUsersExchanges.fulfilled,
-			(state, { payload }) => {
-				console.log('deleteUsersExchanges', Status.SUCCEEDED);
-				state.status = Status.SUCCEEDED;
+			(state, { payload, type }) => {
 				const { id } = payload;
 
 				const filteredUsersExchanges = state.usersExchanges.filter(
@@ -113,17 +135,44 @@ export const usersExchangesSlice = createSlice({
 					}
 				);
 
+				state.type = type;
+				state.status = Status.Succeeded;
 				state.usersExchanges = filteredUsersExchanges;
 			}
 		);
 
-		builder.addCase(deleteUsersExchanges.rejected, (state) => {
-			state.status = Status.FAILED;
+		builder.addCase(deleteUsersExchanges.rejected, (state, { type }) => {
+			state.type = type;
+			state.status = Status.Failed;
+		});
+
+		builder.addCase(createUsersExchanges.pending, (state, { type }) => {
+			state.type = type;
+			state.status = Status.Loading;
+		});
+
+		builder.addCase(createUsersExchanges.fulfilled, (state, action) => {
+			const { payload, type } = action;
+			const createdUsersExchange = payload as IUsersExchange;
+
+			state.type = type;
+			state.status = Status.Succeeded;
+			state.usersExchanges = [
+				...state.usersExchanges,
+				createdUsersExchange,
+			];
+		});
+
+		builder.addCase(createUsersExchanges.rejected, (state, { type }) => {
+			state.type = type;
+			state.status = Status.Failed;
 		});
 	},
 });
 
-const { reducer } = usersExchangesSlice;
+const { reducer, actions } = usersExchangesSlice;
+
+export const { resetType } = actions;
 
 // // Export Selectors
 // // ------------------
@@ -135,12 +184,17 @@ const selectUsersExchangesStatus = (state: State) => {
 	return state.usersExchanges.status;
 };
 
+const selectUsersExchangesType = (state: State) => {
+	return state.usersExchanges.type;
+};
+
 const selectUsersExchangesError = (state: State) => {
 	return state.usersExchanges.error;
 };
 
 export {
 	selectUsersExchanges,
+	selectUsersExchangesType,
 	selectUsersExchangesStatus,
 	selectUsersExchangesError,
 };

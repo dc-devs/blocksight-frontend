@@ -65,7 +65,7 @@ const App = () => {
 	// console.log('App - metaMaskProvider', metaMaskProvider);
 
 	useEffect(() => {
-		if (authentication && authenticationStatus === Status.IDLE) {
+		if (authentication && authenticationStatus === Status.Idle) {
 			dispatch(fetchAuthentication());
 		}
 	}, [authenticationStatus, authentication, dispatch, navigate]);

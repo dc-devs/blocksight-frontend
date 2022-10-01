@@ -1,3 +1,4 @@
 import Status from './Status';
+import UsersExchangesType from './UsersExchangesType';
 
-export { Status };
+export { Status, UsersExchangesType };
