@@ -43,6 +43,7 @@ interface IProps {
 	usersExchanges: IUsersExchange[];
 }
 
+// TODO: Don't return api key/secret data
 const ImportedExchanges = ({ usersExchanges }: IProps) => {
 	const { classes } = useStyles();
 
@@ -51,7 +52,10 @@ const ImportedExchanges = ({ usersExchanges }: IProps) => {
 			const { exchange, user } = usersExchange;
 
 			return (
-				<div key={exchange.id} className={classes.exchangeContainer}>
+				<div
+					key={usersExchange.id}
+					className={classes.exchangeContainer}
+				>
 					<ImportExchange
 						usersExchange={usersExchange}
 						exchange={exchange}
@@ -61,6 +65,7 @@ const ImportedExchanges = ({ usersExchanges }: IProps) => {
 			);
 		}
 	);
+
 	const userHasImportedExchanges = usersExchanges.length > 0;
 	const header = buildHeader(userHasImportedExchanges);
 
@@ -79,3 +84,11 @@ const ImportedExchanges = ({ usersExchanges }: IProps) => {
 };
 
 export default ImportedExchanges;
+
+// const handleUsersExchangeDeletion = async (
+// 	deleteUsersExchange: CallableFunction
+// ) => {
+// 	const usersExchangeId = usersExchange.id;
+
+// 	await deleteUsersExchange(usersExchangeId);
+// };

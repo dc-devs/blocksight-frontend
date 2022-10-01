@@ -1,12 +1,12 @@
-import { IUsersExchange } from '../../../../../../interfaces';
-import { useState, MouseEvent } from 'react';
-import { MdMoreVert } from 'react-icons/md';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { DELETE_USERS_EXCHANGES } from '../../../../../../queries/usersExchanges';
-import { useMutation } from '@apollo/client';
+import Button from '@mui/material/Button';
 import { makeStyles } from 'tss-react/mui';
+import { MdMoreVert } from 'react-icons/md';
+import { useState, MouseEvent } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import { useAppDispatch } from '../../../../../../hooks';
+import { IUsersExchange } from '../../../../../../interfaces';
+import { deleteUsersExchanges } from '../../../../../../redux/slices/usersExchangesSlice';
 
 const useStyles = makeStyles()((theme) => ({
 	menuButton: {
@@ -22,11 +22,9 @@ interface IProps {
 	usersExchange: IUsersExchange | undefined;
 }
 
-// TODO: LEFT OFF
-// Move to own component
-// Add delete functionality when clicked
 const ImportExchangeSummaryMenu = ({ usersExchange }: IProps) => {
 	const { classes } = useStyles();
+	const dispatch = useAppDispatch();
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -43,26 +41,11 @@ const ImportExchangeSummaryMenu = ({ usersExchange }: IProps) => {
 		setAnchorEl(null);
 	};
 
-	const [deleteUsersExchanges] = useMutation(DELETE_USERS_EXCHANGES, {
-		onError: (error) => {
-			const { graphQLErrors } = error;
-
-			if (graphQLErrors) {
-				console.error(graphQLErrors);
-			}
-		},
-		onCompleted: (data) => {
-			console.log('Deleted UsersExchanges', data);
-		},
-	});
-
 	const handleClickDelete = (event: MouseEvent<HTMLElement>) => {
 		if (usersExchange) {
-			deleteUsersExchanges({
-				variables: {
-					deleteUsersExchangesId: usersExchange.id,
-				},
-			});
+			dispatch(
+				deleteUsersExchanges({ usersExchangeId: usersExchange.id })
+			);
 		}
 
 		handleClose(event);

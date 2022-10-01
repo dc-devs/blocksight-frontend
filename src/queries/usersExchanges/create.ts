@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const CREATE_USERS_EXCHANGES = gql`
+const CREATE = gql`
 	mutation Mutation($createUsersExchangesInput: CreateUsersExchangesInput!) {
 		createUsersExchanges(
 			createUsersExchangesInput: $createUsersExchangesInput
@@ -18,4 +18,4 @@ const CREATE_USERS_EXCHANGES = gql`
 	}
 `;
 
-export default CREATE_USERS_EXCHANGES;
+export default CREATE;

@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/client';
 import TextField from '@mui/material/TextField';
 import { IUser, IExchange } from '../../../../../interfaces';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import { CREATE_USERS_EXCHANGES } from '../../../../../queries/usersExchanges';
+import { CREATE } from '../../../../../queries/usersExchanges';
 
 const useStyles = makeStyles()((theme) => ({
 	importExchangeDataContentContainer: {
@@ -57,7 +57,7 @@ const ImportExchangeAccordianDetails = ({ user, exchange }: IProps) => {
 	const { classes } = useStyles();
 	const [serverErrors, setServerErrors] = useState(defaultErrorState);
 
-	const [createUsersExchanges] = useMutation(CREATE_USERS_EXCHANGES, {
+	const [createUsersExchanges] = useMutation(CREATE, {
 		onError: (error) => {
 			const errors = error.graphQLErrors[0].extensions.errors as IErrors;
 

@@ -1,8 +1,17 @@
 import { Status } from '../enums';
-import { apolloClient } from '../../services/apollo';
 import { IUsersExchange } from '../../interfaces';
-import { FIND_ALL } from '../../queries/usersExchanges';
+import { apolloClient } from '../../services/apollo';
+import { FIND_ALL, DELETE } from '../../queries/usersExchanges';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+// TODO: LEFT OFF
+// Create new Exchange should be a thunk
+// Ensure that after create new exhchange it clears form a displays
+// list of exchanges
+//
+// Perhaps moving forward, hard sync only hard syncs userExchange/User combo,
+// and not all
+//
 
 const enum Model {
 	USERS_EXCHANGES = 'usersExchanges',
@@ -44,6 +53,26 @@ export const fetchUsersExchanges = createAsyncThunk(
 	}
 );
 
+interface IDeleteProps {
+	usersExchangeId: number;
+}
+
+export const deleteUsersExchanges = createAsyncThunk(
+	'usersExchanges/deleteUsersExchange',
+	async ({ usersExchangeId }: IDeleteProps) => {
+		const { data } = await apolloClient.mutate({
+			mutation: DELETE,
+			variables: {
+				deleteUsersExchangesId: usersExchangeId,
+			},
+		});
+
+		const { deleteUsersExchanges } = data;
+
+		return { id: deleteUsersExchanges.id };
+	}
+);
+
 export const usersExchangesSlice = createSlice({
 	name: Model.USERS_EXCHANGES,
 	initialState: {
@@ -63,6 +92,32 @@ export const usersExchangesSlice = createSlice({
 		});
 
 		builder.addCase(fetchUsersExchanges.rejected, (state) => {
+			state.status = Status.FAILED;
+		});
+
+		builder.addCase(deleteUsersExchanges.pending, (state) => {
+			console.log('deleteUsersExchanges', Status.LOADING);
+			state.status = Status.LOADING;
+		});
+
+		builder.addCase(
+			deleteUsersExchanges.fulfilled,
+			(state, { payload }) => {
+				console.log('deleteUsersExchanges', Status.SUCCEEDED);
+				state.status = Status.SUCCEEDED;
+				const { id } = payload;
+
+				const filteredUsersExchanges = state.usersExchanges.filter(
+					(usersExchange) => {
+						return id !== usersExchange['id'];
+					}
+				);
+
+				state.usersExchanges = filteredUsersExchanges;
+			}
+		);
+
+		builder.addCase(deleteUsersExchanges.rejected, (state) => {
 			state.status = Status.FAILED;
 		});
 	},

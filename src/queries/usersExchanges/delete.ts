@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const DELETE_USERS_EXCHANGES = gql`
+const DELETE = gql`
 	mutation Mutation($deleteUsersExchangesId: Int!) {
 		deleteUsersExchanges(id: $deleteUsersExchangesId) {
 			id
@@ -18,4 +18,4 @@ const DELETE_USERS_EXCHANGES = gql`
 	}
 `;
 
-export default DELETE_USERS_EXCHANGES;
+export default DELETE;
