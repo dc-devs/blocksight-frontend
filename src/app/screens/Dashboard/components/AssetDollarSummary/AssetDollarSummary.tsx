@@ -19,8 +19,11 @@ import {
 	selectFiatTransfersTotalsStatus,
 } from '../../../../../redux/slices/fiatTransfersTotalsSlice';
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()((theme) => ({
 	assetDollarSummaryContainer: {},
+	secondRow: {
+		marginTop: theme.spacing(2),
+	},
 }));
 
 interface IValue {
@@ -35,21 +38,6 @@ interface IProps {
 const AssetDollarSummary = ({ totalValue }: IProps) => {
 	const { classes } = useStyles();
 	const dispatch = useAppDispatch();
-	// const totalDeposits = useSelector(selectTotalDeposits);
-	// const totalDepositsStatus = useSelector(selectTotalDepositsStatus);
-	// const totalDepositsError = useSelector(selectTotalDepositsError);
-
-	// GET Token Balances
-	// useEffect(() => {
-	// 	if (totalDepositsStatus === 'idle') {
-	// 		appDispatch(fetchTotalDeposits());
-	// 	}
-	// }, [totalDepositsStatus, appDispatch]);
-
-	// const totalDepositsString = totalDeposits.string;
-	// const totalDepositsFormatted = totalDeposits.formatted;
-
-	// const totalDepositsBN = new BigNumber(totalDepositsString);
 	// const cryptoAssetValueBN = new BigNumber(totalValue?.value);
 
 	// const deltaValuePositive =
@@ -82,6 +70,10 @@ const AssetDollarSummary = ({ totalValue }: IProps) => {
 		}
 	}, [userId, fiatTransfersTotalsStatus, dispatch]);
 
+	const cryptAssetValue = totalValue?.formatted
+		? `$${totalValue?.formatted}`
+		: '';
+
 	return (
 		<div className={classes.assetDollarSummaryContainer}>
 			<Grid
@@ -91,12 +83,6 @@ const AssetDollarSummary = ({ totalValue }: IProps) => {
 				alignItems="flex-start"
 				spacing={3}
 			>
-				{/* <Grid item xs>
-					<DollarSummary
-						title="Crypto Assets"
-						amount={totalDeposited}
-					/>
-				</Grid> */}
 				<Grid item xs>
 					<DollarSummary
 						title="Fiat Deposited"
@@ -115,17 +101,30 @@ const AssetDollarSummary = ({ totalValue }: IProps) => {
 						amount={totalWithdrawn?.formatted || ''}
 					/>
 				</Grid>
-				{/* <Grid item xs>
+			</Grid>
+			<Grid
+				container
+				direction="row"
+				justifyContent="flex-start"
+				alignItems="flex-start"
+				spacing={3}
+				className={classes.secondRow}
+			>
+				<Grid item xs>
 					<DollarSummary
 						title="Crypto Assets"
-						deltaValuePositive={deltaValuePositive}
-						deltaValue={cryptoAssetDeltaValue}
-						amount={totalValue?.formatted}
+						amount={cryptAssetValue}
 					/>
 				</Grid>
 				<Grid item xs>
-					<DollarSummary title="Fiat Withdrawn" amount={'$0.00'} />
-				</Grid> */}
+					<DollarSummary title="Cost Basis" amount={`$00.00`} />
+				</Grid>
+				<Grid item xs>
+					<DollarSummary title="Unrealized Gains" amount={`$00.00`} />
+				</Grid>
+				<Grid item xs>
+					<DollarSummary title="Realized Gains" amount={`$00.00`} />
+				</Grid>
 			</Grid>
 		</div>
 	);

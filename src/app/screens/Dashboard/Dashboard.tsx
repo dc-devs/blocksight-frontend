@@ -1,11 +1,17 @@
 import { useEffect } from 'react';
+import Grid from '@mui/material/Grid';
 import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 import { Status } from '../../../redux/enums';
 import { useAppDispatch } from '../../../hooks';
 import AssetSummary from './components/AssetSummary';
+import CrypotPriceChart from './components/CryptoPriceChart';
+import { ITokenBalance, INetwork } from '../../../interfaces';
 import AssetDollarSummary from './components/AssetDollarSummary';
 import { selectMetaMaskProvider } from '../../../redux/slices/metamaskSlice';
+import TokenBalances from './components/AssetSummary/components/TokenBalances';
+import AssetPieChart from './components/AssetSummary/components/AssetPieChart';
+
 import {
 	fetchTokenBalances,
 	selectTokenBalances,
@@ -32,6 +38,14 @@ const useStyles = makeStyles()((theme) => ({
 		padding: `${theme.spacing(2)}px ${theme.spacing(5)}px`,
 		height: '100vh',
 	},
+	// -- AssetSummart
+	assetSummaryContainer: {
+		marginTop: '50px',
+	},
+	assetSummaryItemContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+	},
 }));
 
 const DashBoard = () => {
@@ -56,11 +70,43 @@ const DashBoard = () => {
 		<div className={classes.pageContainer}>
 			<div className={classes.dashboardDataContainer}>
 				<AssetDollarSummary totalValue={totalValue} />
-				<AssetSummary
-					networks={networks}
-					totalValue={totalValue?.formatted}
-					tokenBalances={tokenBalances?.tokens?.balances}
-				/>
+				<Grid
+					container
+					direction="row"
+					justifyContent="flex-start"
+					alignItems="flex-start"
+					spacing={3}
+				>
+					<Grid item xs={12}>
+						<CrypotPriceChart />
+					</Grid>
+				</Grid>
+				<div className={classes.assetSummaryContainer}>
+					<Grid
+						container
+						direction="row"
+						justifyContent="flex-start"
+						alignItems="flex-start"
+						spacing={3}
+					>
+						<Grid item xs={4}>
+							<AssetPieChart
+								totalValue={totalValue?.formatted}
+								tokenBalances={tokenBalances?.tokens?.balances}
+							/>
+						</Grid>
+						<Grid item xs={8}>
+							<div className={classes.assetSummaryItemContainer}>
+								<TokenBalances
+									networks={networks}
+									tokenBalances={
+										tokenBalances?.tokens?.balances
+									}
+								/>
+							</div>
+						</Grid>
+					</Grid>
+				</div>
 			</div>
 		</div>
 	);

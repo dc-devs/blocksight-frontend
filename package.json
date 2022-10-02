@@ -34,6 +34,7 @@
 		"@types/react-dom": "^18.0.3",
 		"@types/react-redux": "^7.1.24",
 		"@types/react-router-dom": "^5.3.3",
+		"@types/recharts": "^1.8.23",
 		"@types/uuid": "^8.3.4",
 		"axios": "^0.27.2",
 		"bignumber.js": "^9.0.2",

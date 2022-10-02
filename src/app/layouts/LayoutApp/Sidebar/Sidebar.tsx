@@ -18,6 +18,7 @@ import {
 // FiLayers - Exchange?
 import { HiChevronDoubleUp } from 'react-icons/hi';
 import { IoWalletOutline } from 'react-icons/io5';
+import { AiOutlineBlock } from 'react-icons/ai';
 
 import AccountDropdown from '../../../screens/Dashboard/components/AccountDropdown';
 
@@ -62,8 +63,20 @@ const useStyles = makeStyles()((theme) => ({
 		cursor: 'pointer',
 		marginTop: '20px',
 	},
-	sidebarLinkLogo: {
+	sidebarLinkLogoContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		justifyItems: 'center',
+		alignContent: 'center',
+		alignItems: 'center',
 		marginRight: '10px',
+		color: theme.palette.primary.main,
+		height: '24px',
+		width: '24px',
+	},
+	sidebarLinkLogo: {
+		height: '21px',
+		width: '21px',
 		color: theme.palette.primary.main,
 	},
 	sidebarLinkText: {
@@ -101,7 +114,13 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						component={ReactLink}
 						className={classes.sidebarLinkContainer}
 					>
-						<BarChart className={classes.sidebarLinkLogo} />
+						<div className={classes.sidebarLinkLogoContainer}>
+							<BarChart
+								height={21}
+								width={21}
+								className={classes.sidebarLinkLogo}
+							/>
+						</div>
 						<Typography className={classes.sidebarLinkText}>
 							Dashboard
 						</Typography>
@@ -114,8 +133,10 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						component={ReactLink}
 						className={classes.sidebarLinkContainer}
 					>
-						<div>
-							<HiChevronDoubleUp
+						<div className={classes.sidebarLinkLogoContainer}>
+							<AiOutlineBlock
+								height={21}
+								width={21}
 								className={classes.sidebarLinkLogo}
 							/>
 						</div>
@@ -131,8 +152,10 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						component={ReactLink}
 						className={classes.sidebarLinkContainer}
 					>
-						<div>
+						<div className={classes.sidebarLinkLogoContainer}>
 							<IoWalletOutline
+								height={21}
+								width={21}
 								className={classes.sidebarLinkLogo}
 							/>
 						</div>
@@ -148,7 +171,13 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						component={ReactLink}
 						className={classes.sidebarLinkContainer}
 					>
-						<DollarSign className={classes.sidebarLinkLogo} />
+						<div className={classes.sidebarLinkLogoContainer}>
+							<DollarSign
+								height={21}
+								width={21}
+								className={classes.sidebarLinkLogo}
+							/>
+						</div>
 						<Typography className={classes.sidebarLinkText}>
 							Tokens
 						</Typography>
@@ -160,7 +189,13 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						component={ReactLink}
 						className={classes.sidebarLinkContainer}
 					>
-						<Repeat className={classes.sidebarLinkLogo} />
+						<div className={classes.sidebarLinkLogoContainer}>
+							<Repeat
+								height={21}
+								width={21}
+								className={classes.sidebarLinkLogo}
+							/>
+						</div>
 						<Typography className={classes.sidebarLinkText}>
 							Transactions
 						</Typography>
@@ -172,7 +207,13 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						component={ReactLink}
 						className={classes.sidebarLinkContainer}
 					>
-						<Search className={classes.sidebarLinkLogo} />
+						<div className={classes.sidebarLinkLogoContainer}>
+							<Search
+								height={21}
+								width={21}
+								className={classes.sidebarLinkLogo}
+							/>
+						</div>
 						<Typography className={classes.sidebarLinkText}>
 							Wallet Mapper
 						</Typography>
