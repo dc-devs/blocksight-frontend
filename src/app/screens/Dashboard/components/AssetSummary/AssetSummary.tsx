@@ -20,7 +20,11 @@ interface Props {
 	tokenBalances: ITokenBalance[];
 }
 
-const AssetDolllarSummary = ({ networks, totalValue, tokenBalances }: Props) => {
+const AssetDolllarSummary = ({
+	networks,
+	totalValue,
+	tokenBalances,
+}: Props) => {
 	const { classes } = useStyles();
 
 	return (

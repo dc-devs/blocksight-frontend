@@ -100,16 +100,19 @@ const AssetDollarSummary = ({ totalValue }: IProps) => {
 				<Grid item xs>
 					<DollarSummary
 						title="Fiat Deposited"
-						amount={totalDeposited}
+						amount={totalDeposited?.formatted || ''}
 					/>
 				</Grid>
 				<Grid item xs>
-					<DollarSummary title="Working Fiat" amount={totalWorking} />
+					<DollarSummary
+						title="Working Fiat"
+						amount={totalWorking?.formatted || ''}
+					/>
 				</Grid>
 				<Grid item xs>
 					<DollarSummary
 						title="Fiat Withdrawn"
-						amount={totalWithdrawn}
+						amount={totalWithdrawn?.formatted || ''}
 					/>
 				</Grid>
 				{/* <Grid item xs>
