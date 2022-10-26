@@ -13,6 +13,7 @@ import {
 	Users,
 	SignIn,
 	SignUp,
+	Trading,
 	Settings,
 	Exchanges,
 	TokenInfo,
@@ -149,6 +150,16 @@ const App = () => {
 						<IsAuthenticated>
 							<LayoutApp>
 								<Exchanges />
+							</LayoutApp>
+						</IsAuthenticated>
+					}
+				/>
+				<Route
+					path="/trading"
+					element={
+						<IsAuthenticated>
+							<LayoutApp>
+								<Trading />
 							</LayoutApp>
 						</IsAuthenticated>
 					}

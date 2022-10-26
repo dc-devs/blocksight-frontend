@@ -1,7 +1,7 @@
 import { makeStyles } from 'tss-react/mui';
 import TokenBalanceInterface from '../../../../../../../../interfaces/ITokenBalance';
-// import { Link as ReactLink } from 'react-router-dom';
-// import Link from '@mui/material/Link';
+import { Link as ReactLink } from 'react-router-dom';
+import Link from '@mui/material/Link';
 import textColors from '../../../../../../../../theme/colors/textColors';
 
 const { coinbaseTableHeaderText } = textColors;
@@ -66,17 +66,16 @@ const TokenBalance = ({ token }: Props) => {
 	const { classes } = useStyles();
 	const { name, price, symbol, balance, logoUrl, totalValue } = token;
 	// TODO: Add back linking in future iteration
-	// const lowerCaseSymbol = symbol.toLowerCase();
-	// <Link
-	// 	to={`/token/${lowerCaseSymbol}`}
-	// 	underline="none"
-	// 	color="textPrimary"
-	// 	component={ReactLink}
-	// 	className={classes.tokenBalanceRow}
-	// >
-	// </Link>
+	const lowerCaseSymbol = symbol.toLowerCase();
 
 	return (
+		// <Link
+		// 	to={`/token/${lowerCaseSymbol}`}
+		// 	underline="none"
+		// 	color="textPrimary"
+		// 	component={ReactLink}
+		// 	className={classes.tokenBalanceRow}
+		// >
 		<div className={classes.tokenBalanceRow}>
 			<div
 				className={`${classes.tokenBalanceColumn} ${classes.nameColumn}`}
@@ -106,6 +105,7 @@ const TokenBalance = ({ token }: Props) => {
 				<div>{totalValue.formatted}</div>
 			</div>
 		</div>
+		// </Link>
 	);
 };
 

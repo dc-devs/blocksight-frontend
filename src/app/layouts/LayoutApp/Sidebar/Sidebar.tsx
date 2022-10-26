@@ -18,7 +18,7 @@ import {
 // FiLayers - Exchange?
 import { HiChevronDoubleUp } from 'react-icons/hi';
 import { IoWalletOutline } from 'react-icons/io5';
-import { AiOutlineBlock } from 'react-icons/ai';
+import { AiOutlineStock, AiOutlineBlock } from 'react-icons/ai';
 
 import AccountDropdown from '../../../screens/Dashboard/components/AccountDropdown';
 
@@ -146,6 +146,25 @@ const PermanentDrawer = ({ logoText }: Props) => {
 					</Link>
 
 					<Link
+						to="/trading"
+						color="primary"
+						underline="none"
+						component={ReactLink}
+						className={classes.sidebarLinkContainer}
+					>
+						<div className={classes.sidebarLinkLogoContainer}>
+							<AiOutlineStock
+								height={21}
+								width={21}
+								className={classes.sidebarLinkLogo}
+							/>
+						</div>
+						<Typography className={classes.sidebarLinkText}>
+							Trading
+						</Typography>
+					</Link>
+
+					{/* <Link
 						to="/token"
 						color="primary"
 						underline="none"
@@ -162,9 +181,9 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Wallets
 						</Typography>
-					</Link>
+					</Link> */}
 
-					<Link
+					{/* <Link
 						to="/token"
 						color="primary"
 						underline="none"
@@ -181,8 +200,8 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Tokens
 						</Typography>
-					</Link>
-					<Link
+					</Link> */}
+					{/* <Link
 						to="/"
 						color="primary"
 						underline="none"
@@ -199,8 +218,8 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Transactions
 						</Typography>
-					</Link>
-					<Link
+					</Link> */}
+					{/* <Link
 						to="/"
 						color="primary"
 						underline="none"
@@ -217,7 +236,7 @@ const PermanentDrawer = ({ logoText }: Props) => {
 						<Typography className={classes.sidebarLinkText}>
 							Wallet Mapper
 						</Typography>
-					</Link>
+					</Link> */}
 				</div>
 			</div>
 		</Paper>
