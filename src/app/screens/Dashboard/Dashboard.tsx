@@ -70,7 +70,7 @@ const DashBoard = () => {
 		<div className={classes.pageContainer}>
 			<div className={classes.dashboardDataContainer}>
 				<AssetDollarSummary totalValue={totalValue} />
-				<Grid
+				{/* <Grid
 					container
 					direction="row"
 					justifyContent="flex-start"
@@ -80,7 +80,7 @@ const DashBoard = () => {
 					<Grid item xs={12}>
 						<CrypotPriceChart />
 					</Grid>
-				</Grid>
+				</Grid> */}
 				<div className={classes.assetSummaryContainer}>
 					<Grid
 						container

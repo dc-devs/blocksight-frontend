@@ -52,7 +52,7 @@ const useStyles = makeStyles()((theme) => ({
 	},
 	sidebarContent: {
 		padding: theme.spacing(3),
-		height: '100vh',
+		height: '100%',
 	},
 	sidebarLinksContainer: {
 		marginTop: '50px',
